@@ -1,0 +1,11 @@
+v,300,Illianas Lolly Hibiscus,Novice,Libero,3,3,2,2,5
+v,301,Pascal Tobasco,Advanced,Setter,3,1,5,5,2
+v,302,Lemon Lime,Beginner,Wing Spiker,1,2,3,1,2
+v,303,Kelly Rue Sinatra,Professional,Middle Blocker,5,5,4,4,3
+v,304,Olly Bean,Advanced,Defensive Specialist,1,5,3,4,3
+v,305,Rex Flatts,Novice,Setter,1,2,2,4,3
+v,306,Amane Commis,Beginner,Middle Blocker,1,2,3,1,2
+v,307,Mason Klucker,Professional,Libero,4,4,5,4,5,Bob Little Chicken,Novice,Defensive Specialist,3,4,1,3,4
+v,308,Chucky Twiggley,Advanced,Wing Spiker,4,3,3,5,4
+v,309,Henrietta Amozanis,Beginner,Setter,1,1,1,2,2
+v,310,Samantha Brown,Professional,Opposite Hitter,5,3,5,2,4
