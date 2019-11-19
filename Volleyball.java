@@ -38,12 +38,11 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 		return ("\nCompetitor Number: ") + getId() + ", " + ("Name: ") + getName().getFullName() +".\n" + getName().getFirstName() + " is an " + getLevel() + " " + volleyballPosition + " " + ("and has scores of: ");
 	}
 	
-	public String getShortDetails() {  
-		return ("\nCID ") + getId() + " (" + getName().getInitials() + ") " + "has an overall score of ";
+
 	}
 
 
 
 
 	
-}
+

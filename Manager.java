@@ -16,14 +16,17 @@ public class Manager{
 	public Manager ()
 		{ allMembers = new ParentCompetitorList();}
 	public void run() { 
-allMembers.readFile("Input File Davids Updated.dat");
-allMembers.readFile("Volleyball_Input_data.txt");
-allMembers.readFile("AgzCompetitors.txt");
-allMembers.readFile("ArkCompetitorInput.txt");
-String report = allMembers.getallMembers();
-//String report1 = allMembers.getHighestScore();
+		allMembers.readFile("ArkCompetitorInput.txt");
+		allMembers.readFile("Input File Davids Updated.dat");
+		allMembers.readFile("Volleyball_Input_data.txt");
+		allMembers.readFile("AgzCompetitors.txt");
 
-allMembers.writeToFile("Output.txt", report);
+System.out.println("Its alive!!!!!");
+String report = allMembers.getallMembers();
+String highestScore = allMembers.getHighestScore();
+
+
+allMembers.writeToFile("Output.txt", report, highestScore);
 }
 	
 }

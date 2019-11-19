@@ -47,11 +47,12 @@ public class DavidKendoka extends ParentCompetitor
 			// sort the list of scores	
 			Arrays.sort(last5Scores);
 			// sum marks 5 to 1 (ignore score[0])
-			int totalMarks = 0;
+			double totalMarks = 0;
 			for (int i = 5-1; i >= 1  ; i--)  
 				{ totalMarks += last5Scores[i]; }
 			
-			return ( totalMarks - danGrade );		
+			return  ( totalMarks - danGrade );	
+			
 		}
 		
 		public int getAge()
@@ -84,13 +85,6 @@ public class DavidKendoka extends ParentCompetitor
 			return fullDetails;					
 		}
 	
-		public String getShortDetails()
-		{
-			String shortDetails = ("CN " + Integer.toString(memberShipNumber) 
-									+ " (" + individual.getInitials() +")"
-									+ " has overall score " + getOverallScore() + ".");
-			return shortDetails;					
-		}
 		
 		
 				

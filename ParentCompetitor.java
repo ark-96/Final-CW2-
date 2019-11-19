@@ -22,10 +22,19 @@ abstract public class ParentCompetitor {
 	
 	public int [] getScoreArray() {
 		return score ;}
-
+	public String getScoreString(){
+		String  report = "";
+		 for(int scoreIndex = 0; scoreIndex < score.length; scoreIndex++){
+		 report += score[scoreIndex] + " " ;
+		 }
+		 return report;
+	}
 	public abstract double getOverallScore();
 	public abstract String getFullDetails();
-	public abstract String getShortDetails();
+	public String getShortDetails(){
+		String compNo = String.format("%s", id);
+		 return "CN " + compNo + " (" + getName().getInitials() + ") has an overall score " + String.format("%.4s", getOverallScore());
+	}
 	
 
 }

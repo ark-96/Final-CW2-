@@ -37,7 +37,7 @@ public void readFile(String filename){
 	 }
 	 catch (FileNotFoundException fnf){
 	  System.out.println("'" + filename + "' not found");
-	  System.exit(0);
+	  System.exit(3);
 	 }
 	}
 
@@ -60,15 +60,15 @@ public ParentCompetitor findByNum(int num){
  return null;
 }
 
-public  void writeToFile(String filename, String report) {  
+public  void writeToFile(String filename, String report, String highestScore) {  
 		 FileWriter fw;
 		 try {
 		    fw = new FileWriter(filename);
 		    fw.write("THE REPORT\n");
 		    fw.write(report);
 		    fw.write("\n");
-		    //fw.write("STATISTICAL\nThere are ");
-		    //fw.write(report1);
+		    fw.write(highestScore);
+		    fw.write(".");
 		    fw.close();
 		 }
 		 //message and stop if file not found
@@ -85,7 +85,7 @@ public  void writeToFile(String filename, String report) {
 
 private void processLine(String line) {
  
-	  String parts [] = line.split(", ");	
+	  String parts [] = line.split(",");	
 	   String a = parts[0];  
         switch (a)
 	{
@@ -130,9 +130,9 @@ private void processLine(String line) {
 	  this.add(t);
           break;
 		  
-          case"k":
-			int mNo = Integer.valueOf(parts[0]);
-			int dan = Integer.valueOf(parts[3]);
+          case "k":
+			int mNo = Integer.valueOf(parts[1]);
+			int dan = Integer.valueOf(parts[4]);
 			
 			// identify if they are a coach			
 			boolean coach = false;
@@ -168,20 +168,20 @@ private void processLine(String line) {
 			int howManyNames = bitsOfNames.length ;
 			
 			String firstName = bitsOfNames[0];				// initialise first,middle,last assuming only two names
-			String middleName = null;
+			String middleName = "";
 			String lastName = bitsOfNames[1];
 			if ( howManyNames == 3 )  						// ie two spaces in the name field, separating three names
 				{											// then shuffle names to reflect 3 names
 				lastName = bitsOfNames[2];
-				middleName = bitsOfNames[3];
+				middleName = bitsOfNames[1];
 				}
 			Name nameOnLine = new Name(firstName, middleName, lastName);
 			
 			// Competitors status
-			String shortStatus = parts[7];
+			char shortStatus = parts[7].charAt(0);
 			String longStatus = "";
-			if (shortStatus == "A") { longStatus = "Amateur" ; }
-			else if (shortStatus == "P") {longStatus = "Professional";}
+			if (shortStatus == 'A') { longStatus = "Amateur" ; }
+			else if (shortStatus == 'P') {longStatus = "Professional";}
 			else 
 				{
 				System.out.println("Error in level, should be 'A' or 'P' " + parts[7]+ "'. Found in line:");
@@ -231,21 +231,51 @@ private void processLine(String line) {
 			this.add(v);
           break;
     default:
+      
+      System.out.println("Could not process");
       System.exit(1);
 	}
-	  System.out.println("Could not process");
+	  
 	  }
 
 public String getallMembers(){
-	String report = "ID    NAME                     LEVEL                      SCORES\n";
+	String report = "The short details of the competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
-		report += String.format("%-6s", c.getId());
-		report += String.format("%-25s", c.getName().getFullName());
-		report += String.format("%-14s", c.getLevel());
-		report += String.format("%-5s", c.getScoreArray());
+		report += c.getShortDetails();
 		report += "\n";
 	}
 	return report;
+}
+
+public String getHighestScore(){
+	double highestScore=0;
+	int count = 0;
+	String scoreReport = "";
+	for (ParentCompetitor c: competitorList) {
+		double score = c.getOverallScore();
+		if(score > highestScore){
+			highestScore = score;	
+		}
+}
+	for (ParentCompetitor c: competitorList) {
+		
+		if (highestScore == c.getOverallScore()){ 
+			
+			if(count>0){
+				scoreReport += " and ";
+				
+			}
+			count++;
+			scoreReport +=  c.getName().getLastCommaMiddleCommaFirst() + " with a score of " + String.format("%.4s",highestScore) ;
+		}
+	}
+	if(count>1){
+		scoreReport = "There are " + count + " competitors with the highest overall score.\nThey are: " + scoreReport;
+	}
+	else {
+		scoreReport = "The competitor with the highest overall score is: " + scoreReport;
+	}
+	return scoreReport;
 }
 
 

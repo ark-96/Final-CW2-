@@ -1,16 +1,16 @@
 t,100,Keith John Talbot,Novice,23,Britain,3,2,4,3,4
-t,01,Jane Macdonald john,Novice,43,Britain,2,5,5,5,4
-t,02,John Stuart,Expert,21,Germany,2,3,4,2,4
-t,03,James Potter,Amateur,33,Argentina,2,4,3,2,3
-t,04,Bruce Wayne,Expert,27,USA,4,3,5,4,4
-t,05,Dick Grayson,Amateur,21,USA,3,5,3,2,2
-t,06,Karen Zarding james,Expert,23,Britain,3,2,3,4,3
-t,07,Sarah Green,Expert,32,Britain,2,2,1,2,3
-t,08,Charles Xavier,Amateur,34,Britain,3,2,3,2,2
-t,09,Jason Bourne,Expert,30,USA,3,4,5,4,3
-t,0,Clarke Kent,Expert,28,Russia,3,4,5,4,5
-t,11,Severus Snape,Expert,32,France,3,4,3,3,4
-t,12,Freddy Kruger,Amateur,37,Spain,5,4,3,4,3
-t,13,Hermione Granger,Expert,26,Australia,4,3,5,4,4
-t,4,Albus Dumbledore,Expert,34,Japan,3,4,5,3,4
-t,5,Jack Ryan,Amateur,25,Spain,4,3,5,4,4
+t,101,Jane Macdonald john,Novice,43,Britain,2,5,5,5,4
+t,102,John Stuart,Expert,21,Germany,2,3,4,2,4
+t,103,James Potter,Amateur,33,Argentina,2,4,3,2,3
+t,104,Bruce Wayne,Expert,27,USA,4,3,5,4,4
+t,105,Dick Grayson,Amateur,21,USA,3,5,3,2,2
+t,106,Karen Zarding james,Expert,23,Britain,3,2,3,4,3
+t,107,Sarah Green,Expert,32,Britain,2,2,1,2,3
+t,108,Charles Xavier,Amateur,34,Britain,3,2,3,2,2
+t,109,Jason Bourne,Expert,30,USA,3,4,5,4,3
+t,110,Clarke Kent,Expert,28,Russia,3,4,5,4,5
+t,111,Severus Snape,Expert,32,France,3,4,3,3,4
+t,112,Freddy Kruger,Amateur,37,Spain,5,4,3,4,3
+t,113,Hermione Granger,Expert,26,Australia,4,3,5,4,4
+t,114,Albus Dumbledore,Expert,34,Japan,3,4,5,3,4
+t,115,Jack Ryan,Amateur,25,Spain,4,3,5,4,4

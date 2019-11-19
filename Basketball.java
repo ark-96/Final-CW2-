@@ -54,11 +54,7 @@ public class Basketball extends ParentCompetitor {
 		}
 	
 	
-	public String getShortDetails () {
-		String shortDetails = "";
-			shortDetails += ("CN " + getId() + "(" + getName().getInitials() + ") has overall score " + getOverallScore() + ".");
-		return shortDetails; 
-		}
+
 	
 	//gets maximum score value
 	public int getMaxScore() {
