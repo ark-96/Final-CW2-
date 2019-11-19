@@ -22,7 +22,7 @@ CN 202 (F.W) has an overall score -1.0
 CN 203 (J.P) has an overall score 8.0
 CN 204 (S.Y) has an overall score 3.0
 CN 205 (A.W) has an overall score 15.0
-CN 206 (S.B) has an overall score 15.0
+CN 206 (S.B) has an overall score 13.0
 CN 207 (G.M) has an overall score 3.0
 CN 208 (S.M) has an overall score 12.0
 CN 209 (G.S) has an overall score 13.0
@@ -56,5 +56,4 @@ CN 411 (E.B) has an overall score 2.33
 CN 412 (V.G) has an overall score 3.33
 CN 413 (D.M) has an overall score 3.33
 
-There are 2 competitors with the highest overall score.
-They are: Wright, Andrew with a score of 15.0 and Bishop, Steven with a score of 15.0.
+The competitor with the highest overall score is: Wright, Andrew with a score of 15.0.
