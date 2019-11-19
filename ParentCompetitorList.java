@@ -2,20 +2,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class ParentCompetitorList {
-  private ArrayList<Competitor> competitorList; 
+  private ArrayList<ParentCompetitor> competitorList; 
 
 
 
  public ParentCompetitorList() {
-	 competitorList = new ArrayList<Competitor> ();
+	 competitorList = new ArrayList<ParentCompetitor> ();
  }
 
 public String findShortDetails(int id)
 	{
-		for (Competitor c : competitorList )
+		for (ParentCompetitor c : competitorList )
 			{
 			
 			return ( c.getShortDetails() ) ;
@@ -40,24 +41,34 @@ public void readFile(String filename){
 	 }
 	}
 
+public boolean add(ParentCompetitor c){
+ int num = c.getId();
+ ParentCompetitor inList = this.findByNum(num);
+ if (inList == null){
+  competitorList.add(c);
+  return true;
+ }
+ return false;
+}
 
+public ParentCompetitor findByNum(int num){
+ for (ParentCompetitor c : competitorList){
+  if (c.getId() == (num)){
+   return c;
+  }
+ }
+ return null;
+}
 
-public  void writeToFile(String filename, String report, String report1, String report2, String report3, String report4) {
+public  void writeToFile(String filename, String report) {  
 		 FileWriter fw;
 		 try {
 		    fw = new FileWriter(filename);
 		    fw.write("THE REPORT\n");
 		    fw.write(report);
 		    fw.write("\n");
-		    fw.write("STATISTICAL\nThere are ");
-		    fw.write(report1); 
-		    fw.write(" competitors.");
-		    fw.write("\n\n");
-		    fw.write(report2);
-		    fw.write("\n\n");
-		    fw.write(report3);
-		    fw.write("\n\n");
-		    fw.write(report4);
+		    //fw.write("STATISTICAL\nThere are ");
+		    //fw.write(report1);
 		    fw.close();
 		 }
 		 //message and stop if file not found
@@ -73,29 +84,23 @@ public  void writeToFile(String filename, String report, String report1, String 
 	}
 
 private void processLine(String line) {
-  try {
-			
-	typeOfCompetitor = charAt(0).line; //set flag as first character of input line
-	String a = charAt(0);  
- 	line = substring( 2 ).line
-      
-        switch typeOfCompetitor
+ 
+	  String parts [] = line.split(", ");	
+	   String a = parts[0];  
+        switch (a)
 	{
-          case(b)
-          String parts [] = line.split(", ");
-			String numb = parts[0];
-			//trim function deletes all spaces which could interfere with values
+          case "b":
+			String numb = parts[1];
 			numb = numb.trim();
 			int num = Integer.parseInt(numb);
-			Name name = new Name (parts[1]);
-			String level = parts[2];
+			Name name = new Name (parts[2]);
+			String level = parts[3];
 			level = level.trim();
-			String country = parts[3];
+			String country = parts[4];
 			country = country.trim();
-			// scores are integer therefore an appropriate conversion from String is necessary
-		    	int scoreLenght= parts.length - 4;
+		    	int scoreLenght= parts.length - 5;
 			String[] scoress = new String [scoreLenght];
-			System.arraycopy(parts, 4, scoress, 0, scoreLenght);
+			System.arraycopy(parts, 5, scoress, 0, scoreLenght);
 			int array = scoress.length;
 			int [] scores = new int [array];
 			for(int i=0; i<array; i++) {
@@ -103,69 +108,63 @@ private void processLine(String line) {
 			}
 			
 			//information from the line read is implemented into an AgzCompetitor parameter and new competitor is created
-			AgzCompetitor c = new AgzCompetitor(a, num, name, level, country, scores); 
+			Basketball b = new Basketball(a, num, name, level, country, scores); 
 			//after information had been assigned, then newly created object is added to the list
-			this.add(c);
+			this.add(b);
           break;
 			
-        switch(t)
-          String parts [] = line.split(",");
-	  int num = Integer.parseInt(parts[0]);    
-	  Name name = new Name (parts[1]);
-	  String tier = parts[2];
-	  for(int f=0;f<tier.length();f++) {
-	  String nationality = parts[4];
-	  for(int f=0;f<nationality.length();f++) {
-	  int age = Integer.parseInt(parts[3]);
-	  int scoreLength = parts.length - 5;
+          case "t":
+	  int num1 = Integer.parseInt(parts[1]);    
+	  Name name1 = new Name (parts[2]);
+	  String tier = parts[3];
+	  String nationality = parts[5];
+	  int age = Integer.parseInt(parts[4]);
+	  int scoreLength = parts.length - 6;
 	  int score[]=new int[scoreLength];
 	  String sc[]=new String[scoreLength];  
-	  System.arraycopy(parts, 5, sc, 0, scoreLength);
+	  System.arraycopy(parts, 6, sc, 0, scoreLength);
 	  for(int scoreIndex = 0; scoreIndex < sc.length; scoreIndex++){
 	   score[scoreIndex]=Integer.parseInt(sc[scoreIndex]);
 	  }
-	  ArkCompetitor c = new ArkCompetitor(num, fullName, tier, age, nationality, score);
-	  this.add(c);
+	  TableTennis t = new TableTennis(a, num1, name1, tier, age, nationality, score);
+	  this.add(t);
           break;
 		  
-        switch(k)
-          String parts [] = line.split(",");
-			
-			// handle the easy int conversions for memberShipNo and danGrade
+          case"k":
 			int mNo = Integer.valueOf(parts[0]);
 			int dan = Integer.valueOf(parts[3]);
 			
 			// identify if they are a coach			
 			boolean coach = false;
-			if ( parts[5].equals("t") )
+			if ( parts[6].equals("t") )
 				{coach = true ;}
-			else if ( parts[5].equals("n") )
+			else if ( parts[6].equals("n") )
 				{coach = false;}
 			else 
 				{
-				System.out.println("Error in coach indicator, should be 'n' or 't'. I found '" + parts[5]+ "' in line:");
+				System.out.println("Error in coach indicator, should be 'n' or 't'. I found '" + parts[6]+ "' in line:");
 				System.out.println( line );	
 				System.exit(0);
 				}
 			
 			// process Shogo field
 			String shogo = null;
-			if ( parts[4].equals("n") )
+			if ( parts[5].equals("n") )
 				{shogo = null ;}
-			else if ( parts[4].toUpperCase().equals("RENSHI") )
+			else if ( parts[5].toUpperCase().equals("RENSHI") )
 				{shogo = "Renshi";}
-			else if ( parts[4].toUpperCase().equals("KYOSHI") )
+			else if ( parts[5].toUpperCase().equals("KYOSHI") )
 				{shogo = "Kyoshi";}
-			else if ( parts[4].toUpperCase().equals("HANSHI") )
+			else if ( parts[5].toUpperCase().equals("HANSHI") )
 				{shogo = "Hanshi";}
 			else 
 				{
-				System.out.println("Error in shogo, should be 'n','Renshi','Kyoshi' or 'Hanshi' only. '" + parts[4]+ "'. Found in line:");
+				System.out.println("Error in shogo, should be 'n','Renshi','Kyoshi' or 'Hanshi' only. '" + parts[5]+ "'. Found in line:");
 				System.out.println( line );	
 				System.exit(0);
 				}
 			// process Names
-			String bitsOfNames[] = parts[1].split(" ");
+			String bitsOfNames[] = parts[2].split(" ");
 			int howManyNames = bitsOfNames.length ;
 			
 			String firstName = bitsOfNames[0];				// initialise first,middle,last assuming only two names
@@ -174,64 +173,80 @@ private void processLine(String line) {
 			if ( howManyNames == 3 )  						// ie two spaces in the name field, separating three names
 				{											// then shuffle names to reflect 3 names
 				lastName = bitsOfNames[2];
-				middleName = bitsOfNames[1];
+				middleName = bitsOfNames[3];
 				}
 			Name nameOnLine = new Name(firstName, middleName, lastName);
 			
 			// Competitors status
-			Char shortStatus = parts[6];
+			String shortStatus = parts[7];
 			String longStatus = "";
-			if (shortStatus = 'A') { longStatus = "Amateur" ; }
-			else if (shortStatus = 'P') {longStatus = "Professional";}
+			if (shortStatus == "A") { longStatus = "Amateur" ; }
+			else if (shortStatus == "P") {longStatus = "Professional";}
 			else 
 				{
-				System.out.println("Error in level, should be 'A' or 'P' " + parts[6]+ "'. Found in line:");
+				System.out.println("Error in level, should be 'A' or 'P' " + parts[7]+ "'. Found in line:");
 				System.out.println( line );	
 				System.exit(0);
 				}
 			
 			// recent scores	
-			int recentScores [] = new int [5];
+			int recentScores [] = new int [6];
 			for (int s=0 ; s < 5 ; s++)
-				{ recentScores[s] = Integer.parseInt( parts[( s+7) ].trim() ) ; }
+				{ recentScores[s] = Integer.parseInt( parts[( s+8) ].trim() ) ; }
 			// Date of birth
-			LocalDate doB = LocalDate.parse(parts[2]); 
+			LocalDate doB = LocalDate.parse(parts[3]); 
 			
 			// now construct this Kendoka			
-			Kendoka memberReadFromFile = new Kendoka(mNo, nameOnLine , doB , dan, shogo , coach , longStatus , recentScores);
+			DavidKendoka k = new DavidKendoka(a, mNo, nameOnLine , doB , dan, shogo , coach , longStatus , recentScores);
 			// and finally add to membershipList
-			this.addOneKendoka( memberReadFromFile );
+			this.add(k);
           break;
 		  
-        switch(v)
-          String parts [] = line.split(",");
+          case "v":
 			
-			String id = parts[0];
+			String id = parts[1];
 			id = id.trim();
 			int numid = Integer.parseInt(id);
-			Name cName = new Name(parts[1].trim());
-			String cLevel = parts[2];
+			Name cName = new Name(parts[2].trim());
+			String cLevel = parts[3];
 			cLevel = cLevel.trim();
-			String cPosition = parts[3];
+			String cPosition = parts[4];
 			cPosition = cPosition.trim();
 			
 			//the scores are at the end of the line
-			int competitorScoreLength = parts.length - 4;
+			int competitorScoreLength = parts.length - 5;
 			int []competitorScore = new int[competitorScoreLength];
 			//System.arraycopy(parts, 4, competitorScore, 0, competitorScoreLength);
 			for(int i = 0; i < competitorScore.length; i++) {
-				if (parts[4 +i].trim().isEmpty()) {
+				if (parts[5 +i].trim().isEmpty()) {
 					continue; 
 				} 
 				else {
-					competitorScore[i] = Integer.parseInt(parts[4 + i].trim());
+					competitorScore[i] = Integer.parseInt(parts[5 + i].trim());
 				}
 			}
 			
 			//create competitor object and add to the list
-			Competitors c = new Competitors(numid , cName , cLevel , cPosition, competitorScore);
-			this.add(c);
+			Volleyball v = new Volleyball (a, numid , cName , cLevel , cPosition, competitorScore);
+			this.add(v);
           break;
     default:
-      system.
+      System.exit(1);
 	}
+	  System.out.println("Could not process");
+	  }
+
+public String getallMembers(){
+	String report = "ID    NAME                     LEVEL                      SCORES\n";
+	for (ParentCompetitor c: competitorList) {
+		report += String.format("%-6s", c.getId());
+		report += String.format("%-25s", c.getName().getFullName());
+		report += String.format("%-14s", c.getLevel());
+		report += String.format("%-5s", c.getScoreArray());
+		report += "\n";
+	}
+	return report;
+}
+
+
+}

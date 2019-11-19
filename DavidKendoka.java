@@ -4,7 +4,7 @@ import java.time.Period;
 import java.util.Arrays;
 
 
-public class Kendoka extends Competitor
+public class DavidKendoka extends ParentCompetitor
 	{
 	// now build main data structure
 	// Declare variables
@@ -17,22 +17,23 @@ public class Kendoka extends Competitor
 	int [] last5Scores;
 		
 	// Constructor
-	public Kendoka(String a, Integer memberNo , 
-					Name names ,
+	public DavidKendoka(String a, Integer i , 
+					Name n ,
 					LocalDate dob ,
 					Integer dan , 
 					String shogoAwarded , 
 					boolean qualifiedCoach ,
-					int [] marks ) 
+					String l,
+					int [] s ) 
 		{
-		super (a)
-		memberShipNumber = memberNo;
-		individual = names;
+		super (a, i, n, l, s);
+		memberShipNumber = i;
+		individual = n;
 		dateOfBirth = dob;
 		danGrade = dan;
 		shogo = shogoAwarded;
 		coach = qualifiedCoach;	
-		last5Scores = marks;
+		last5Scores = s;
 		}
 		
 

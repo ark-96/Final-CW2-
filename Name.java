@@ -1,4 +1,3 @@
-package volleyball;
 
 public class Name {
 		//instance variables

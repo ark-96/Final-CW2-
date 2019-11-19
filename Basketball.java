@@ -1,10 +1,9 @@
 
-public class AgzCompetitor extends Competitor {
+public class Basketball extends ParentCompetitor {
 	
 	private String country;
-	private static final int NUM_SCORES = 5;
 
-	public AgzCompetitor(String a, int i, Name n, String l, String country, int [] s) {
+	public Basketball(String a, int i, Name n, String l, String country, int [] s) {
 					
 		super(a, i, n, l, s);
 		this.country = country;
@@ -13,40 +12,33 @@ public class AgzCompetitor extends Competitor {
 	public String getCountry() {
 		return country; 
 		}
-			
-	public int getScoreArray () {
-		int scoreArray = 0;
-			for (int scoreIndex = 0; scoreIndex < score.length; scoreIndex++) {
-					scoreArray += score[scoreIndex]; }
-			return scoreArray;
-		}
-			
+					
 	public double getAverageScore () {
 		int total = 0;
-			for (int scoreIndex = 0; scoreIndex < score.length; scoreIndex++) {
-				total += score[scoreIndex]; }
-			return (double) total/score.length;
+			for (int scoreIndex = 0; scoreIndex < getScoreArray().length; scoreIndex++) {
+				total += getScoreArray()[scoreIndex]; }
+			return (double) total/getScoreArray().length;
 			}
 	
 	public double getOverallScore () {
 		int total = 0;
 		double average = 0;
-			for (int scoreIndex = 0; scoreIndex < score.length; scoreIndex++) {
-				total += score[scoreIndex]; }
-			average += total/score.lenght;
-		int maxScore = score[0];
-		for(int i=1; i<score.length; i++) {
-			if (score[i] > maxScore) {
-				maxScore = score[i];
+			for (int scoreIndex = 0; scoreIndex < getScoreArray().length; scoreIndex++) {
+				total += getScoreArray()[scoreIndex]; }
+			average += total/getScoreArray().length;
+		int maxScore = getScoreArray()[0];
+		for(int i=1; i<getScoreArray().length; i++) {
+			if (getScoreArray()[i] > maxScore) {
+				maxScore = getScoreArray()[i];
 			}
 		}
-		int minScore = score[0];
-		for (int i=1; i<score.length; i++) {
-			if(score[i] < minScore) {
-				minScore = score[i];
+		int minScore = getScoreArray()[0];
+		for (int i=1; i<getScoreArray().length; i++) {
+			if(getScoreArray()[i] < minScore) {
+				minScore = getScoreArray()[i];
 			}
 		}
-		return (double) = (average + maxScore + minScore)/3
+		return (double) (average + maxScore + minScore)/3;
 	}
 		
 		
@@ -54,49 +46,26 @@ public class AgzCompetitor extends Competitor {
 			
 	public String getFullDetails() {
 		String fullDetails = "";
-			fullDetails += ("Full details for " + c.getNumber());
-			fullDetails += ("Competitor number " + c.getNumber() + ", name " + c.getName().getFullName() + ", country " + c.getCountry() +"\n");
-			fullDetails += (c.getName().getFirstName() + "is a " + c.getLevel() + " and received these scores: " + c.getScoreArray()+ "\n");
-			fullDetails += ("This gives the competitor an overall score of " + c.getOverallScore());
+			fullDetails += ("Full details for " + getId());
+			fullDetails += ("Competitor number " + getId() + ", name " + getName().getFullName() + ", country " + getCountry() +"\n");
+			fullDetails += (getName().getFirstName() + "is a " + getLevel() + " and received these scores: " + getScoreArray()+ "\n");
+			fullDetails += ("This gives the competitor an overall score of " + getOverallScore());
 		return fullDetails;
 		}
 	
 	
 	public String getShortDetails () {
 		String shortDetails = "";
-			shortDetails += ("CN " + c.getNumber() + "(" + c.getName().getInitName() + ") has overall score " + c.getOverallScore() + ".");
+			shortDetails += ("CN " + getId() + "(" + getName().getInitials() + ") has overall score " + getOverallScore() + ".");
 		return shortDetails; 
 		}
 	
-	
-	//frequency calculation
-	public void getFrequencyOfScores() {
-		int [] frq = new int [score.length];
-		int counted = -1;
-		for (int i=0; i<score.length; i++) {
-			int count = 1;
-			for (int j = i+1; j<score.length; j++) {
-				if(score[i]==score[j]) {
-					count++;
-					frq[j] = counted;
-					}
-				}
-			if(frq[i] != counted)
-				frq[i] = count;
-			}
-		System.out.println("Score | Frequency");
-		for (int i=0; i<frq.length; i++) {
-			if(frq[i] != counted)
-				System.out.println(" " + score[i] + " | " + frq[i]);
-
-		}
-	}
 	//gets maximum score value
 	public int getMaxScore() {
-		int maxScore = score[0];
-		for(int i=1; i<score.length; i++) {
-			if (score[i] > maxScore) {
-				maxScore = score[i];
+		int maxScore = getScoreArray()[0];
+		for(int i=1; i<getScoreArray().length; i++) {
+			if (getScoreArray()[i] > maxScore) {
+				maxScore = getScoreArray()[i];
 			}
 		}
 		return maxScore;
@@ -104,10 +73,10 @@ public class AgzCompetitor extends Competitor {
 	
 	//gets minimum score value
 	public int getMinScore () {
-		int minScore = score[0];
-		for (int i=1; i<score.length; i++) {
-			if(score[i] < minScore) {
-				minScore = score[i];
+		int minScore = getScoreArray()[0];
+		for (int i=1; i<getScoreArray().length; i++) {
+			if(getScoreArray()[i] < minScore) {
+				minScore = getScoreArray()[i];
 			}
 		}
 		return minScore;
@@ -115,4 +84,3 @@ public class AgzCompetitor extends Competitor {
 			
 
 		}
-	

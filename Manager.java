@@ -20,5 +20,10 @@ allMembers.readFile("Input File Davids Updated.dat");
 allMembers.readFile("Volleyball_Input_data.txt");
 allMembers.readFile("AgzCompetitors.txt");
 allMembers.readFile("ArkCompetitorInput.txt");
+String report = allMembers.getallMembers();
+//String report1 = allMembers.getHighestScore();
+
+allMembers.writeToFile("Output.txt", report);
 }
+	
 }
