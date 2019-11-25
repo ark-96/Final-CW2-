@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class ParentCompetitorList {
-  private ArrayList<ParentCompetitor> competitorList; 
+  protected ArrayList<ParentCompetitor> competitorList; 
 
 
 
@@ -14,6 +14,8 @@ public class ParentCompetitorList {
 	 competitorList = new ArrayList<ParentCompetitor> ();
  }
 
+ 
+ 
 public String findShortDetails(int id)
 	{
 		for (ParentCompetitor c : competitorList )
@@ -21,7 +23,7 @@ public String findShortDetails(int id)
 			
 			return ( c.getShortDetails() ) ;
 			}
-		return ( "Sorry despite double validation we could not retrieve this members records.\n" );
+		return ( "Sorry despite due validation we could not retrieve this members records.\n" );
 	}	
 
 public void readFile(String filename){
