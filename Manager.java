@@ -34,8 +34,7 @@ public class Manager{
 		System.out.println("started");
 		CompetitorListGUI gui= new CompetitorListGUI();
 		 gui.setVisible(true);
-		 
-		 System.out.println("ended ");
+		 System.out.println("ended");
 	 }
 	
 }

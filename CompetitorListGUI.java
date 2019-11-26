@@ -13,7 +13,7 @@ public class CompetitorListGUI extends JFrame {
 	
 	//gridofbuttons frame???
 	
-	public JFrame CompetitorListGUI(){
+	public CompetitorListGUI(){
 
 		// construct grid of buttons???
 		JFrame mainGUI = new JFrame("JADA Sports Management");
@@ -25,7 +25,7 @@ public class CompetitorListGUI extends JFrame {
 		mainGUI.pack();
 		mainGUI.setVisible(true);	
 		System.out.println("gui");
-		return mainGUI;
+	
 		
 	}
 	
