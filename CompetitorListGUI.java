@@ -7,7 +7,7 @@ public class CompetitorListGUI extends JFrame {
 	JMenuBar menuBar;
 	JMenu m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19, m20, m21, m22, m23, m24, m25, m26, m27, m28, m29, m30, m31, m32, m33, m34, m35, m36, m37, m38, m39, m40, m41, m42;
 	JPanel sportsPanel, panelSouth, panelCentre, basketballPanel, kendoPanel, tableTennisPanel, volleyballPanel;
-	JButton shortDetails, search, delete,b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4;
+	JButton shortDetails, search, delete, close, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4;
 	JLabel membershipNumber, title;
 	JTextField searchField;
 	
@@ -97,11 +97,14 @@ public class CompetitorListGUI extends JFrame {
         JTextField mn = new JTextField(3); // accepts upto 3 characters
         JButton search = new JButton("Search");
         JButton delete = new JButton("Delete");
+        JButton close = new JButton("Close");
         panel.add(shortD); 
         panel.add(label); // Components Added using Flow Layout
         panel.add(mn);
         panel.add(search);
         panel.add(delete);
+        panel.add(new JLabel("          "));		// spaces pad out the close button to the RHS
+        panel.add(close);
 //        shortD.addActionListener(this);
 //        search.addActionListener(this);
 //        delete.addActionListener(this);
