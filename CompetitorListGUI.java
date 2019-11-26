@@ -10,7 +10,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	JMenuBar menuBar;
 	JMenu mb, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19, m20, m21, m22, m23, m24, m25, m26, m27, m28, m29, m30, m31, m32, m33, m34, m35, m36, m37, m38, m39, m40, m41, m42;
 	JPanel sportsPanel, panelSouth, panelCentre, basketballPanel, kendoPanel, tableTennisPanel, volleyballPanel;
-	JButton shortDetails, search, delete, close, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4;
+	JButton shortDetails, search, delete, close, help, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4;
 	JLabel membershipNumber, title;
 	JTextField searchField;
 	
@@ -246,89 +246,130 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		String action = e.getActionCommand();
 		if (action.equals("About"))
 		{
-			JOptionPane.showMessageDialog(null, about());	
+			JOptionPane.showMessageDialog(null, about());
+			System.out.println("About");
+		}
+		if (action.equals("Help"))
+		{
+			JOptionPane.showMessageDialog(null, help());
+			System.out.println("Help");
 		}
 		
 		else if(action.equals("Read File"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Reading file");
 		}
 		else if(action.equals("Save File"))
 		{
 			JOptionPane.showMessageDialog(null, );
+			System.out.println("Saving file");
 		}
 		else if(action.equals("Delete"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Deleting");
 		}
 		else if(action.equals("Close"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Closing");
 		}
 		else if(action.equals("Full report b"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Full basketball report");
 		}
 		else if(action.equals("Full report k"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Full kedo report");
 		}
 		else if(action.equals("Full report t"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Full tennis report");
 		}
 		else if(action.equals("Full report v"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Full tennis report");
 		}
 		else if(action.equals("Short details b"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Short basketball details");
 		}
 		else if(action.equals("Short details k"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Short kendo details");
 		}
 		else if(action.equals("Short details t"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Short tennis details");
 		}
 		else if(action.equals("Short details v"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Short volleyball details");
 		}
 		else if(action.equals("Write member b"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing basketball member");
 		}
 		else if(action.equals("Write member k"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing kendo member");
 		}
 		else if(action.equals("Write member t"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing tennis member");
 		}
 		else if(action.equals("Write member v"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing volleyball member");
 		}
 		else if(action.equals("Write file b"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing basketball members to a file");
 		}
 		else if(action.equals("Write file k"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing kendo members to a file");
 		}
 		else if(action.equals("Write file t"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing tennis members to a file");
 		}
 		else if(action.equals("Write file v"))
 		{
 			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Writing volleyball members to a file");
 		}
+		else if(action.equals("Add member"))
+		{
+			JOptionPane.showMessageDialog(null,  );
+			System.out.println("Adding a member");
+		}
+		else if(action.equals("Delete member"))
+			{
+				JOptionPane.showMessageDialog(null,  );
+				System.out.println("Deleting a member");
+			}
+		else if(action.equals("Extend member"))
+			{
+				JOptionPane.showMessageDialog(null,  );
+				System.out.println("Extending a members categories");
+			}
 //		System.out.println(ta);
 	}
 	
