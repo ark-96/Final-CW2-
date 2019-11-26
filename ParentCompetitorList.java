@@ -14,7 +14,9 @@ public class ParentCompetitorList {
 	 competitorList = new ArrayList<ParentCompetitor> ();
  }
 
- 
+ public ArrayList<ParentCompetitor> getCompetitorList(){
+	 return competitorList;
+ }
  
 public String findShortDetails(int id)
 	{
@@ -249,6 +251,50 @@ public String getallMembers(){
 	return report;
 }
 
+public String getallBasketball(){
+	String report = "The short details of the basketball competitors is as follows:\n";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof Basketball){
+		report += c.getShortDetails();
+		report += "\n";
+		}
+	}
+	return report;
+}
+
+public String getallDavidKendoka(){
+	String report = "The short details of the kendoka competitors is as follows:\n";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof DavidKendoka){
+		report += c.getShortDetails();
+		report += "\n";
+		}
+	}
+	return report;
+}
+
+public String getallTableTennis(){
+	String report = "The short details of the table-tennis competitors is as follows:\n";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof TableTennis){
+		report += c.getShortDetails();
+		report += "\n";
+		}
+	}
+	return report;
+}
+
+public String getallVolleyball(){
+	String report = "The short details of the volleyball competitors is as follows:\n";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof Volleyball){
+		report += c.getShortDetails();
+		report += "\n";
+		}
+	}
+	return report;
+}
+
 public String getHighestScore(){
 	double highestScore=0;
 	int count = 0;
@@ -280,5 +326,27 @@ public String getHighestScore(){
 	return scoreReport;
 }
 
+
+public String getallVolleyballReport(){
+	String report = "";
+	String highestScore = "";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof Volleyball){
+			report += c.getShortDetails();
+			highestScore +=  competitorList.getHighestScore();
+		}
+	}
+	return report;
+}
+
+
+public int getCompetitorCount(){
+	int count = 0;
+	for (ParentCompetitor c: competitorList) {
+		count ++;
+	}
+	return count;
+	
+}
 
 }

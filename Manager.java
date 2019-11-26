@@ -6,15 +6,10 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Manager{ 
-/** Offers the user a number of options.
- * Performs very basic validation:
- * 1. Valid option.
- * 2 Context valid - eg cannot report until imported or populated data
- * 
- */		
+	
 
 	protected ParentCompetitorList allMembers;
-	public Manager (){
+	public Manager(){
 		 allMembers = new ParentCompetitorList();
 		 }
 	
@@ -32,9 +27,10 @@ public class Manager{
 	
 	public void showGUI(){
 		System.out.println("started");
-		CompetitorListGUI gui= new CompetitorListGUI();
+		CompetitorListGUI gui= new CompetitorListGUI(allMembers);
 		 gui.setVisible(true);
 		 System.out.println("ended");
 	 }
 	
 }
+
