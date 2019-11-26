@@ -24,7 +24,7 @@ public class CompetitorListGUI extends JFrame {
 		mainGUI.getContentPane().add(BorderLayout.CENTER, buildCentre());
 		mainGUI.pack();
 		mainGUI.setVisible(true);	
-		System.out.println("gui");
+		System.out.println("gui works");
 	
 		
 	}
