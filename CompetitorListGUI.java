@@ -1,21 +1,22 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class CompetitorListGUI extends JFrame {
+public class CompetitorListGUI extends JFrame implements ActionListener {
 	private ParentCompetitorList competitorList;
 	JFrame mainGUI;
 	JMenuBar menuBar;
-	JMenu m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19, m20, m21, m22, m23, m24, m25, m26, m27, m28, m29, m30, m31, m32, m33, m34, m35, m36, m37, m38, m39, m40, m41, m42;
+	JMenu mb, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19, m20, m21, m22, m23, m24, m25, m26, m27, m28, m29, m30, m31, m32, m33, m34, m35, m36, m37, m38, m39, m40, m41, m42;
 	JPanel sportsPanel, panelSouth, panelCentre, basketballPanel, kendoPanel, tableTennisPanel, volleyballPanel;
 	JButton shortDetails, search, delete, close, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4;
 	JLabel membershipNumber, title;
 	JTextField searchField;
 	
-	//gridofbuttons frame???
-	
+
 	public CompetitorListGUI(){
 
-		// construct grid of buttons???
 		JFrame mainGUI = new JFrame("JADA Sports Management");
 		mainGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainGUI.setLocation(400,200);
@@ -29,7 +30,7 @@ public class CompetitorListGUI extends JFrame {
 		
 	}
 	
-	public static JMenuBar buildMenu()
+	public JMenuBar buildMenu()
 	{
         //Creating the MenuBar and adding components
         JMenuBar mb = new JMenuBar();
@@ -37,6 +38,7 @@ public class CompetitorListGUI extends JFrame {
         JMenu m2 = new JMenu("Edit");
         JMenu m3 = new JMenu("Report");
         JMenu m4 = new JMenu("Help");
+        m4.addActionListener(this);
         mb.add(m1);
         mb.add(m2);
         mb.add(m3);
@@ -80,7 +82,8 @@ public class CompetitorListGUI extends JFrame {
         
         JMenuItem m41 = new JMenuItem("About JADA Sports Management Software");
         JMenuItem m42 = new JMenuItem("Help");
-//        m41.addActionListener(null);
+        m41.addActionListener(this);
+        m41.setActionCommand("About JADA Sports Management Software");
 //        m42.addActionListener(this);
         m4.add(m41);
         m4.add(m42);
@@ -137,7 +140,7 @@ public class CompetitorListGUI extends JFrame {
 		return sportPanel;
 	}    	
 	
-	public static JPanel buildCentre()
+	public JPanel buildCentre()
 	{
 		// Builds the centre panel of 4 sports
         JPanel cPanel = new JPanel();
@@ -145,13 +148,17 @@ public class CompetitorListGUI extends JFrame {
         
 		JPanel basketP = new JPanel();
 		JButton b1 = new JButton("Full Statistics");
+		b1.setToolTipText("Full report of baskelball players");
 		JButton b2 = new JButton("Short Details");
-		JButton b3 = new JButton("Write Members to File"); 
+		b2.setToolTipText("Short details of baskelball players");
+		JButton b3 = new JButton("Write Members to File");
 		JButton b4 = new JButton("Write report to File");
 		buildSport(basketP, Color.GREEN, "Basket Ball", b1, b2, b3, b4);
 		
 		JPanel kendoP = new JPanel();
         JButton k1 = new JButton("Full Statistics");
+        k1.addActionListener(this);
+        k1.setActionCommand("Full Statistics k");
 		JButton k2 = new JButton("Short Details");
 		JButton k3 = new JButton("Write members to file");
 		JButton k4 = new JButton("Write report to file");
@@ -178,6 +185,77 @@ public class CompetitorListGUI extends JFrame {
 
 		return cPanel;
 	}   
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		String action = e.getActionCommand();
+			System.out.println("actionPerformer works!!!11");
+		if (action.equals("About JADA Sports Management Software"))
+		{
+			System.out.println("If works!!!11");
+			JOptionPane.showMessageDialog(null, "You chose About!" + about());
+			
+			
+			
+		}
+		
+		else if(action.equals("Full Statistics k"))
+		{
+			JOptionPane.showMessageDialog(null,  competitorList.getHighestScore());
+		}
+//				ta.setText("Import from File");
+//			else if(e.getSource() == m12)
+//				ta.setText("Save to File");
+//			else if(e.getSource() == m13)
+//				System.exit(0);
+//			else if(e.getSource() == m21)
+//				ta.setText("Add a Member");
+//			else if(e.getSource() == m22)
+//				ta.setText("Delete a Member");
+//			else if(e.getSource() == m23)
+//				ta.setText("Extend a Member");
+//			else if(e.getSource() == m31)
+//				ta.setText("Report Best Overall Competitor");
+//			else if(e.getSource() == m32)
+//				ta.setText("Report Basket Ball Statistics");
+//			else if (e.getSource() == m33)
+//				ta.setText("Report Kendo Statistics");
+//			else if(e.getSource() == m34)
+//				ta.setText("Report Table Tennis Statistics");
+//			else if(e.getSource() == m35)
+//				ta.setText("Report Volley Ball Statistics");
+//	    	else if(e.getSource() == m41)
+//	    		JOptionPane.showMessageDialog(null, help());	
+//	    	else if(e.getSource() == m42)
+//	    		JOptionPane.showMessageDialog(null, about());
+//			
+//		System.out.println(ta);
+	}
 	
-	
+	public String about()
+	{
+		System.out.println("Reached about()");
+		String aboutJADA = "";
+		aboutJADA += "\n";
+		aboutJADA += "This excellent Sports Membership software was written by:";
+		aboutJADA += "\n";
+		aboutJADA += "Jessica Yip\n";
+		aboutJADA += "Agne Zainyte\n";
+		aboutJADA += "David Spacey\n";
+		aboutJADA += "Akshay Krishnan\n";
+		aboutJADA += "\n";
+		aboutJADA += "Our Software is free to use, but donations and high marks are appreciated.";
+		
+		return aboutJADA;
+	}
+
+	public static String help()
+	{
+		String help = "";
+		help += "/n";
+		help += "Search our extensive Help database./n";
+		help += "/n";
+				
+		return help;
+	}	
 }
