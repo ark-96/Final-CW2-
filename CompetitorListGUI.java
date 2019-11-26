@@ -107,7 +107,8 @@ public class CompetitorListGUI extends JFrame {
         panel.add(close);
 //        shortD.addActionListener(this);
 //        search.addActionListener(this);
-//        delete.addActionListener(this);
+//        delete.addActionListener(this);`
+//        close.addActionListener(this);
         
         return panel;
 	}
