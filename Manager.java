@@ -1,4 +1,5 @@
 import java.io.File;
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,7 +31,11 @@ public class Manager{
 		}
 	
 	public void showGUI(){
-		 CompetitorListGUI gui= new CompetitorListGUI();
+		System.out.println("started");
+		CompetitorListGUI gui= new CompetitorListGUI();
+		 gui.setVisible(true);
+		 
+		 System.out.println("ended ");
 	 }
 	
 }
