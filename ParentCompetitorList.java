@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
+
+import java.util.Arrays;
+
 public class ParentCompetitorList {
   protected ArrayList<ParentCompetitor> competitorList; 
 
@@ -21,8 +26,7 @@ public class ParentCompetitorList {
 public String findShortDetails(int id)
 	{
 		for (ParentCompetitor c : competitorList )
-			{
-			
+			{			
 			return ( c.getShortDetails() ) ;
 			}
 		return ( "Sorry despite due validation we could not retrieve this members records.\n" );
@@ -263,7 +267,7 @@ public String getallBasketball(){
 }
 
 public String getallDavidKendoka(){
-	String report = "The short details of the kendoka competitors is as follows:\n";
+	String report = "The short details of the basketball competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
 		if(c instanceof DavidKendoka){
 		report += c.getShortDetails();
@@ -305,13 +309,10 @@ public String getHighestScore(){
 			highestScore = score;	
 		}
 }
-	for (ParentCompetitor c: competitorList) {
-		
-		if (highestScore == c.getOverallScore()){ 
-			
+	for (ParentCompetitor c: competitorList) {	
+		if (highestScore == c.getOverallScore()){ 			
 			if(count>0){
-				scoreReport += " and ";
-				
+				scoreReport += " and ";				
 			}
 			count++;
 			scoreReport +=  c.getName().getLastCommaMiddleCommaFirst() + " with a score of " + String.format("%.4s",highestScore) ;
@@ -326,27 +327,220 @@ public String getHighestScore(){
 	return scoreReport;
 }
 
-
-public String getallVolleyballReport(){
-	String report = "";
-	String highestScore = "";
+public String getallBasketballScoreReport(){
+	double highestScore=0;
+	int count = 0;
+	String scoreReport = "";
 	for (ParentCompetitor c: competitorList) {
-		if(c instanceof Volleyball){
-			report += c.getShortDetails();
-			highestScore +=  competitorList.getHighestScore();
+		if(c instanceof Basketball){
+		double score = c.getOverallScore();
+		if(score > highestScore){
+			highestScore = score;	
+		}
+		}
+}
+	for (ParentCompetitor c: competitorList) {	
+		if(c instanceof Basketball){
+		if (highestScore == c.getOverallScore()){ 			
+			if(count>0){
+				scoreReport += " and ";				
+			}
+			count++;
+			scoreReport +=  c.getName().getLastCommaMiddleCommaFirst() + " with a score of " + String.format("%.4s",highestScore) ;
 		}
 	}
-	return report;
+	}
+	if(count>1){
+		scoreReport = "There are " + count + " competitors with the highest overall score.\nThey are: " + scoreReport;
+	}
+	else {
+		scoreReport = "The competitor with the highest overall score is: " + scoreReport;
+	}
+	return scoreReport;
 }
 
+public String getallDavidKendokaScoreReport(){
+	double highestScore=0;
+	int count = 0;
+	String scoreReport = "";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof DavidKendoka){
+		double score = c.getOverallScore();
+		if(score > highestScore){
+			highestScore = score;	
+		}
+		}
+}
+	for (ParentCompetitor c: competitorList) {	
+		if(c instanceof DavidKendoka){
+		if (highestScore == c.getOverallScore()){ 			
+			if(count>0){
+				scoreReport += " and ";				
+			}
+			count++;
+			scoreReport +=  c.getName().getLastCommaMiddleCommaFirst() + " with a score of " + String.format("%.4s",highestScore) ;
+		}
+	}
+	}
+	if(count>1){
+		scoreReport = "There are " + count + " competitors with the highest overall score.\nThey are: " + scoreReport;
+	}
+	else {
+		scoreReport = "The competitor with the highest overall score is: " + scoreReport;
+	}
+	return scoreReport;
+}
+
+public String getallTableTennisScoreReport(){
+	double highestScore=0;
+	int count = 0;
+	String scoreReport = "";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof TableTennis){
+		double score = c.getOverallScore();
+		if(score > highestScore){
+			highestScore = score;	
+		}
+		}
+}
+	for (ParentCompetitor c: competitorList) {	
+		if(c instanceof TableTennis){
+		if (highestScore == c.getOverallScore()){ 			
+			if(count>0){
+				scoreReport += " and ";				
+			}
+			count++;
+			scoreReport +=  c.getName().getLastCommaMiddleCommaFirst() + " with a score of " + String.format("%.4s",highestScore) ;
+		}
+	}
+	}
+	if(count>1){
+		scoreReport = "There are " + count + " competitors with the highest overall score.\nThey are: " + scoreReport;
+	}
+	else {
+		scoreReport = "The competitor with the highest overall score is: " + scoreReport;
+	}
+	return scoreReport;
+}
+
+public String getallVolleyballScoreReport(){
+	double highestScore=0;
+	int count = 0;
+	String scoreReport = "";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof Volleyball){
+		double score = c.getOverallScore();
+		if(score > highestScore){
+			highestScore = score;	
+		}
+		}
+}
+	for (ParentCompetitor c: competitorList) {	
+		if(c instanceof Volleyball){
+		if (highestScore == c.getOverallScore()){ 			
+			if(count>0){
+				scoreReport += " and ";				
+			}
+			count++;
+			scoreReport +=  c.getName().getLastCommaMiddleCommaFirst() + " with a score of " + String.format("%.4s",highestScore) ;
+		}
+	}
+	}
+	if(count>1){
+		scoreReport = "There are " + count + " competitors with the highest overall score.\nThey are: " + scoreReport;
+	}
+	else {
+		scoreReport = "The competitor with the highest overall score is: " + scoreReport;
+	}
+	return scoreReport;
+}
 
 public int getCompetitorCount(){
 	int count = 0;
 	for (ParentCompetitor c: competitorList) {
 		count ++;
 	}
-	return count;
+	return count;	
+}
+
+public String getBasketballFullDetails() {
+	String report = "Number               " + "Name                          " + "Country           " + "Level          " + "Scores               " + "Overall Score            \n ";
+	for (ParentCompetitor c : competitorList) {
+		if(c instanceof Basketball){
+		report += String.format("%-6d", c.getId());
+		report += String.format("%-37s", c.getName().getFullName());
+		report += String.format("%-15s", ((Basketball) c).getCountry());
+		report += String.format("%-15s", c.getLevel());
+		report += String.format("%-20s", c.getScoreString());
+		report += String.format("%-6s", c.getOverallScore());
+		report += "\n"; 
+		}
+		}
+	return report;
+}
+
+public String getDavidKendokaFullDetails()
+{	
+	String report = "_________________ Membership List ________________" + "\n" ;
 	
+	
+	// Char positions   0-2     4-23               25    27-35         37-39
+	report +=          "M.No.   NAME               Dan   SCORES    OVERALL\n";
+	// Iterate over the list of members and build text table
+	for (ParentCompetitor m : competitorList)
+		{
+		if(m instanceof DavidKendoka){
+		// get individuals name in the longest format which fits the field available
+		String person =  m.getName().getFullName();
+		
+		if (person.length() > (23-4+1))					// ie check name length > 20 chars
+			{person = m.getName().getFirstILast();     // if so get a shorter version of name
+			if (person.length() > (23-4+1))
+				{person = m.getName().getFirstAndLastName();  // and a shorter version
+				if (person.length() > (23-4+1))
+					{person = m.getName().getInitPeriodLast();}// and the shortest version
+				else
+					{person = person.substring(0, 23-4+1);}    // OK give up and truncate the name
+				}
+			}
+		if (person.length() < 23-4+1)						// add spaces to pad out field if name is shorter
+			{person += "              ".substring(0,23-4+1 - person.length());  }
+		
+		System.out.println( person );
+		// build a string of the scores of m in for format specified (ie a b c d e instead of [a,b,c,d,e])
+		String scores = Arrays.toString(m.getScoreArray()) + " ";
+		scores = scores.substring(1, scores.length() - 1 - 1);  // ie trim leading and closing []
+		scores = scores.replace("," , "");                      // strip out the ","
+		
+		
+		// now build the report
+		report += " " + Integer.toString (m.getId()) + "   " ;
+		report += person + " ";
+		report += Integer.toString( ((DavidKendoka) m).getDanGrade() ) + "   ";
+		report += scores + "   ";
+		//  
+		report += String.format("%5s" ,Double.toString( m.getOverallScore()));
+		report += "\n" ;
+		}
+		}
+	report += "N.B. Overall score is the sum of the members 4 highest recent scores, less their dan grade handicap.\n\n" ;
+	return report;
+}
+
+public String getTableTennisFullDetails()
+{
+	
+	String report = "\n \nDETAILS OF THE COMPETITOR WITH THE HIGHEST SCORE:\n";
+	  for (ParentCompetitor c : competitorList){
+		  if(c instanceof TableTennis){
+			  report += "\nFull details for "+ c.getId() + ": \n";
+			  report +=c.getFullDetails();
+	//		  report +="\n \nShort details for " + c.getCompetitorNumber() + ":\n";
+			  report +=c.getShortDetails();
+			  report +="\n \n";
+		  }
+	  }
+	  return report;  
 }
 
 }

@@ -61,4 +61,19 @@ public class Name {
 	public String getInitials() {
 		return firstName.charAt(0) + "." + lastName.charAt(0);
 	}
+	
+	 public String getFirstILast()
+	 {
+	 String shorterName = firstName + " ";
+	 if (middleName != null)
+	        {shorterName += Character.toString( middleName.charAt(0)) + " ";}
+	 shorterName += lastName;
+	 return shorterName;
+	 }
+	 
+
+	 public String getInitPeriodLast(){
+		 return firstName.charAt(0) + ". " + lastName; 		 
+	 }
+
 }

@@ -65,8 +65,13 @@ public class DavidKendoka extends ParentCompetitor
 		public int getIdAsInt()
 			{ return memberShipNumber ;}
 		
+		public int getDanGrade(){
+			return danGrade;
+		}
 		
-		
+		public int [] getLast5Scores(){
+			return last5Scores;
+		}
 		
 		public String getFullDetails()
 		{
