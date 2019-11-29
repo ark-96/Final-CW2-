@@ -28,8 +28,8 @@ public class Manager{
 	public void showGUI(){
 		System.out.println("started");
 		CompetitorListGUI gui= new CompetitorListGUI(allMembers);
-		 gui.setVisible(true);
-		 System.out.println("ended");
+		//gui.setVisible(true);
+		System.out.println("ended");
 	 }
 	
 }

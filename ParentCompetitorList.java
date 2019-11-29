@@ -475,9 +475,317 @@ public String getBasketballFullDetails() {
 		report += String.format("%-6s", c.getOverallScore());
 		report += "\n"; 
 		}
-		}
+	}
 	return report;
 }
+
+public String getBasketballStats() {
+	String statistics = "";
+	statistics += ("There are " + getSizeOfBasketball() + " competitors. \n");
+	statistics += ("There are " + getCountOfPeopleAtLevel("Novice") + " competitor at Novice Level. \n" );
+	statistics += ("There are " + getCountOfPeopleAtLevel("Standard") + " competitors at Standard Level. \n");
+	statistics += ("There are " + getCountOfPeopleAtLevel("Veteran") + " competitors at Veteran Level. \n");
+	statistics += ("The winner(s) of this competition is (are) " + getallBasketballScoreReport() );
+	statistics += "." + getFrequencyOfScoresBasketball();			
+	return statistics; 
+}
+
+public  int getSizeOfBasketball() {
+	int count=0;
+	for (ParentCompetitor c:competitorList) {
+		if (c instanceof Basketball) {
+			count++;
+		}
+		}
+	return count;
+}
+
+public int getCountOfPeopleAtLevel(String level) {
+	int countLevel = 0;
+	for (ParentCompetitor c:competitorList) {
+		if (c instanceof Basketball) {
+		if(c.getLevel().equals(level)) {
+			countLevel++; }
+	}
+	}
+	return countLevel; 
+}
+
+public String getFrequencyOfScoresBasketball() {
+	String report="";
+	int [] freqOfScores = new int [6];
+	 for(ParentCompetitor c : competitorList){
+		 if (c instanceof Basketball) { 
+		 String scoreArray = c.getScoreString();
+	  scoreArray.replaceAll(" ","");
+	  for (int s = 0; s < scoreArray.length() ; s++){
+	   String sc=scoreArray.substring(s, s+1);
+	    if (s%2==0){
+	     int sco=Integer.valueOf(sc);
+	     freqOfScores[sco]++;
+	    }
+	   }  
+	  }
+	 }
+	 report+= "\n";
+	 report +="The following individual scores were awarded:";
+	 report +="\nScore:  0 1 2 3 4 5";
+	 report +="\nFrequency:  ";
+	 for(int scoreIndex = 0; scoreIndex < freqOfScores.length; scoreIndex++){
+	  report += freqOfScores[scoreIndex] + " " ;
+}
+	 return report;
+}
+
+//private DavidKendoka getHighestScorer()
+//{
+//	for(ParentCompetitor c: competitorList){
+//	if(c instanceof DavidKendoka) {	
+//	DavidKendoka hm = c.listOfMembers.get(0);
+//	Double highScore = (double) -999;      // initialise with silly low value
+//	
+//	for (Kendoka m : listOfMembers)
+//		{
+//		double membersScore = m.getOverallScore(m);
+//		if (membersScore > highScore)
+//		{								// then replace hm with current member, and highScore with their score
+//			hm = m;
+//			highScore = membersScore;
+//			}
+//		}
+//	return hm;							// send back the highest scoring member
+//}
+//
+//private DavidKendoka getLowestScorer()
+//{
+//	DavidKendoka lm = listOfMembers.get(0);
+//	Double lowScore = (double) +999;      // initialise with silly high value
+//	
+//	for (Kendoka m : listOfMembers)
+//		{
+//		double membersScore = m.getOverallScore(m);
+//		if (membersScore < lowScore)
+//		{								// then replace lm with current member, and lowScore with their score
+//			lm = m;
+//			lowScore = membersScore;
+//			}
+//		}
+//	return lm;							// send back the lowest scoring member
+//}
+//
+//public String getStatistics()
+//{
+//	String Sreport = "Highest Scoring Member\n";
+//	Sreport +=       "----------------------\n";
+//	Sreport += "The details of the member with the highest overall score is :\n";
+//	DavidKendoka high = getHighestScorer();
+//	Sreport += getFullDetails(high);
+//	
+//	Sreport += "\n\n";
+//	Sreport += buildScoreFrequency();
+//	Sreport += buildAvgScoresByDan();
+//			
+//	return Sreport;
+//}
+//
+//
+//private String buildScoreFrequency()
+//{
+//	Kendoka winner = getHighestScorer();
+//	double maxScore = winner.getOverallScore(winner);
+//	int high = (int) Math.round(maxScore);
+//			
+//	Kendoka loser = getLowestScorer();
+//	double lowScore = loser.getOverallScore(loser);
+//	int low = (int) Math.round(lowScore);
+//	
+//	
+//	int range = high - low;
+//	int cumCount = 0 ;     			// cumulative count of participants
+//	double totalScores = 0 ;		// Total of all scores 
+//			
+//	//	create array, starting from low score, ie [0] represents low score rounded down
+//	int [] counts = new int [ range + 1];
+//		
+//	// count scores
+//	double score;                      // temporary variable 
+//	for (Kendoka k : listOfMembers)
+//		{
+//		score = k.getOverallScore(k);
+//		// System.out.println(range + " " + score + "index = " + ((int) (Math.round(score) - low )));
+//		counts[ (int) (Math.round(score) - low ) ] ++ ;
+//		totalScores += score ;
+//		cumCount ++ ;
+//		}
+//			
+//	// Start by defining title of table
+//	String title = " Frequency Count of Overall (Handicapped) Scores ";
+//	int tableTop = range * 6;       // Allow 6 characters for each frequency bucket
+//	String heading =  "---------------------------------------".substring(0,(int) ((tableTop - title.length()) / 2)) ;
+//	String frequencyTable = "\n" + "       " + heading + title + heading + "\n";
+//	
+//	//build intervals into table
+//	frequencyTable += "Score ";
+//	for (int n = 0; n < range + 1 ; n++)
+//		{ frequencyTable += String.format("%4s" , Integer.toString(n + low )) + "  "; }
+//	frequencyTable += "\n";
+//	
+//	// now build counts into table
+//	frequencyTable += "Count ";
+//	for (int n = 0; n < range + 1 ; n++)
+//		{ frequencyTable += String.format("%4s" ,counts[n]) + "  "; }
+//	frequencyTable += "\n\n\n";
+//	
+//	
+//	frequencyTable += "Summary Statistics for these " + cumCount + " members:\n";
+//	frequencyTable += "----------------------------------------\n";
+//	// calculate median
+//	frequencyTable += "    Median Score is :   ";
+//	int countToHalf = 0;
+//	int index = 0;
+//	while ( countToHalf < cumCount / 2)
+//		{
+//		countToHalf += counts[index];
+//		index ++ ;
+//		//  System.out.println(index + " " + countToHalf + " " + cumCount + " " + index%2); - debugging
+//		}
+//	if ( index%2 == 1 )
+//		{ frequencyTable += Integer.toString( index + low - 1) ; }
+//	else
+//		{ frequencyTable += Integer.toString( ( (index + low -1) + (index +low - 1) - 1) / 2 );}
+//	
+//	frequencyTable += "\n";
+//	
+//	// calculate Median
+//	double mean = totalScores / cumCount;
+//	String stringToAdd = String.format( "%.1f" , mean);
+//	frequencyTable += "    Mean Score is :   " + stringToAdd + "\n";
+//	
+//	// calculate Mode
+//	int maxFreqAt = 0;
+//	int maxCount = 0;
+//	boolean multiModal = false;
+//	
+//	for (int i = 0 ; i < counts.length ; ++ i )
+//		{
+//		if (( counts[i] == maxCount) && ( i != maxFreqAt))
+//			{ multiModal = true ; 
+//			continue ;}
+//		
+//		if (counts[i] > maxCount)
+//			{
+//			maxCount = counts[i];
+//			maxFreqAt = i;
+//			multiModal = false;
+//			}
+//		}
+//	frequencyTable += "    Modal Score is :   ";
+//	frequencyTable += (maxFreqAt + low) ;
+//	if ( multiModal ) frequencyTable += "  But beware this data is multimodal.";
+//	frequencyTable += "\n" + "    Minimum Score is : " + low + "\n";
+//	frequencyTable += "    Maximum Score is : " + high;
+//	frequencyTable += "\n\n";
+//			
+//	return frequencyTable ;
+//}
+//
+//	
+// private String buildAvgScoresByDan()
+//{
+//	// create a two-dimensional array of size [8][2]
+//	// [8] represents the possible Dan grades 0-8, the highest rank possible in Kendo is 8th Dan, beginners start with no dan (mudan), or zero
+//	// [2] represents:
+//		//[0] is a count of members with a grade corresponding to the index/Dan grade
+//		//[1] is a total (by grade) of Overall Score of members with that grade
+//	 	//[2] will hold mean score by grade
+//		
+//	// Although Dan grades are integers, and our marking scheme only applies integer results, we will have to work in FP to allow for averages
+//			 
+//	 double [][] memberScores = new double [9][3];
+//	 
+//	 int count = 0;		// array index (to make code more readable)
+//	 int cumScores = 1; // array index
+//	 int avgScores = 2; // array index
+//	 int g = 0; 		// simple grade pointer/counter
+//	
+//	 // iterate over memberList and populate array
+//	 
+//	 for (Kendoka m : listOfMembers)
+//	 	{
+//		 memberScores[m.danGrade][count] ++ ; 							// Increment the dan grade count
+//		 memberScores[m.danGrade][cumScores] += m.getOverallScore(m) ; 	// Add m's overall score to the total for their grade
+//		 }
+//	 
+//	 // calculate averages
+//	 for ( g = 0 ; g <= 8 ; g++ )
+//	 	{
+//		 if ( memberScores[g][count] != 0 )
+//	 		{ memberScores[g][avgScores] = memberScores[g][cumScores] / memberScores[g][count]; }
+//	 		
+//	 	else															// deal with zero denominator by simplifying result to zero
+//	 		{memberScores[g][avgScores] = 0 ;}
+//	 	}
+//	 
+//	 // Build output table.
+//	 // Start by defining title of table
+//	String title = "Average Overall (Handicapped) Scores by Dan Grade";
+//	int tableTop = 9 * 7;       // Allow 7 characters for each frequency bucket, nb 9 grades hard coded, as there are only 9 grades
+//	String heading =  "---------------------------------------".substring( 0 , (int) ((tableTop - title.length()) / 2)) ;
+//	String avgMarksTable = "\n" + "          " + heading + title + heading + "\n";
+//	
+//	//build grades into table
+//	avgMarksTable += "Dan Grade ";
+//	for ( g = 0; g <= 8; g ++)
+//		{ avgMarksTable += String.format("%5d" , (int) g) + "  "; }
+//	avgMarksTable += "\n";
+//	
+//	// now build counts into table
+//	avgMarksTable += "No.Members";
+//	for ( g = 0; g <= 8; g ++)
+//		{ avgMarksTable += String.format("%5d" , (int) memberScores[g][count]) + "  "; }
+//	avgMarksTable += "\n";
+//	
+//	// now build averages into table
+//	avgMarksTable += "Mean Score";
+//	for ( g = 0; g <= 8; g ++)
+//		{ 
+//		String stringToAdd = String.format( "%.1f" , memberScores[g][avgScores] );
+//		avgMarksTable += "         ".substring(0, 7 - stringToAdd.length() ) + stringToAdd ;
+//		}
+//	avgMarksTable += "\n\n";
+//	
+//	
+//	// Find & Summarise best & Worst
+//	int danGradeBestScore = 0 ;
+//	double bestScore = -99 ;
+//	int danGradeWorstScore = 0 ;
+//	double worstScore = +99 ;
+//	
+//	
+//	for ( g = 0 ; g<=8 ; g ++)
+//		{
+//		if ( memberScores[g][avgScores] > bestScore )		// nb does not deal with multi modal, but rewards junior grades for matching seniors
+//			{
+//			bestScore = memberScores[g][avgScores];
+//			danGradeBestScore = g;
+//			}
+//		if ( memberScores[g][avgScores] < worstScore )		// nb does not deal with multi equal low frequencies, but penalises senior grades for not beating juniors
+//			{
+//			worstScore = memberScores[g][avgScores];
+//			danGradeWorstScore = g;
+//			}
+//		}
+//		
+//	avgMarksTable += "The best  scoring (handicapped) dan group is " + danGradeBestScore;
+//	avgMarksTable += " with an average performance of :" + bestScore + "\n";
+//	
+//	avgMarksTable += "The worst scoring (handicapped) dan group is " + danGradeWorstScore;
+//	avgMarksTable += " with an average performance of :" + worstScore + "\n\n";
+//	
+//	avgMarksTable += "End of Report.\n\n\n";
+//	return avgMarksTable;
+//		
+//}
 
 public String getDavidKendokaFullDetails()
 {	
@@ -523,24 +831,47 @@ public String getDavidKendokaFullDetails()
 		report += "\n" ;
 		}
 		}
-	report += "N.B. Overall score is the sum of the members 4 highest recent scores, less their dan grade handicap.\n\n" ;
+	report += "\nN.B. Overall score is the sum of the members 4 highest recent scores,\n";
+	report += "less their dan grade handicap.\n\n" ;
 	return report;
 }
 
-public String getTableTennisFullDetails()
-{
-	
-	String report = "\n \nDETAILS OF THE COMPETITOR WITH THE HIGHEST SCORE:\n";
-	  for (ParentCompetitor c : competitorList){
-		  if(c instanceof TableTennis){
-			  report += "\nFull details for "+ c.getId() + ": \n";
-			  report +=c.getFullDetails();
-	//		  report +="\n \nShort details for " + c.getCompetitorNumber() + ":\n";
-			  report +=c.getShortDetails();
-			  report +="\n \n";
-		  }
-	  }
-	  return report;  
+public String getTableTennisFullDetails(){	
+	String report = "Competitor Number  Competitor Name         Level  	Age  	Nationality  Scores       OVERALL\n";
+	 for(ParentCompetitor c : competitorList){
+		 if(c instanceof TableTennis){
+	  report +=String.format("%s", c.getId());
+	  report +="                ";
+	  report +=String.format("%-22s", c.getName().getFullName());
+	  report +="  ";
+	  report +=String.format("%-7s", c.getLevel());
+	  report +="  ";
+	  report +=String.format("%-6s", ((TableTennis) c).getAge());
+	  report +="  ";
+	  report +=String.format("%-11s", ((TableTennis) c).getCountry());
+	  report +="  ";
+	  report +=String.format("%-11s", c.getScoreString());
+	  report +="  ";
+	  report +=String.format("%.3s", c.getOverallScore());
+	  report +="\n";
+		 }
+	 }
+	 return report;  
+}
+
+public String getVolleyballFullDetails(){
+	String report = "ID    NAME                     LEVEL         POSITION              SCORES\n";
+	for (ParentCompetitor c: competitorList) {
+		if(c instanceof Volleyball){
+			report += String.format("%-6s", c.getId());
+			report += String.format("%-25s", c.getName().getFullName());
+			report += String.format("%-14s", c.getLevel());
+			report += String.format("%-22s", ((Volleyball) c).getPosition());
+			report += String.format("%-5s", c.getScoreString());
+			report += "\n";
+		}
+	}
+return report;
 }
 
 }

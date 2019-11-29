@@ -1,5 +1,47 @@
 THE REPORT
-The short details of the basketball competitors is as follows:
+The short details of the competitors is as follows:
+CN 100 (K.T) has an overall score 3.3
+CN 101 (J.j) has an overall score 4.0
+CN 102 (J.S) has an overall score 3.0
+CN 103 (J.P) has an overall score 2.7
+CN 104 (B.W) has an overall score 4.0
+CN 105 (D.G) has an overall score 2.9
+CN 106 (K.j) has an overall score 3.0
+CN 107 (S.G) has an overall score 2.0
+CN 108 (C.X) has an overall score 2.4
+CN 109 (J.B) has an overall score 3.7
+CN 110 (C.K) has an overall score 4.2
+CN 111 (S.S) has an overall score 3.3
+CN 112 (F.K) has an overall score 3.7
+CN 113 (H.G) has an overall score 4.0
+CN 114 (A.D) has an overall score 3.8
+CN 115 (J.R) has an overall score 4.0
+CN 200 (B.S) has an overall score 2.0
+CN 201 (J.W) has an overall score 1.0
+CN 202 (F.W) has an overall score -1.0
+CN 203 (J.P) has an overall score 8.0
+CN 204 (S.Y) has an overall score 3.0
+CN 205 (A.W) has an overall score 15.0
+CN 206 (S.B) has an overall score 13.0
+CN 207 (G.M) has an overall score 3.0
+CN 208 (S.M) has an overall score 12.0
+CN 209 (G.S) has an overall score 13.0
+CN 210 (M.M) has an overall score 12.0
+CN 211 (K.N) has an overall score 12.0
+CN 212 (A.A) has an overall score 4.0
+CN 213 (P.S) has an overall score 4.0
+CN 300 (I.H) has an overall score 3.0
+CN 301 (P.T) has an overall score 3.2
+CN 302 (L.L) has an overall score 1.8
+CN 303 (K.S) has an overall score 4.2
+CN 304 (O.B) has an overall score 3.2
+CN 305 (R.F) has an overall score 2.4
+CN 306 (A.C) has an overall score 1.8
+CN 307 (M.K) has an overall score 4.4
+CN 308 (B.C) has an overall score 3.0
+CN 309 (C.T) has an overall score 3.8
+CN 310 (H.A) has an overall score 1.4
+CN 311 (S.B) has an overall score 3.8
 CN 401 (B.D) has an overall score 2.0
 CN 402 (T.L) has an overall score 3.33
 CN 403 (M.M) has an overall score 3.0
@@ -14,5 +56,4 @@ CN 411 (E.B) has an overall score 2.33
 CN 412 (V.G) has an overall score 3.33
 CN 413 (D.M) has an overall score 3.33
 
-There are 4 competitors with the highest overall score.
-They are: Louganis, Theodor with a score of 3.33 and Ruolin, Zhiong with a score of 3.33 and Galkin, Vladimyr with a score of 3.33 and Moshknik, Dmitriy with a score of 3.33.
+The competitor with the highest overall score is: Wright, Andrew with a score of 15.0.
