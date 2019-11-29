@@ -1,8 +1,11 @@
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+// import javax.swing.ButtonGroup;
+
 
 public class CompetitorListGUI extends JFrame implements ActionListener {
 	private ParentCompetitorList competitorList;
@@ -619,10 +622,21 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	return panel;
 	}
 
+//	private void groupButton()
+//	{
+//		ButtonGroup bg1 = new ButtonGroup();
+//		bg1.add(jRadioButton1);
+//		bg1.add(jRadioButton2);
+//		bg1.add(jRadioButton3);
+//		
+//	}
+	
+	
 	public JPanel northPanel()
 	{
 	JPanel panelN = new JPanel();
 	panelN.setLayout(new FlowLayout());
+	ButtonGroup group = new ButtonGroup();
 
 	JLabel label1 = new JLabel("Age");
 	JRadioButton rbutton1 = new JRadioButton();
@@ -630,6 +644,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	rbutton1.setActionCommand("Sort by Age");
 	panelN.add(label1);
 	panelN.add(rbutton1);
+	group.add(rbutton1);
 
 	JLabel label2 = new JLabel("Dan Grade");
 	JRadioButton rbutton2 = new JRadioButton();
@@ -637,6 +652,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	rbutton2.setActionCommand("Sort by Dan");
 	panelN.add(label2);
 	panelN.add(rbutton2);
+	group.add(rbutton2);
 
 	JLabel label3 = new JLabel("Overall Score");
 	JRadioButton rbutton3 = new JRadioButton();
@@ -644,6 +660,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	rbutton3.setActionCommand("Sort by Overall Score");
 	panelN.add(label3);
 	panelN.add(rbutton3);
+	group.add(rbutton3);
 
 	return panelN;
 	}
