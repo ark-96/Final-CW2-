@@ -5,7 +5,6 @@ public class MainCompetitor {
 		// TODO Auto-generated method stub
 		Manager km = new Manager();
 		//km.run();
-		
 		km.showGUI();
 	}
 
