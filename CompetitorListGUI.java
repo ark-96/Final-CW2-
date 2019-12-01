@@ -11,9 +11,12 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	JMenu mb, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19, m20, m21, m22, m23, m24, m25, m26, m27, m28, m29, m30, m31, m32, m33, m34, m35, m36, m37, m38, m39, m40, m41, m42;
 	JPanel sportsPanel, panelSouth, panelCentre, basketballPanel, kendoPanel, tableTennisPanel, volleyballPanel;
 	JButton shortDetails, search, delete, close, help, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4, basketball, kendoka, tabletennis, volleyball;
-	JLabel membershipNumber, title;
+	JLabel membershipNumber, title, explain;
 	JTextField searchField;
 	
+	private static String popUpSport = "Kendo";
+	private static String popUpSortKey = "ID";
+		
 
 	public CompetitorListGUI(ParentCompetitorList list){
 		
@@ -38,7 +41,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	popUpGUI.setLocation(500,300);
 	//popUpGUI.add(BorderLayout.SOUTH, bottomPanel());
 	popUpGUI.getContentPane().add(BorderLayout.NORTH, northPanel());
-	popUpGUI.add(BorderLayout.CENTER, reportPane(popUpList));
+	popUpGUI.add(BorderLayout.CENTER, reportPane(popUpList, popUpSortKey));
 	popUpGUI.pack();
 	popUpGUI.setVisible(true);
 	System.out.println("gui works");
@@ -471,7 +474,8 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 			}
 		else if(action.equals("Options k"))
 		{
-			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, "Kendo");
+			popUpSport = "Kendo";
+			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
 			System.out.println("Kendo popup");
 			}
 		else if(action.equals("Options t"))
@@ -486,19 +490,40 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 			}
 		else if (action.equals("Sort by Age"))
 		{
-		System.out.println("Sort by Age");
-		// code to replace report pane with sorted by Age
+			System.out.println("Sort by Age");
+			popUpSortKey = "age";
+			this.setVisible(false);
+			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+			dispose();
+			// this.setVisible(true);
 		}
 		else if (action.equals("Sort by Dan"))
 		{
-		System.out.println("Sort by Dan");
-		// code to replace report pane with sorted by Dan
+			System.out.println("Sort by Dan");
+			popUpSortKey = "dan";
+			this.setVisible(false);
+			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+			// this.setVisible(true);
+			dispose();
 		}
 		else if (action.equals("Sort by Overall Score"))
 		{
-		System.out.println("Sort by Overall Score");
-		// code to replace report pane with sorted by Score
+			System.out.println("Sort by Overall Score");
+			popUpSortKey = "score";
+			this.setVisible(false);
+			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+			// this.setVisible(true);
+			dispose();
 		}
+		else if (action.equals("Sort by ID"))
+		{
+			System.out.println("Sort by ID");
+			popUpSortKey = "ID";
+			this.setVisible(false);
+			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+			// this.setVisible(true);
+			dispose();
+		}	
 		else if (action.equals("Close Popup"))
 		{
 			this.setVisible(false);
@@ -537,20 +562,30 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	public JScrollPane makeReportGUI(String report)
 	{
 		JTextArea text = new JTextArea( report );
-//		text.setLineWrap(false);
-//		text.setWrapStyleWord(true);
 		text.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 		JScrollPane scrollPane = new JScrollPane(text);
 		return scrollPane;
 	}
 
 
-	public JTextArea reportPane(ParentCompetitorList popUpList)
+	public JTextArea reportPane(ParentCompetitorList popUpList, String sortkey)
 	{
-	String report = popUpList.getDavidKendokaFullDetails("dan");
-	JTextArea panel = new JTextArea( report );
-	panel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-	return panel;
+		String report = "";
+		switch (popUpSport)
+		{
+			case "Kendo":
+				report = popUpList.getDavidKendokaFullDetails(sortkey);
+				break;
+			case "Basketball":
+				break;
+			case "Tabletennis":
+				break;
+			case "Volleyball":
+				break;
+		}
+		JTextArea panel = new JTextArea( report );
+		panel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+		return panel;
 	}
 	
 	public JPanel northPanel()
@@ -558,6 +593,18 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	JPanel panelN = new JPanel();
 	panelN.setLayout(new FlowLayout());
 	ButtonGroup group = new ButtonGroup();
+	
+	JLabel explain = new JLabel("Sort By:   ");
+	panelN.add(explain);
+	
+	JLabel label0 = new JLabel("ID");
+	JRadioButton rbutton0 = new JRadioButton();
+	rbutton0.addActionListener(this);
+	rbutton0.setActionCommand("Sort by ID");
+	panelN.add(label0);
+	panelN.add(rbutton0);
+	group.add(rbutton0);
+	if (popUpSortKey == "ID" ) {rbutton0.setSelected(true);} 					// set default
 
 	JLabel label1 = new JLabel("Age");
 	JRadioButton rbutton1 = new JRadioButton();
@@ -566,47 +613,82 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	panelN.add(label1);
 	panelN.add(rbutton1);
 	group.add(rbutton1);
+	if (popUpSortKey == "age" ) {rbutton1.setSelected(true);}
 
-	JLabel label2 = new JLabel("Dan Grade");
+	JLabel label2 = new JLabel("Overall Score");
 	JRadioButton rbutton2 = new JRadioButton();
 	rbutton2.addActionListener(this);
-	rbutton2.setActionCommand("Sort by Dan");
+	rbutton2.setActionCommand("Sort by Overall Score");
 	panelN.add(label2);
 	panelN.add(rbutton2);
 	group.add(rbutton2);
-	rbutton2.setSelected(true); 				// Set default
-
-	JLabel label3 = new JLabel("Overall Score");
-	JRadioButton rbutton3 = new JRadioButton();
-	rbutton3.addActionListener(this);
-	rbutton3.setActionCommand("Sort by Overall Score");
-	panelN.add(label3);
-	panelN.add(rbutton3);
-	group.add(rbutton3);
-
+	if (popUpSortKey == "score" ) {rbutton2.setSelected(true);}
+	
+	switch(popUpSport)
+		{
+		case "Kendo":
+			JLabel label3 = new JLabel("Dan Grade");
+			JRadioButton rbutton3 = new JRadioButton();
+			rbutton3.addActionListener(this);
+			rbutton3.setActionCommand("Sort by Dan");
+			panelN.add(label3);
+			panelN.add(rbutton3);
+			group.add(rbutton3);
+			if (popUpSortKey == "dan" ) {rbutton3.setSelected(true);}
+			break;
+		case "Basketball":
+			break;
+		case "Tabletennis":
+			break;
+		case "Volleyball":
+			break;
+			
+		}
 	return panelN;
 	}
 
-	public void actionPerformedPopup(ActionEvent e)
-	{
-	String action = e.getActionCommand();
-
-	if (action.equals("Sort by Age"))
-		{
-		System.out.println("Sort by Age");
-		// code to replace report pane with sorted by Age
-		}
-	else if (action.equals("Sort by Dan"))
-		{
-		System.out.println("Sort by Dan");
-		// code to replace report pane with sorted by Dan
-		}
-	else if (action.equals("Sort by Overall Score"))
-		{
-		System.out.println("Sort by Overall Score");
-		// code to replace report pane with sorted by Score
-		}
-	}
-	
+//	public void actionPerformedPopup(ActionEvent e)
+//	{
+//	String action = e.getActionCommand();
+//
+//	if (action.equals("Sort by Age"))
+//		{
+//		popUpSortKey = "age";
+//		System.out.println("Sort by Age");
+//		System.out.println("Sort by Age");
+//		popUpSortKey = "age";
+//		this.setVisible(false);
+//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+//		dispose();
+//		// this.setVisible(true); to replace report pane with sorted by Age
+//		}
+//	else if (action.equals("Sort by Dan"))
+//		{
+//		System.out.println("Sort by Dan");
+//		popUpSortKey = "dan";
+//		this.setVisible(false);
+//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+//		// this.setVisible(true);
+//		dispose();
+//		}
+//	else if (action.equals("Sort by Overall Score"))
+//		{
+//		System.out.println("Sort by Overall Score");
+//		popUpSortKey = "score";
+//		this.setVisible(false);
+//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+//		// this.setVisible(true);
+//		dispose();
+//		}
+//	else if (action.equals("Sort by ID"))
+//		{
+//		System.out.println("Sort by ID");
+//		popUpSortKey = "ID";
+//		this.setVisible(false);
+//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+//		// this.setVisible(true);
+//		dispose();
+//		}
+//	}
 	
 }
