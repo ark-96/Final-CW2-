@@ -1,7 +1,9 @@
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.chrono.ChronoLocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 public class DavidKendoka extends ParentCompetitor
@@ -44,16 +46,17 @@ public class DavidKendoka extends ParentCompetitor
 		 * returns the Overall Score.	 
 		 */
 		{
-			// sort the list of scores	
-			Arrays.sort(last5Scores);
-			// sum marks 5 to 1 (ignore score[0])
 			double totalMarks = 0;
-			for (int i = 5-1; i >= 1  ; i--)  
-				{ totalMarks += last5Scores[i]; }
-			
-			return  ( totalMarks - danGrade );	
-			
+			double minScore = last5Scores[0];
+			for (int i = 0 ; i <= 4 ; i++ )  
+				{
+				totalMarks += last5Scores[i]; 
+				if (last5Scores[i] < minScore)
+					{ minScore = last5Scores[i];	}
+				}
+			return  ( totalMarks - minScore - danGrade );	
 		}
+		
 		
 		public int getAge()
 			{return Period.between( dateOfBirth , LocalDate.now() ).getYears();}
@@ -76,7 +79,7 @@ public class DavidKendoka extends ParentCompetitor
 		public String getFullDetails()
 		{
 			String scores = "";
-			for (int s : last5Scores)
+			for (int s = 0 ; s <=4 ; s++)
 				{scores += last5Scores[s] + " , ";}
 			scores = scores.substring(0, scores.length() -1) + "\n";			// ie strip off last comma & space and add new line
 			
@@ -133,4 +136,22 @@ public class DavidKendoka extends ParentCompetitor
 //		
 //	}
 
+//	public int compareName(DavidKendoka a , DavidKendoka b)
+//	{
+//		Name n1 = a.getName();
+//		Name n2 = b.getName();
+//		return (n1.getFullName()).compareTo(n2.getFullName());
+//	}
+		
+	public int compareDan(DavidKendoka a , DavidKendoka b)
+	{	return Integer.compare(a.getDanGrade(), b.getDanGrade());	}	
+		
+	public int compareAge(DavidKendoka a , DavidKendoka b)
+	{	return Integer.compare(a.getAge() , b.getAge() );	}
+	
+	public int compareScore(DavidKendoka a , DavidKendoka b)
+	{	return Double.compare( a.getOverallScore() , b.getOverallScore() );	}
+
+
+		
 }

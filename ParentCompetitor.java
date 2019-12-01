@@ -7,7 +7,8 @@ abstract public class ParentCompetitor {
 	private String level;
 	private int [] score;
 	
-	public ParentCompetitor (String a, int i, Name n, String l, int [] s) {
+	public ParentCompetitor (String a, int i, Name n, String l, int [] s) 
+	{
 		identifier = a;
 		id = i;
 		name = n;
@@ -20,21 +21,24 @@ abstract public class ParentCompetitor {
 	public Name getName() {return name; }
 	public String getLevel() {return level; }
 	
-	public int [] getScoreArray() {
-		return score ;}
-	public String getScoreString(){
+	public int [] getScoreArray() 
+	{ return score ;}
+	public String getScoreString()
+	{
 		String  report = "";
-		 for(int scoreIndex = 0; scoreIndex < score.length; scoreIndex++){
-		 report += score[scoreIndex] + " " ;
-		 }
-		 return report;
+		 for(int scoreIndex = 0; scoreIndex < score.length; scoreIndex++)
+	 	{
+			 report += score[scoreIndex] + " " ;
+	 	}
+	 return report;
 	}
 	public abstract double getOverallScore();
 	public abstract String getFullDetails();
-	public String getShortDetails(){
+	public String getShortDetails()
+	{
 		String compNo = String.format("%s", id);
 		 return "CN " + compNo + " (" + getName().getInitials() + ") has an overall score " + String.format("%.4s", getOverallScore());
 	}
-	
-
+	public int compareN(ParentCompetitor a , ParentCompetitor b)
+	{	return (a.getName().getFullName()).compareTo(b.getName().getFullName());	}
 }

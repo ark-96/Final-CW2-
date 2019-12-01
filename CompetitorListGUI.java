@@ -293,23 +293,21 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	
 		String action = e.getActionCommand();
 		
-		if ((competitorList.getCompetitorCount() == 0) & !( (action.equals("Read File") || action.equals("Close") ) || ((action.equals("About")) || (action.equals("Help")))))			{
-			JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
-			
-			}
+		if ((competitorList.getCompetitorCount() == 0) & !( (action.equals("Read File") || action.equals("Close") ) || ((action.equals("About")) || (action.equals("Help")))))	
+		{ JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." ); }
 		else
-		{	
-		
-		if (action.equals("About"))
-		{
-			JOptionPane.showMessageDialog(null, about());
-			System.out.println("About");
-		}
-		if (action.equals("Help"))
-		{
-			JOptionPane.showMessageDialog(null, help());
-			System.out.println("Help");
-		}
+			{	
+			
+			if (action.equals("About"))
+				{
+					JOptionPane.showMessageDialog(null, about());
+					System.out.println("About");
+				}
+			if (action.equals("Help"))
+				{
+					JOptionPane.showMessageDialog(null, help());
+					System.out.println("Help");
+				}
 		
 		else if(action.equals("Read File"))
 		{
@@ -371,7 +369,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		}
 		else if(action.equals("Full report k"))
 		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails()) );
+				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getKendoStatistics()) );
 				System.out.println("Full kendo report");
 		}
 		else if(action.equals("Full report t"))
@@ -391,28 +389,18 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		}
 		else if(action.equals("Short details k"))
 		{
-			JOptionPane.showMessageDialog(mainGUI, competitorList.getallDavidKendoka());
-			System.out.println("Short kendo details");
+			JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails()) );
+			System.out.println("Full kendo report");
 		}
 		else if(action.equals("Short details t"))
 		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
-			}
-			else{
 			JOptionPane.showMessageDialog(mainGUI, competitorList.getallTableTennis());
 			System.out.println("Short tennis details");
-			}
 		}
 		else if(action.equals("Short details v"))
 		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
-			}
-			else{
 			JOptionPane.showMessageDialog(mainGUI, competitorList.getallVolleyball());
 			System.out.println("Short volleyball details");
-			}
 		}
 		else if(action.equals("Write member b"))
 		{
@@ -436,43 +424,23 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		}
 		else if(action.equals("Write report b"))
 		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
-			}
-			else{
 			JOptionPane.showMessageDialog(null,  competitorList.getallBasketballScoreReport());
 			System.out.println("Writing basketball members to a file");
-			}
 		}
 		else if(action.equals("Write report k"))
 		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
-			}
-			else{
 				JOptionPane.showMessageDialog(null,  competitorList.getallDavidKendokaScoreReport() );
 				System.out.println("Writing Kendoka members to a file");
-			}
 		}
 		else if(action.equals("Write report t"))
 		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
-			}
-			else{
 				JOptionPane.showMessageDialog(null,  competitorList.getallTableTennisScoreReport());
 				System.out.println("Writing table tennis members to a file");
-			}
 		}
 		else if(action.equals("Write report v"))
 		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
-			}
-			else{
 				JOptionPane.showMessageDialog(null,  competitorList.getallVolleyballScoreReport());
 				System.out.println("Writing volleyball members to a file");
-			}
 		}
 		else if(action.equals("Add member"))
 		{
@@ -604,33 +572,15 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	
 	
 
-//	public JPanel bottomPanel()
-//	{
-//	JPanel panel = new JPanel(); //
-//	        JButton close = new JButton("Close");
-//	        panel.add(close);
-//	        close.addActionListener(this);
-//	        close.setActionCommand("Close Popup");
-//	        close.setToolTipText("Click here to return to main GUI");
-//	        return panel;
-//	}
 
 	public JTextArea reportPane(ParentCompetitorList popUpList)
 	{
-	String report = popUpList.getallDavidKendoka();// gotta change this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	String report = popUpList.getDavidKendokaFullDetails();
 	JTextArea panel = new JTextArea( report );
+	panel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 	return panel;
 	}
 
-//	private void groupButton()
-//	{
-//		ButtonGroup bg1 = new ButtonGroup();
-//		bg1.add(jRadioButton1);
-//		bg1.add(jRadioButton2);
-//		bg1.add(jRadioButton3);
-//		
-//	}
-	
 	
 	public JPanel northPanel()
 	{
@@ -653,6 +603,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	panelN.add(label2);
 	panelN.add(rbutton2);
 	group.add(rbutton2);
+	rbutton2.setSelected(true); 				// Set default
 
 	JLabel label3 = new JLabel("Overall Score");
 	JRadioButton rbutton3 = new JRadioButton();
@@ -665,54 +616,26 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	return panelN;
 	}
 
-//public void popupDavidKendoka(String action){
-//	CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, "Kendo");
-//	System.out.println("Kendo popup");
-//	
-//	if (action.equals("Sort by Age"))
-//	{
-//	System.out.println("Sort by Age");
-//	// code to replace report pane with sorted by Age
-//	}
-//	else if (action.equals("Sort by Dan"))
-//	{
-//	System.out.println("Sort by Dan");
-//	// code to replace report pane with sorted by Dan
-//	}
-//	else if (action.equals("Sort by Overall Score"))
-//	{
-//	System.out.println("Sort by Overall Score");
-//	// code to replace report pane with sorted by Score
-//	}
-//	else if (action.equals("Close Popup"))
-//	{
-//		System.out.println("Closing popup");
-//		kendoka.setEnabled(false);
-//	}
-//}
+	public void actionPerformedPopup(ActionEvent e)
+	{
+	String action = e.getActionCommand();
 
-//	@Override
-//	public void actionPerformedPopup(ActionEvent e)
-//	{
-//	// TODO Auto-generated method stub
-//	String action = e.getActionCommand();
-//
-//	if (action.equals("Sort by Age"))
-//	{
-//	System.out.println("Sort by Age");
-//	// code to replace report pane with sorted by Age
-//	}
-//	else if (action.equals("Sort by Dan"))
-//	{
-//	System.out.println("Sort by Dan");
-//	// code to replace report pane with sorted by Dan
-//	}
-//	else if (action.equals("Sort by Overall Score"))
-//	{
-//	System.out.println("Sort by Overall Score");
-//	// code to replace report pane with sorted by Score
-//	}
-//	}
-//	
+	if (action.equals("Sort by Age"))
+		{
+		System.out.println("Sort by Age");
+		// code to replace report pane with sorted by Age
+		}
+	else if (action.equals("Sort by Dan"))
+		{
+		System.out.println("Sort by Dan");
+		// code to replace report pane with sorted by Dan
+		}
+	else if (action.equals("Sort by Overall Score"))
+		{
+		System.out.println("Sort by Overall Score");
+		// code to replace report pane with sorted by Score
+		}
+	}
+	
 	
 }
