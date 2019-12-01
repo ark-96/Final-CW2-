@@ -7,12 +7,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 public class ParentCompetitorList {
   protected ArrayList<ParentCompetitor> competitorList; 
 
@@ -246,6 +240,7 @@ private void processLine(String line) {
 	}
 	  
 	  }
+
 
 public String getallMembers(){
 	String report = "The short details of the competitors is as follows:\n";
@@ -603,7 +598,7 @@ public String getFullKendoDetails(ParentCompetitor a)
 
 public String getKendoStatistics()
 {
-	String Sreport = getDavidKendokaFullDetails();
+	String Sreport = getDavidKendokaFullDetails("ID");
 	Sreport += "\nHighest Scoring Member\n";
 	Sreport +=       "----------------------\n";
 	Sreport += "The details of the member with the highest overall score is :\n";
@@ -818,15 +813,39 @@ private String buildScoreFrequency()
 		
 }
 
-public String getDavidKendokaFullDetails()
+public String getDavidKendokaFullDetails(String key)
 {	
+	Sorter sortedList;
 	String report =    "_____________________ Membership List ____________________" + "\n" ;
 	// Char positions   0-2     4-23                25  28     30-38         40-42
 	report +=          "M.No.   NAME                Age Dan   SCORES    OVERALL" + "\n";
 //	Collections.sort( competitorList , compareN() );
 //	Collections.sort( competitorList ,  compareN() );
 	// Iterate over the list of members and build text table
-	for (ParentCompetitor m : competitorList)
+	
+	sortedList = new Sorter(competitorList);
+	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
+	System.out.println(key);
+	switch(key)
+	{
+		case "name":
+			sortedCompetitors = sortedList.sortByName();
+			break;
+		case "age":
+			sortedCompetitors = sortedList.sortByAge();
+			break;
+		case "dan":
+			sortedCompetitors = sortedList.sortByDan();
+			break;
+		case "score":
+			sortedCompetitors = sortedList.sortByScore();
+			break;
+		case "ID":
+			sortedCompetitors = sortedList.sortByID();
+			break;	
+			
+	}
+	for (ParentCompetitor m : sortedCompetitors)
 		{
 		if(m instanceof DavidKendoka)
 			{
@@ -900,22 +919,5 @@ public String getVolleyballFullDetails(){
 return report;
 }
 
-//public void sortByName()
-//	{
-//		Collections.sort(competitorList, nameCompare() );
-//	}
-//
-//
-//private int nameCompare(ParentCompetitor o1 , ParentCompetitor o2) 
-//	{	return compare(o1 ,o2) );  }
-//
-//private String getFullName(ParentCompetitor o) 
-//	{	return getFullName(o);  }
-//
-//public  interface Comparator<ParentCompetitor>
-//	{public int compare(ParentCompetitor c1 , ParentCompetitor c2);}
-
-public int compareN(ParentCompetitor a , ParentCompetitor b)
-{			return (a.getName().getFullName()).compareTo(b.getName().getFullName());	}
 
 }

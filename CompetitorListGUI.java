@@ -1,10 +1,7 @@
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-// import javax.swing.ButtonGroup;
 
 
 public class CompetitorListGUI extends JFrame implements ActionListener {
@@ -389,7 +386,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		}
 		else if(action.equals("Short details k"))
 		{
-			JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails()) );
+			JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails("score")) );
 			System.out.println("Full kendo report");
 		}
 		else if(action.equals("Short details t"))
@@ -474,30 +471,8 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 			}
 		else if(action.equals("Options k"))
 		{
-//			popupDavidKendoka(action);
 			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, "Kendo");
 			System.out.println("Kendo popup");
-			
-//			if (action.equals("Sort by Age"))
-//			{
-//			System.out.println("Sort by Age");
-//			// code to replace report pane with sorted by Age
-//			}
-//			else if (action.equals("Sort by Dan"))
-//			{
-//			System.out.println("Sort by Dan");
-//			// code to replace report pane with sorted by Dan
-//			}
-//			else if (action.equals("Sort by Overall Score"))
-//			{
-//			System.out.println("Sort by Overall Score");
-//			// code to replace report pane with sorted by Score
-//			}
-//			else if (action.equals("Close Popup"))
-//			{
-//				popupGUI.setVisible(false);
-//			}
-			
 			}
 		else if(action.equals("Options t"))
 		{
@@ -568,19 +543,15 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane(text);
 		return scrollPane;
 	}
-	
-	
-	
 
 
 	public JTextArea reportPane(ParentCompetitorList popUpList)
 	{
-	String report = popUpList.getDavidKendokaFullDetails();
+	String report = popUpList.getDavidKendokaFullDetails("dan");
 	JTextArea panel = new JTextArea( report );
 	panel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 	return panel;
 	}
-
 	
 	public JPanel northPanel()
 	{
