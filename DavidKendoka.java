@@ -92,9 +92,6 @@ public class DavidKendoka extends ParentCompetitor
 									+ " and has an overall score of " + getOverallScore() + ".\n";
 			return fullDetails;					
 		}
-	
-		
-		
 				
 		public void printMemberDetails()
 		{	System.out.println( getFullDetails()); }
@@ -136,12 +133,6 @@ public class DavidKendoka extends ParentCompetitor
 //		
 //	}
 
-//	public int compareName(DavidKendoka a , DavidKendoka b)
-//	{
-//		Name n1 = a.getName();
-//		Name n2 = b.getName();
-//		return (n1.getFullName()).compareTo(n2.getFullName());
-//	}
 		
 	public int compareDan(DavidKendoka a , DavidKendoka b)
 	{	return Integer.compare(a.getDanGrade(), b.getDanGrade());	}	
