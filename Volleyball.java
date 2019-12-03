@@ -26,7 +26,7 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 		for (int volleyballScoreIndex = 0; volleyballScoreIndex < volleyballScore.length; volleyballScoreIndex++) 
 			{ total +=volleyballScore[volleyballScoreIndex];}
 		// System.out.print( total ); System.out.println( "   " + volleyballScore.length);
-		return (double) total/volleyballScore.length;
+		return (double) (total/volleyballScore.length);
 	}
 	
 	public String getArraytoString(){
