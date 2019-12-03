@@ -25,7 +25,7 @@ public String findShortDetails(int id)
 			return ( c.getShortDetails() ) ;
 			}
 		return ( "Sorry despite validation we could not retrieve this members records.\n" );
-	}	
+	}	//CompetitorListGUI2
 
 public void readFile(String filename){
 	 try{
@@ -828,21 +828,11 @@ public String getDavidKendokaFullDetails(String key)
 	System.out.println(key);
 	switch(key)
 	{
-		case "name":
-			sortedCompetitors = sortedList.sortByName();
-			break;
-		case "age":
-			sortedCompetitors = sortedList.sortByAge();
-			break;
-		case "dan":
-			sortedCompetitors = sortedList.sortByDan();
-			break;
-		case "score":
-			sortedCompetitors = sortedList.sortByScore();
-			break;
-		case "ID":
-			sortedCompetitors = sortedList.sortByID();
-			break;	
+		case "name":	sortedCompetitors = sortedList.sortByName();	break;
+		case "age":		sortedCompetitors = sortedList.sortByAge();		break;
+		case "dan":		sortedCompetitors = sortedList.sortByDan();		break;
+		case "score":	sortedCompetitors = sortedList.sortByScore();	break;
+		case "ID":		sortedCompetitors = sortedList.sortByID();		break;	
 			
 	}
 	for (ParentCompetitor m : sortedCompetitors)
@@ -881,9 +871,20 @@ public String getDavidKendokaFullDetails(String key)
 	return report;
 }
 
-public String getTableTennisFullDetails(){	
+public String getTableTennisFullDetails(String key){	
+	Sorter sortedList;
+	sortedList = new Sorter(competitorList);
+	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
+	System.out.println(key);
+	switch(key)
+	{
+		case "ID":		sortedCompetitors = sortedList.sortByID();		break;
+		case "score":	sortedCompetitors = sortedList.sortByScore();	break;
+		case "name":	sortedCompetitors = sortedList.sortByName(); 	break;
+		case "nationality": sortedCompetitors = sortedList.sortByNationality(); 	break;	
+	}
 	String report = "Competitor Number  Competitor Name         Level  	Age  	Nationality  Scores       OVERALL\n";
-	 for(ParentCompetitor c : competitorList){
+	 for(ParentCompetitor c : sortedCompetitors){
 		 if(c instanceof TableTennis){
 	  report +=String.format("%s", c.getId());
 	  report +="                ";
@@ -891,13 +892,14 @@ public String getTableTennisFullDetails(){
 	  report +="  ";
 	  report +=String.format("%-7s", c.getLevel());
 	  report +="  ";
-	  report +=String.format("%-6s", ((TableTennis) c).getAge());
+	  report +=String.format("%-6s", c.getAge());
 	  report +="  ";
-	  report +=String.format("%-11s", ((TableTennis) c).getCountry());
+	  report +=String.format("%-11s", c.getN());
 	  report +="  ";
 	  report +=String.format("%-11s", c.getScoreString());
 	  report +="  ";
-	  report +=String.format("%.3s", c.getOverallScore());
+	  report +=String.format("%.3s",  ((TableTennis) c).getOverallScore());
+	  System.out.print(c.getOverallScore() + " ");
 	  report +="\n";
 		 }
 	 }
@@ -912,18 +914,10 @@ public String getVolleyballFullDetails(String key)
 	System.out.println(key);
 	switch(key)
 	{
-		case "name":
-			sortedCompetitors = sortedList.sortByName();
-			break;
-		case "score":
-			sortedCompetitors = sortedList.sortByScore();
-			break;
-		case "ID":
-			sortedCompetitors = sortedList.sortByID();
-			break;
-		case "position":
-			sortedCompetitors = sortedList.sortByPosition();
-			break;	
+		case "name": 	sortedCompetitors = sortedList.sortByName();	break;
+		case "score":	sortedCompetitors = sortedList.sortByScore();	break;
+		case "ID":		sortedCompetitors = sortedList.sortByID();		break;
+		case "position":sortedCompetitors = sortedList.sortByPosition();break;	
 	}	
 	String report = "ID    NAME                     LEVEL         POSITION              SCORES     OVERALL\n";
 	for (ParentCompetitor c: sortedCompetitors) {
@@ -933,8 +927,9 @@ public String getVolleyballFullDetails(String key)
 			report += String.format("%-14s", c.getLevel());
 			report += String.format("%-22s", ((Volleyball) c).getPosition());
 			report += String.format("%-5s", c.getScoreString()) + "   ";
-			report += String.format("%-7s", c.getOverallScore());
+			report += String.format("%-7s",  c.getOverallScore());
 			report += "\n";
+			System.out.print(c.getOverallScore() + " ");
 		}
 	}
 return report;

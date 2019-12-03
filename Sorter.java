@@ -45,5 +45,10 @@ public class Sorter
 			return competitor;
 		}
 		
+		public ArrayList<ParentCompetitor> sortByNationality()
+		{
+			Collections.sort(competitor, ParentCompetitor.compareNationality);
+			return competitor;
+		}
 		
 }

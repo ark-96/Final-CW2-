@@ -61,7 +61,6 @@ abstract public class ParentCompetitor {
 	{
 		if (this instanceof Volleyball )
 			{
-			System.out.println(((Volleyball) this).getPosition());
 			return ((Volleyball) this).getPosition();
 			}
 		else
@@ -96,7 +95,8 @@ abstract public class ParentCompetitor {
 		@Override
 		public int compare(ParentCompetitor pc1, ParentCompetitor pc2)
 		{
-		return  (int) ( (pc1.getOverallScore() ) - (pc2.getOverallScore() ) );
+		return 	Double.compare(pc1.getOverallScore(), pc2.getOverallScore());
+		//return  (int) ((pc1.getOverallScore() ) - (pc2.getOverallScore() )) ;
 		}
 	};
 	
@@ -129,5 +129,25 @@ abstract public class ParentCompetitor {
 		}
 	};
 	
+	public static Comparator<ParentCompetitor> compareNationality = new Comparator<ParentCompetitor>()
+	{
+		@Override
+		public int compare(ParentCompetitor pc1, ParentCompetitor pc2)
+		{
+			if ((pc1 instanceof TableTennis) & (pc2 instanceof TableTennis))
+			{return (int) ( pc1.getN().compareTo( pc2.getN() )) ;}
+			else {return 0;}
+		}
+	};
+
+	protected String getN() 
+	{
+		if (this instanceof TableTennis )
+		{
+		return ((TableTennis) this).getCountry();
+		}
+	else
+		{return null;}
+	}
 	
 }

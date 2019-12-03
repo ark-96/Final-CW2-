@@ -22,11 +22,13 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 	public int [] getScoreArray() {return volleyballScore;}
 	
 	public double getOverallScore() {
-		int total = 0;
+		double total = 0;
 		for (int volleyballScoreIndex = 0; volleyballScoreIndex < volleyballScore.length; volleyballScoreIndex++) 
 			{ total +=volleyballScore[volleyballScoreIndex];}
 		// System.out.print( total ); System.out.println( "   " + volleyballScore.length);
-		return (double) (total/volleyballScore.length);
+		double avg = (total/volleyballScore.length);
+		System.out.print(avg + " ");
+		return (avg);
 	}
 	
 	public String getArraytoString(){

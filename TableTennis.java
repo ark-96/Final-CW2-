@@ -29,8 +29,8 @@ public double getOverallScore(){
   divider +=2;
  }
  }
- overall = overall/(divider);
- return overall;
+ double overall1 = (overall/(divider));
+ return (overall1);
 }
 public String getFullDetails(){
  String compNo = String.format("%s", getId());
@@ -41,4 +41,13 @@ public String getShortDetails(){
  String compNo = String.format("%s", getId());
  return "CN " + compNo + " (" + getName().getInitials() + ") has an overall score " + String.format("%.3s", getOverallScore());
 }
+
+public int compareNationality(TableTennis a , TableTennis b)
+{	return  a.getCountry().compareTo( b.getCountry() );	}
+
+
+
+
+
+
 }

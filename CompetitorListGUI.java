@@ -390,7 +390,7 @@ public class CompetitorListGUI  implements ActionListener {
 		}
 		else if(action.equals("Full report t"))
 		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisFullDetails()) );
+				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisFullDetails("ID")) );
 				System.out.println("Full tennis report");
 		}
 		else if(action.equals("Full report v"))
@@ -497,7 +497,12 @@ public class CompetitorListGUI  implements ActionListener {
 			}
 		else if(action.equals("Options t"))
 		{
-			JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
+			popUpSport = "Tabletennis";
+			popUpSortKey = "ID";  						// default option when entering Popup
+			buildOutGUIs(popUpSortKey, popUpSport);
+			System.out.println("Tabletennis popup");
+			
+//			JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
 			System.out.println("Printing tabletennis statistics");
 			}
 		else if(action.equals("Options v"))
@@ -549,6 +554,13 @@ public class CompetitorListGUI  implements ActionListener {
 		{
 			System.out.println("Sort by Position");
 			popUpSortKey = "position";
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
+		}		
+		else if	(action.equals("Sort by Nationality"))
+		{
+			System.out.println("Sort by Nationality");
+			popUpSortKey = "nationality";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}		
@@ -619,6 +631,7 @@ public class CompetitorListGUI  implements ActionListener {
 			case "Basketball":
 				break;
 			case "Tabletennis":
+				report = popUpList.getTableTennisFullDetails(sortkey);
 				break;
 			case "Volleyball":
 				report = popUpList.getVolleyballFullDetails(sortkey);
@@ -680,6 +693,14 @@ public class CompetitorListGUI  implements ActionListener {
 		case "Basketball":
 			break;
 		case "Tabletennis":
+			JLabel tlabel2 = new JLabel("Nationality");
+			JRadioButton trbutton2 = new JRadioButton();
+			trbutton2.addActionListener(this);
+			trbutton2.setActionCommand("Sort by Nationality");
+			panelN.add(tlabel2);
+			panelN.add(trbutton2);
+			group.add(trbutton2);
+			if (popUpSortKey == "nationality" ) {trbutton2.setSelected(true);}
 			break;
 		case "Volleyball":
 			JLabel vlabel2 = new JLabel("Position");
