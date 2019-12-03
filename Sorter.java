@@ -51,4 +51,9 @@ public class Sorter
 			return competitor;
 		}
 		
+		public ArrayList<ParentCompetitor> sortByLevel()
+		{
+			Collections.sort(competitor, ParentCompetitor.compareLevel);
+			return competitor;
+		}
 }

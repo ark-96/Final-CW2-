@@ -140,6 +140,19 @@ abstract public class ParentCompetitor {
 		}
 	};
 
+	public static Comparator<ParentCompetitor> compareLevel = new Comparator<ParentCompetitor>()
+	{
+		@Override
+		public int compare(ParentCompetitor pc1, ParentCompetitor pc2)
+		{
+			// if ((pc1 instanceof TableTennis) & (pc2 instanceof TableTennis))
+			return (int) ( pc1.getLevel().compareTo( pc2.getLevel() )) ;
+			// else {return 0;}
+		}
+	};
+	
+	
+	
 	protected String getN() 
 	{
 		if (this instanceof TableTennis )

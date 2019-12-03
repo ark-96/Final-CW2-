@@ -461,16 +461,29 @@ public int getCompetitorCount(){
 	return count;	
 }
 
-public String getBasketballFullDetails() {
-	String report = "Number               " + "Name                          " + "Country           " + "Level          " + "Scores               " + "Overall Score            \n ";
-	for (ParentCompetitor c : competitorList) {
+public String getBasketballFullDetails(String key) {
+	Sorter sortedList;
+	sortedList = new Sorter(competitorList);
+	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
+	System.out.println(key);
+	switch(key)
+	{
+		case "ID":		sortedCompetitors = sortedList.sortByID();		break;
+		case "score":	sortedCompetitors = sortedList.sortByScore();	break;
+		case "level":	sortedCompetitors = sortedList.sortByLevel(); 	break;
+		case "name": 	sortedCompetitors = sortedList.sortByName(); 	break;	
+	}
+	
+	
+	String report = "Number               " + "Name                   " + "Country        " + "Level          " + "Scores            " + "Overall Score            \n";
+	for (ParentCompetitor c : sortedCompetitors) {
 		if(c instanceof Basketball){
 		report += String.format("%-6d", c.getId());
 		report += String.format("%-37s", c.getName().getFullName());
 		report += String.format("%-15s", ((Basketball) c).getCountry());
 		report += String.format("%-15s", c.getLevel());
 		report += String.format("%-20s", c.getScoreString());
-		report += String.format("%-6s", c.getOverallScore());
+		report += String.format("%-3s", Math.round(c.getOverallScore()*100.0)/100.0);
 		report += "\n"; 
 		}
 	}
@@ -479,6 +492,7 @@ public String getBasketballFullDetails() {
 
 public String getBasketballStats() {
 	String statistics = "";
+	statistics += getBasketballFullDetails("ID");
 	statistics += ("There are " + getSizeOfBasketball() + " competitors. \n");
 	statistics += ("There are " + getCountOfPeopleAtLevel("Novice") + " competitor at Novice Level. \n" );
 	statistics += ("There are " + getCountOfPeopleAtLevel("Standard") + " competitors at Standard Level. \n");
@@ -527,7 +541,7 @@ public String getFrequencyOfScoresBasketball() {
 	 }
 	 report+= "\n";
 	 report +="The following individual scores were awarded:";
-	 report +="\nScore:  0 1 2 3 4 5";
+	 report +="\nScore:      0  1  2  3  4  5";
 	 report +="\nFrequency:  ";
 	 for(int scoreIndex = 0; scoreIndex < freqOfScores.length; scoreIndex++){
 	  report += freqOfScores[scoreIndex] + " " ;

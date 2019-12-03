@@ -380,7 +380,7 @@ public class CompetitorListGUI  implements ActionListener {
 		}
 		else if(action.equals("Full report b"))
 		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getBasketballFullDetails()) );
+				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getBasketballStats()) );
 				System.out.println("Full basketball report");
 		}
 		else if(action.equals("Full report k"))
@@ -485,7 +485,10 @@ public class CompetitorListGUI  implements ActionListener {
 			}
 		else if(action.equals("Options b"))
 		{
-			JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
+			popUpSport = "Basketball";
+			popUpSortKey = "ID";  						// default option when entering Popup
+			buildOutGUIs(popUpSortKey, popUpSport);
+			// JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
 			System.out.println("Printing basketball statistics");
 			}
 		else if(action.equals("Options k"))
@@ -564,6 +567,13 @@ public class CompetitorListGUI  implements ActionListener {
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}		
+		else if	(action.equals("Sort by Level"))
+		{
+			System.out.println("Sort by Level");
+			popUpSortKey = "level";
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
+		}		
 		else if (action.equals("Close Popup"))
 		{
 	//		this.setVisible(false);
@@ -629,6 +639,7 @@ public class CompetitorListGUI  implements ActionListener {
 				report = popUpList.getDavidKendokaFullDetails(sortkey);
 				break;
 			case "Basketball":
+				report = popUpList.getBasketballFullDetails(sortkey);
 				break;
 			case "Tabletennis":
 				report = popUpList.getTableTennisFullDetails(sortkey);
@@ -691,7 +702,25 @@ public class CompetitorListGUI  implements ActionListener {
 			if (popUpSortKey == "age" ) {rbutton3.setSelected(true);}
 			break;
 		case "Basketball":
+			JLabel blabel3 = new JLabel("Name");
+			JRadioButton brbutton3 = new JRadioButton();
+			brbutton3.addActionListener(this);
+			brbutton3.setActionCommand("Sort by Name");
+			panelN.add(blabel3);
+			panelN.add(brbutton3);
+			group.add(brbutton3);
+			if (popUpSortKey == "name" ) {brbutton3.setSelected(true);}
+						
+			JLabel blabel2 = new JLabel("Level");
+			JRadioButton brbutton2 = new JRadioButton();
+			brbutton2.addActionListener(this);
+			brbutton2.setActionCommand("Sort by Level");
+			panelN.add(blabel2);
+			panelN.add(brbutton2);
+			group.add(brbutton2);
+			if (popUpSortKey == "level" ) {brbutton2.setSelected(true);}
 			break;
+			
 		case "Tabletennis":
 			JLabel tlabel2 = new JLabel("Nationality");
 			JRadioButton trbutton2 = new JRadioButton();
