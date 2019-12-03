@@ -23,7 +23,10 @@ abstract public class ParentCompetitor {
 	public String getLevel() {return level; }
 	
 	public int [] getScoreArray() 
-	{ return score ;}
+	{ 
+		return score ;}
+	public void setScoreArray(int [] sc)
+	{ score=sc;}
 	public String getScoreString()
 	{
 		String  report = "";
@@ -56,7 +59,7 @@ abstract public class ParentCompetitor {
 		else
 			{return -1;}
 	}
-
+	
 	public String getP()
 	{
 		if (this instanceof Volleyball )
@@ -66,11 +69,6 @@ abstract public class ParentCompetitor {
 		else
 			{return null;}
 	}
-	
-	
-	
-	
-	
 	
 	public static Comparator<ParentCompetitor> compareName = new Comparator<ParentCompetitor>()
 	{
