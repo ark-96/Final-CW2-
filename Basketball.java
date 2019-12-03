@@ -1,4 +1,3 @@
-
 public class Basketball extends ParentCompetitor {
 	
 	private String country;
@@ -47,8 +46,8 @@ public class Basketball extends ParentCompetitor {
 	public String getFullDetails() {
 		String fullDetails = "";
 			fullDetails += ("Full details for " + getId());
-			fullDetails += ("Competitor number " + getId() + ", name " + getName().getFullName() + ", country " + getCountry() +"\n");
-			fullDetails += (getName().getFirstName() + "is a " + getLevel() + " and received these scores: " + getScoreArray()+ "\n");
+			fullDetails += (". \nCompetitor number " + getId() + ", name " + getName().getFullName() + ", country " + getCountry() +"\n");
+			fullDetails += (getName().getFirstName() + "is a " + getLevel() + " and received these scores: " + getScoreString()+ "\n");
 			fullDetails += ("This gives the competitor an overall score of " + getOverallScore());
 		return fullDetails;
 		}
@@ -77,5 +76,6 @@ public class Basketball extends ParentCompetitor {
 		}
 		return minScore;
 	}
-	
-}
+			
+
+		}
