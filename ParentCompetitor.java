@@ -123,7 +123,9 @@ abstract public class ParentCompetitor {
 		@Override
 		public int compare(ParentCompetitor pc1, ParentCompetitor pc2)
 		{
-		return (int) ( (pc1.getP()).compareTo( pc2.getP() )) ;
+			if ((pc1 instanceof Volleyball) & (pc2 instanceof Volleyball))
+			{return (int) ( (pc1.getP()).compareTo( pc2.getP() )) ;}
+			else {return 0;}
 		}
 	};
 	
