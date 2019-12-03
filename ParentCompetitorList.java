@@ -20,12 +20,53 @@ public class ParentCompetitorList {
  
 public String findShortDetails(int id)
 	{
-		for (ParentCompetitor c : competitorList )
-			{			
-			return ( c.getShortDetails() ) ;
-			}
-		return ( "Sorry despite validation we could not retrieve this members records.\n" );
+	String report = "";
+	for (ParentCompetitor c : competitorList )
+		if (c.getId() == (id)) {
+			report = c.getShortDetails();
+			report += "\nThe scores received by " + c.getName().getLastName() + " are: " ;
+			report += c.getScoreString();
+		}
+	if (report.equals("")) {
+		report = "Sorry despite validation we could not retrieve this members records.\n"; 
+		}		
+		return report;
 	}	
+
+public String findFullDetails(int id)
+{
+String report = "";
+for (ParentCompetitor c : competitorList )
+	if (c.getId() == (id)) {
+		report = c.getFullDetails();
+		
+	}
+if (report.equals("")) {
+	report = "Sorry despite validation we could not retrieve this members records.\n"; 
+	}		
+	return report;
+}
+
+public void setScoreArray(int [] sc, int id)
+{ 
+	for (ParentCompetitor c : competitorList ){
+		if (c.getId() == (id)) {
+			c.setScoreArray(sc);
+		}
+	}
+}
+
+public double getOverallScore( int id)
+{ 
+	
+	double report=0;
+	for (ParentCompetitor c : competitorList ){
+		if (c.getId() == (id)) {
+			report = c.getOverallScore();
+		}
+	}
+	return report;
+}
 
 public void readFile(String filename){
 	 try{
@@ -228,6 +269,8 @@ private void processLine(String line) {
 					competitorScore[i] = Integer.parseInt(parts[5 + i].trim());
 				}
 			}
+			
+			//create competitor object and add to the list
 			Volleyball v = new Volleyball (a, numid , cName , cLevel , cPosition, competitorScore);
 			this.add(v);
           break;
@@ -261,6 +304,7 @@ public String getallBasketball(){
 }
 
 public String getallDavidKendoka(){
+	// Collections.sort( competitorList , Comparator );
 	String report = "The short details of the kendo competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
 		if(c instanceof DavidKendoka){
@@ -535,7 +579,7 @@ public String getFrequencyOfScoresBasketball() {
 	 }
 	 report+= "\n";
 	 report +="The following individual scores were awarded:";
-	 report +="\nScore:      0  1  2  3  4  5";
+	 report +="\nScore:  0 1 2 3 4 5";
 	 report +="\nFrequency:  ";
 	 for(int scoreIndex = 0; scoreIndex < freqOfScores.length; scoreIndex++){
 	  report += freqOfScores[scoreIndex] + " " ;
@@ -623,11 +667,12 @@ private String buildScoreFrequency()
 	ParentCompetitor winner = getKendoHighestScorer();
 	double maxScore = winner.getOverallScore();
 	int high = (int) Math.round(maxScore);
-	
+			
 	ParentCompetitor loser = getKendoLowestScorer();
 	double lowScore = loser.getOverallScore();
 	int low = (int) Math.round(lowScore);
-		
+	
+	
 	int range = high - low;
 	int cumCount = 0 ;     			// cumulative count of participants
 	double totalScores = 0 ;		// Total of all scores 
@@ -732,12 +777,14 @@ private String buildScoreFrequency()
 	// Although Dan grades are integers, and our marking scheme only applies integer results, we will have to work in FP to allow for averages
 			 
 	 double [][] memberScores = new double [9][3];
+	 
 	 int count = 0;		// array index (to make code more readable)
 	 int cumScores = 1; // array index
 	 int avgScores = 2; // array index
 	 int g = 0; 		// simple grade pointer/counter
 	
 	 // iterate over memberList and populate array
+	 
 	 for (ParentCompetitor m : competitorList)
 		 {
 		 if (m instanceof DavidKendoka)
@@ -751,10 +798,12 @@ private String buildScoreFrequency()
 	 	{
 		 if ( memberScores[g][count] != 0 )
 	 		{ memberScores[g][avgScores] = memberScores[g][cumScores] / memberScores[g][count]; }
+	 		
 	 	else										// deal with zero denominator by simplifying result to zero
 	 		{memberScores[g][avgScores] = 0 ;}
 	 	}
 		 
+	 
 	 // Build output table.
 	 // Start by defining title of table
 	String title = "Average Overall (Handicapped) Scores by Dan Grade";
@@ -782,13 +831,15 @@ private String buildScoreFrequency()
 		avgMarksTable += "         ".substring(0, 7 - stringToAdd.length() ) + stringToAdd ;
 		}
 	avgMarksTable += "\n\n";
-		
+	
+	
 	// Find & Summarise best & Worst
 	int danGradeBestScore = 0 ;
 	double bestScore = -99 ;
 	int danGradeWorstScore = 0 ;
 	double worstScore = +99 ;
-		
+	
+	
 	for ( g = 0 ; g<=8 ; g ++)
 		{
 		if ( memberScores[g][avgScores] > bestScore )		// nb does not deal with multi modal, but rewards junior grades for matching seniors
@@ -811,6 +862,7 @@ private String buildScoreFrequency()
 	
 	avgMarksTable += "End of Report.\n\n\n";
 	return avgMarksTable;
+		
 }
 
 public String getDavidKendokaFullDetails(String key)
@@ -819,18 +871,32 @@ public String getDavidKendokaFullDetails(String key)
 	String report =    "_____________________ Membership List ____________________" + "\n" ;
 	// Char positions   0-2     4-23                25  28     30-38         40-42
 	report +=          "M.No.   NAME                Age Dan   SCORES    OVERALL" + "\n";
-
+//	Collections.sort( competitorList , compareN() );
+//	Collections.sort( competitorList ,  compareN() );
+	// Iterate over the list of members and build text table
+	
 	sortedList = new Sorter(competitorList);
 	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
+	System.out.println(key);
 	switch(key)
 	{
-		case "name":	sortedCompetitors = sortedList.sortByName();	break;
-		case "age":		sortedCompetitors = sortedList.sortByAge();		break;
-		case "dan":		sortedCompetitors = sortedList.sortByDan();		break;
-		case "score":	sortedCompetitors = sortedList.sortByScore();	break;
-		case "ID":		sortedCompetitors = sortedList.sortByID();		break;	
+		case "name":
+			sortedCompetitors = sortedList.sortByName();
+			break;
+		case "age":
+			sortedCompetitors = sortedList.sortByAge();
+			break;
+		case "dan":
+			sortedCompetitors = sortedList.sortByDan();
+			break;
+		case "score":
+			sortedCompetitors = sortedList.sortByScore();
+			break;
+		case "ID":
+			sortedCompetitors = sortedList.sortByID();
+			break;	
+			
 	}
-	// Iterate over the list of members and build text table
 	for (ParentCompetitor m : sortedCompetitors)
 		{
 		if(m instanceof DavidKendoka)
@@ -901,30 +967,32 @@ public String getTableTennisFullDetails(String key){
 }
 
 public String getVolleyballFullDetails(String key)
-	{
-	Sorter sortedList;
-	sortedList = new Sorter(competitorList);
-	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
-	switch(key)
-	{
-		case "name": 	sortedCompetitors = sortedList.sortByName();	break;
-		case "score":	sortedCompetitors = sortedList.sortByScore();	break;
-		case "ID":		sortedCompetitors = sortedList.sortByID();		break;
-		case "position":sortedCompetitors = sortedList.sortByPosition();break;	
-	}	
-	String report = "ID    NAME                     LEVEL         POSITION              SCORES     OVERALL\n";
-	for (ParentCompetitor c: sortedCompetitors) {
-		if(c instanceof Volleyball){
-			report += String.format("%-6s", c.getId());
-			report += String.format("%-25s", c.getName().getFullName());
-			report += String.format("%-14s", c.getLevel());
-			report += String.format("%-22s", ((Volleyball) c).getPosition());
-			report += String.format("%-5s", c.getScoreString()) + "   ";
-			report += String.format("%-7s",  c.getOverallScore());
-			report += "\n";
-		}
+{
+Sorter sortedList;
+sortedList = new Sorter(competitorList);
+ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
+switch(key)
+{
+	case "name": 	sortedCompetitors = sortedList.sortByName();	break;
+	case "score":	sortedCompetitors = sortedList.sortByScore();	break;
+	case "ID":		sortedCompetitors = sortedList.sortByID();		break;
+	case "position":sortedCompetitors = sortedList.sortByPosition();break;	
+}	
+String report = "ID    NAME                     LEVEL         POSITION              SCORES     OVERALL\n";
+for (ParentCompetitor c: sortedCompetitors) {
+	if(c instanceof Volleyball){
+		report += String.format("%-6s", c.getId());
+		report += String.format("%-25s", c.getName().getFullName());
+		report += String.format("%-14s", c.getLevel());
+		report += String.format("%-22s", ((Volleyball) c).getPosition());
+		report += String.format("%-5s", c.getScoreString()) + "   ";
+		report += String.format("%-7s",  c.getOverallScore());
+		report += "\n";
 	}
+}
 return report;
 }
+
+
 
 }
