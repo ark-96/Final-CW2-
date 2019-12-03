@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
-
+ 
 public class Sorter
 {
 		ArrayList<ParentCompetitor> competitor = new ArrayList<>();
