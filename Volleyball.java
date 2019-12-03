@@ -15,9 +15,6 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 		volleyballScore = s;
 	}
 	
-	
-	
-	
 	public String getPosition() {return volleyballPosition;}
 	public int [] getScoreArray() {return volleyballScore;}
 	
@@ -25,9 +22,7 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 		double total = 0;
 		for (int volleyballScoreIndex = 0; volleyballScoreIndex < volleyballScore.length; volleyballScoreIndex++) 
 			{ total +=volleyballScore[volleyballScoreIndex];}
-		// System.out.print( total ); System.out.println( "   " + volleyballScore.length);
 		double avg = (total/volleyballScore.length);
-		System.out.print(avg + " ");
 		return (avg);
 	}
 	

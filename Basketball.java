@@ -77,6 +77,5 @@ public class Basketball extends ParentCompetitor {
 		}
 		return minScore;
 	}
-		
 	
 }

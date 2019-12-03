@@ -25,7 +25,7 @@ public String findShortDetails(int id)
 			return ( c.getShortDetails() ) ;
 			}
 		return ( "Sorry despite validation we could not retrieve this members records.\n" );
-	}	//CompetitorListGUI2
+	}	
 
 public void readFile(String filename){
 	 try{
@@ -228,8 +228,6 @@ private void processLine(String line) {
 					competitorScore[i] = Integer.parseInt(parts[5 + i].trim());
 				}
 			}
-			
-			//create competitor object and add to the list
 			Volleyball v = new Volleyball (a, numid , cName , cLevel , cPosition, competitorScore);
 			this.add(v);
           break;
@@ -263,7 +261,6 @@ public String getallBasketball(){
 }
 
 public String getallDavidKendoka(){
-	// Collections.sort( competitorList , Comparator );
 	String report = "The short details of the kendo competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
 		if(c instanceof DavidKendoka){
@@ -465,7 +462,6 @@ public String getBasketballFullDetails(String key) {
 	Sorter sortedList;
 	sortedList = new Sorter(competitorList);
 	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
-	System.out.println(key);
 	switch(key)
 	{
 		case "ID":		sortedCompetitors = sortedList.sortByID();		break;
@@ -473,8 +469,6 @@ public String getBasketballFullDetails(String key) {
 		case "level":	sortedCompetitors = sortedList.sortByLevel(); 	break;
 		case "name": 	sortedCompetitors = sortedList.sortByName(); 	break;	
 	}
-	
-	
 	String report = "Number               " + "Name                   " + "Country        " + "Level          " + "Scores            " + "Overall Score            \n";
 	for (ParentCompetitor c : sortedCompetitors) {
 		if(c instanceof Basketball){
@@ -629,12 +623,11 @@ private String buildScoreFrequency()
 	ParentCompetitor winner = getKendoHighestScorer();
 	double maxScore = winner.getOverallScore();
 	int high = (int) Math.round(maxScore);
-			
+	
 	ParentCompetitor loser = getKendoLowestScorer();
 	double lowScore = loser.getOverallScore();
 	int low = (int) Math.round(lowScore);
-	
-	
+		
 	int range = high - low;
 	int cumCount = 0 ;     			// cumulative count of participants
 	double totalScores = 0 ;		// Total of all scores 
@@ -739,14 +732,12 @@ private String buildScoreFrequency()
 	// Although Dan grades are integers, and our marking scheme only applies integer results, we will have to work in FP to allow for averages
 			 
 	 double [][] memberScores = new double [9][3];
-	 
 	 int count = 0;		// array index (to make code more readable)
 	 int cumScores = 1; // array index
 	 int avgScores = 2; // array index
 	 int g = 0; 		// simple grade pointer/counter
 	
 	 // iterate over memberList and populate array
-	 
 	 for (ParentCompetitor m : competitorList)
 		 {
 		 if (m instanceof DavidKendoka)
@@ -760,12 +751,10 @@ private String buildScoreFrequency()
 	 	{
 		 if ( memberScores[g][count] != 0 )
 	 		{ memberScores[g][avgScores] = memberScores[g][cumScores] / memberScores[g][count]; }
-	 		
 	 	else										// deal with zero denominator by simplifying result to zero
 	 		{memberScores[g][avgScores] = 0 ;}
 	 	}
 		 
-	 
 	 // Build output table.
 	 // Start by defining title of table
 	String title = "Average Overall (Handicapped) Scores by Dan Grade";
@@ -793,15 +782,13 @@ private String buildScoreFrequency()
 		avgMarksTable += "         ".substring(0, 7 - stringToAdd.length() ) + stringToAdd ;
 		}
 	avgMarksTable += "\n\n";
-	
-	
+		
 	// Find & Summarise best & Worst
 	int danGradeBestScore = 0 ;
 	double bestScore = -99 ;
 	int danGradeWorstScore = 0 ;
 	double worstScore = +99 ;
-	
-	
+		
 	for ( g = 0 ; g<=8 ; g ++)
 		{
 		if ( memberScores[g][avgScores] > bestScore )		// nb does not deal with multi modal, but rewards junior grades for matching seniors
@@ -824,7 +811,6 @@ private String buildScoreFrequency()
 	
 	avgMarksTable += "End of Report.\n\n\n";
 	return avgMarksTable;
-		
 }
 
 public String getDavidKendokaFullDetails(String key)
@@ -833,13 +819,9 @@ public String getDavidKendokaFullDetails(String key)
 	String report =    "_____________________ Membership List ____________________" + "\n" ;
 	// Char positions   0-2     4-23                25  28     30-38         40-42
 	report +=          "M.No.   NAME                Age Dan   SCORES    OVERALL" + "\n";
-//	Collections.sort( competitorList , compareN() );
-//	Collections.sort( competitorList ,  compareN() );
-	// Iterate over the list of members and build text table
-	
+
 	sortedList = new Sorter(competitorList);
 	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
-	System.out.println(key);
 	switch(key)
 	{
 		case "name":	sortedCompetitors = sortedList.sortByName();	break;
@@ -847,8 +829,8 @@ public String getDavidKendokaFullDetails(String key)
 		case "dan":		sortedCompetitors = sortedList.sortByDan();		break;
 		case "score":	sortedCompetitors = sortedList.sortByScore();	break;
 		case "ID":		sortedCompetitors = sortedList.sortByID();		break;	
-			
 	}
+	// Iterate over the list of members and build text table
 	for (ParentCompetitor m : sortedCompetitors)
 		{
 		if(m instanceof DavidKendoka)
@@ -889,7 +871,6 @@ public String getTableTennisFullDetails(String key){
 	Sorter sortedList;
 	sortedList = new Sorter(competitorList);
 	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
-	System.out.println(key);
 	switch(key)
 	{
 		case "ID":		sortedCompetitors = sortedList.sortByID();		break;
@@ -897,7 +878,7 @@ public String getTableTennisFullDetails(String key){
 		case "name":	sortedCompetitors = sortedList.sortByName(); 	break;
 		case "nationality": sortedCompetitors = sortedList.sortByNationality(); 	break;	
 	}
-	String report = "Competitor Number  Competitor Name         Level  	Age  	Nationality  Scores       OVERALL\n";
+	String report = "Competitor Number  Competitor Name         Level       Age  	 Nationality     Scores    OVERALL\n";
 	 for(ParentCompetitor c : sortedCompetitors){
 		 if(c instanceof TableTennis){
 	  report +=String.format("%s", c.getId());
@@ -905,15 +886,14 @@ public String getTableTennisFullDetails(String key){
 	  report +=String.format("%-22s", c.getName().getFullName());
 	  report +="  ";
 	  report +=String.format("%-7s", c.getLevel());
+	  report +="     ";
+	  report +=String.format("%-10s", c.getAge());
 	  report +="  ";
-	  report +=String.format("%-6s", c.getAge());
-	  report +="  ";
-	  report +=String.format("%-11s", c.getN());
-	  report +="  ";
-	  report +=String.format("%-11s", c.getScoreString());
+	  report +=String.format("%-14s", c.getN());
+	  report +="";
+	  report +=String.format("%-12s", c.getScoreString());
 	  report +="  ";
 	  report +=String.format("%.3s",  ((TableTennis) c).getOverallScore());
-	  System.out.print(c.getOverallScore() + " ");
 	  report +="\n";
 		 }
 	 }
@@ -925,7 +905,6 @@ public String getVolleyballFullDetails(String key)
 	Sorter sortedList;
 	sortedList = new Sorter(competitorList);
 	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
-	System.out.println(key);
 	switch(key)
 	{
 		case "name": 	sortedCompetitors = sortedList.sortByName();	break;
@@ -943,11 +922,9 @@ public String getVolleyballFullDetails(String key)
 			report += String.format("%-5s", c.getScoreString()) + "   ";
 			report += String.format("%-7s",  c.getOverallScore());
 			report += "\n";
-			System.out.print(c.getOverallScore() + " ");
 		}
 	}
 return report;
 }
-
 
 }

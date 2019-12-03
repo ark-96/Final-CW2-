@@ -151,8 +151,6 @@ abstract public class ParentCompetitor {
 		}
 	};
 	
-	
-	
 	protected String getN() 
 	{
 		if (this instanceof TableTennis )

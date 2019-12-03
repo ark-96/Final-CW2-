@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -18,16 +17,13 @@ public class CompetitorListGUI  implements ActionListener {
 	JButton shortDetails, search, delete, close, help, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4, basketball, kendoka, tabletennis, volleyball;
 	JLabel membershipNumber, title, explain;
 	JTextField searchField;
-	// CompetitorListGUI guiArray[];
 	ArrayList<CompetitorListGUI> guiList = new ArrayList<CompetitorListGUI>();
 	
 	private static String popUpSport = "Kendo";
 	private static String popUpSortKey = "ID";
-//	String[] sportsList = {"Basketball", "Kendo", "Table Tennis", "Volleyball"};
-//	String[][] sortOptions = {{" ", " ", " ", " "},{"ID", "name", "age", "dan" },{" ", " ", " ", " "},{" ", " ", " ", " "}};
-		
-	public CompetitorListGUI(ParentCompetitorList list){
-		
+	
+	public CompetitorListGUI(ParentCompetitorList list)
+	{
 		competitorList=list;
 		mainGUI = new JFrame("JADA Sports Management");
 		mainGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,7 +33,6 @@ public class CompetitorListGUI  implements ActionListener {
 		mainGUI.getContentPane().add(BorderLayout.CENTER, buildCentre());
 		mainGUI.pack();
 		mainGUI.setVisible(true);	
-		System.out.println("gui works");		
 	}
 	
 	public void KillMe()
@@ -48,18 +43,15 @@ public class CompetitorListGUI  implements ActionListener {
 	
 	private void CompetitorListGUI2(ParentCompetitorList popUpList, String sport, String sort)
 	{	
-	competitorList = popUpList;
-	System.out.println("creating Pop Up");
-	popUpGUI = new JFrame("More Details on " + sport);
-	popUpGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	popUpGUI.setLocation(500,300);
-	//popUpGUI.add(BorderLayout.SOUTH, bottomPanel());
-	popUpGUI.getContentPane().add(BorderLayout.NORTH, northPanel());
-	popUpGUI.add(BorderLayout.CENTER, reportPane(popUpList, sort));
-	popUpGUI.pack();
-	popUpGUI.setVisible(true);
-	pops.add( popUpGUI );
-	System.out.println("gui works");
+		competitorList = popUpList;
+		popUpGUI = new JFrame("More Details on " + sport);
+		popUpGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		popUpGUI.setLocation(500,300);
+		popUpGUI.getContentPane().add(BorderLayout.NORTH, northPanel());
+		popUpGUI.add(BorderLayout.CENTER, reportPane(popUpList, sort));
+		popUpGUI.pack();
+		popUpGUI.setVisible(true);
+		pops.add( popUpGUI );
 	}
 	
 	
@@ -315,15 +307,9 @@ public class CompetitorListGUI  implements ActionListener {
 			{	
 			
 			if (action.equals("About"))
-				{
-					JOptionPane.showMessageDialog(null, about());
-					System.out.println("About");
-				}
+				{	JOptionPane.showMessageDialog(null, about());	}
 			if (action.equals("Help"))
-				{
-					JOptionPane.showMessageDialog(null, help());
-					System.out.println("Help");
-				}
+				{	JOptionPane.showMessageDialog(null, help());	}
 		
 		else if(action.equals("Read File"))
 		{
@@ -362,13 +348,12 @@ public class CompetitorListGUI  implements ActionListener {
 		}
 		else if(action.equals("Close"))
 		{
-	//		JOptionPane.showMessageDialog(null,  );
 			System.out.println("Closing");
 			System.exit(0);
 			
 		}
 		else if(action.equals("Short details"))
-		{
+			{
 				JTextArea shortDetailstext = new JTextArea(competitorList.getallMembers());
 				JScrollPane shortDetails = new JScrollPane(shortDetailstext);
 				shortDetailstext.setLineWrap(true);
@@ -377,226 +362,154 @@ public class CompetitorListGUI  implements ActionListener {
 				shortDetails.setPreferredSize(new Dimension(371,400));
 				JOptionPane.showMessageDialog(mainGUI,shortDetails, "Short details of all competitors",JOptionPane.PLAIN_MESSAGE);
 				System.out.println("Short competitor details displayed");
-		}
+			}
 		else if(action.equals("Full report b"))
-		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getBasketballStats()) );
-				System.out.println("Full basketball report");
-		}
+			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getBasketballStats()) );	}
 		else if(action.equals("Full report k"))
-		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getKendoStatistics()) );
-				System.out.println("Full kendo report");
-		}
+			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getKendoStatistics()) );	}
 		else if(action.equals("Full report t"))
-		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisFullDetails("ID")) );
-				System.out.println("Full tennis report");
-		}
+			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisFullDetails("ID")) );	}
 		else if(action.equals("Full report v"))
-		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballFullDetails("ID")) );
-				System.out.println("Full tennis report");
-		}
+			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballFullDetails("ID")) );	}
 		else if(action.equals("Short details b"))
-		{
-			JOptionPane.showMessageDialog(mainGUI, competitorList.getallBasketball());
-			System.out.println("Short basketball details");
-		}
+			{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallBasketball());	}
 		else if(action.equals("Short details k"))
-		{
-			JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails("score")) );
-			System.out.println("Full kendo report");
-		}
+			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails("score")) );}
 		else if(action.equals("Short details t"))
-		{
-			JOptionPane.showMessageDialog(mainGUI, competitorList.getallTableTennis());
-			System.out.println("Short tennis details");
-		}
+			{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallTableTennis());		}
 		else if(action.equals("Short details v"))
-		{
-			JOptionPane.showMessageDialog(mainGUI, competitorList.getallVolleyball());
-			System.out.println("Short volleyball details");
-		}
+			{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallVolleyball());		}
 		else if(action.equals("Write member b"))
-		{
-		//	JOptionPane.showMessageDialog(null,  );
-			System.out.println("Writing basketball member");
-		}
+		{		}			// not defined
 		else if(action.equals("Write member k"))
-		{
-		//	JOptionPane.showMessageDialog(null,  );
-			System.out.println("Writing kendo member");
-		}
+		{		}			// not defined
 		else if(action.equals("Write member t"))
-		{
-		//	JOptionPane.showMessageDialog(null,  );
-			System.out.println("Writing tennis member");
-		}
+		{		}			// not defined
 		else if(action.equals("Write member v"))
-		{
-		//	JOptionPane.showMessageDialog(null,  );
-			System.out.println("Writing volleyball member");
-		}
+		{				}   // not defined
 		else if(action.equals("Write report b"))
 		{
 			JOptionPane.showMessageDialog(null,  competitorList.getallBasketballScoreReport());
-			System.out.println("Writing basketball members to a file");
 		}
 		else if(action.equals("Write report k"))
 		{
 				JOptionPane.showMessageDialog(null,  competitorList.getallDavidKendokaScoreReport() );
-				System.out.println("Writing Kendoka members to a file");
 		}
 		else if(action.equals("Write report t"))
 		{
 				JOptionPane.showMessageDialog(null,  competitorList.getallTableTennisScoreReport());
-				System.out.println("Writing table tennis members to a file");
 		}
 		else if(action.equals("Write report v"))
 		{
 				JOptionPane.showMessageDialog(null,  competitorList.getallVolleyballScoreReport());
-				System.out.println("Writing volleyball members to a file");
 		}
 		else if(action.equals("Add member"))
-		{
-		//	JOptionPane.showMessageDialog(null,  );
-			System.out.println("Adding a member");
-		}
+		{		}						// not defined
 		else if(action.equals("Delete member"))
 			{
-		//		JOptionPane.showMessageDialog(null,  );
+		
 				System.out.println("Deleting a member");
 			}
 		else if(action.equals("Extend member"))
-			{
-			//		JOptionPane.showMessageDialog(null,  );
-				System.out.println("Extending a members categories");
-						}
+			{						}    // not defined
 		else if(action.equals("Best overall report"))
 		{
 			JOptionPane.showMessageDialog(null, competitorList.getHighestScore());
-			System.out.println("Finding a competitor with overall highest score");
-				}
+		}
 		else if(action.equals("Basketball stats"))
 		{
 			JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
-			System.out.println("Printing basketball statistics");
-			}
+		}
 		else if(action.equals("Options b"))
 		{
 			popUpSport = "Basketball";
 			popUpSortKey = "ID";  						// default option when entering Popup
 			buildOutGUIs(popUpSortKey, popUpSport);
-			// JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
-			System.out.println("Printing basketball statistics");
-			}
+		}
 		else if(action.equals("Options k"))
 		{
 			popUpSport = "Kendo";
 			popUpSortKey = "ID";  						// default option when entering Popup
 			buildOutGUIs(popUpSortKey, popUpSport);
-			System.out.println("Kendo popup");
-			}
+		}
 		else if(action.equals("Options t"))
 		{
 			popUpSport = "Tabletennis";
 			popUpSortKey = "ID";  						// default option when entering Popup
 			buildOutGUIs(popUpSortKey, popUpSport);
-			System.out.println("Tabletennis popup");
-			
-//			JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
-			System.out.println("Printing tabletennis statistics");
-			}
+		}
 		else if(action.equals("Options v"))
 		{
 			popUpSport = "Volleyball";
 			popUpSortKey = "ID";  						// default option when entering Popup
 			buildOutGUIs(popUpSortKey, popUpSport);
-			System.out.println("Volleyball popup");
-			
-			// JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
-			System.out.println("Volleyball popup");
-			}
+		}
 		else if (action.equals("Sort by Age"))
 		{
-			System.out.println("Sort by Age");
 			popUpSortKey = "age";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}
 		else if (action.equals("Sort by Dan"))
 		{
-			System.out.println("Sort by Dan");
 			popUpSortKey = "dan";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}
 		else if (action.equals("Sort by Overall Score"))
 		{
-			System.out.println("Sort by Overall Score");
 			popUpSortKey = "score";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}
 		else if (action.equals("Sort by ID"))
 		{
-			System.out.println("Sort by ID");
 			popUpSortKey = "ID";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}	
 		else if (action.equals("Sort by Name"))
 		{
-			System.out.println("Sort by Name");
 			popUpSortKey = "name";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}	
 		else if	(action.equals("Sort by Position"))
 		{
-			System.out.println("Sort by Position");
 			popUpSortKey = "position";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}		
 		else if	(action.equals("Sort by Nationality"))
 		{
-			System.out.println("Sort by Nationality");
 			popUpSortKey = "nationality";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}		
 		else if	(action.equals("Sort by Level"))
 		{
-			System.out.println("Sort by Level");
 			popUpSortKey = "level";
 			killPopUp();
 			buildOutGUIs(popUpSortKey, popUpSport);
 		}		
 		else if (action.equals("Close Popup"))
-		{
-	//		this.setVisible(false);
-			System.out.println("making popup not visible");
-		}
+		{ 	}// not defined	
 		
 		}
 	}
 
-
-	private void killPopUp() {
+	private void killPopUp() 
+	{
 
 		for (int i=0; i<pops.size(); ++i)
 		{
 			pops.get(i).setVisible( false );
 		}
 		guiList.removeAll(guiList);
-		System.out.println("guiList is empty" + guiList.isEmpty());
 	}
 
 	public String about()
 	{
-		System.out.println("Reached about()");
 		String aboutJADA = "";
 		aboutJADA += "\n";
 		aboutJADA += "This excellent Sports Membership software was written by:";
@@ -607,7 +520,6 @@ public class CompetitorListGUI  implements ActionListener {
 		aboutJADA += "Akshay Rajieve Krishnan\n";
 		aboutJADA += "\n";
 		aboutJADA += "Our Software is free to use, but donations and high marks are appreciated.";
-		
 		return aboutJADA;
 	}
 
@@ -617,7 +529,6 @@ public class CompetitorListGUI  implements ActionListener {
 		help += "\n";
 		help += "Search our extensive Help database.";
 		help += "\n";
-				
 		return help;
 	}
 	
@@ -635,7 +546,7 @@ public class CompetitorListGUI  implements ActionListener {
 		String report = "";
 		switch (popUpSport)
 		{
-			case "Kendo":
+			case "Kendo": 
 				report = popUpList.getDavidKendokaFullDetails(sortkey);
 				break;
 			case "Basketball":
