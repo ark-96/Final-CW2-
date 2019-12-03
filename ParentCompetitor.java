@@ -56,6 +56,21 @@ abstract public class ParentCompetitor {
 		else
 			{return -1;}
 	}
+
+	public String getP()
+	{
+		if (this instanceof Volleyball )
+			{
+			System.out.println(((Volleyball) this).getPosition());
+			return ((Volleyball) this).getPosition();
+			}
+		else
+			{return null;}
+	}
+	
+	
+	
+	
 	
 	
 	public static Comparator<ParentCompetitor> compareName = new Comparator<ParentCompetitor>()
@@ -102,5 +117,15 @@ abstract public class ParentCompetitor {
 		return  ( (pc1.getId() ) - (pc2.getId() ) );
 		}
 	};
+	
+	public static Comparator<ParentCompetitor> comparePosition = new Comparator<ParentCompetitor>()
+	{
+		@Override
+		public int compare(ParentCompetitor pc1, ParentCompetitor pc2)
+		{
+		return (int) ( (pc1.getP()).compareTo( pc2.getP() )) ;
+		}
+	};
+	
 	
 }

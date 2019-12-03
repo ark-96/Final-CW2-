@@ -904,15 +904,36 @@ public String getTableTennisFullDetails(){
 	 return report;  
 }
 
-public String getVolleyballFullDetails(){
-	String report = "ID    NAME                     LEVEL         POSITION              SCORES\n";
-	for (ParentCompetitor c: competitorList) {
+public String getVolleyballFullDetails(String key)
+	{
+	Sorter sortedList;
+	sortedList = new Sorter(competitorList);
+	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
+	System.out.println(key);
+	switch(key)
+	{
+		case "name":
+			sortedCompetitors = sortedList.sortByName();
+			break;
+		case "score":
+			sortedCompetitors = sortedList.sortByScore();
+			break;
+		case "ID":
+			sortedCompetitors = sortedList.sortByID();
+			break;
+		case "position":
+			sortedCompetitors = sortedList.sortByPosition();
+			break;	
+	}	
+	String report = "ID    NAME                     LEVEL         POSITION              SCORES     OVERALL\n";
+	for (ParentCompetitor c: sortedCompetitors) {
 		if(c instanceof Volleyball){
 			report += String.format("%-6s", c.getId());
 			report += String.format("%-25s", c.getName().getFullName());
 			report += String.format("%-14s", c.getLevel());
 			report += String.format("%-22s", ((Volleyball) c).getPosition());
-			report += String.format("%-5s", c.getScoreString());
+			report += String.format("%-5s", c.getScoreString()) + "   ";
+			report += String.format("%-7s", c.getOverallScore());
 			report += "\n";
 		}
 	}

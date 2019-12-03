@@ -19,11 +19,11 @@ CN 115 (J.R) has an overall score 4.0
 CN 200 (B.S) has an overall score 2.0
 CN 201 (J.W) has an overall score 1.0
 CN 202 (F.W) has an overall score -1.0
-CN 203 (J.P) has an overall score 8.0
-CN 204 (S.Y) has an overall score 3.0
+CN 203 (J.P) has an overall score 12.0
+CN 204 (S.Y) has an overall score 5.0
 CN 205 (A.W) has an overall score 15.0
-CN 206 (S.B) has an overall score 13.0
-CN 207 (G.M) has an overall score 3.0
+CN 206 (S.B) has an overall score 14.0
+CN 207 (G.M) has an overall score 5.0
 CN 208 (S.M) has an overall score 12.0
 CN 209 (G.S) has an overall score 13.0
 CN 210 (M.M) has an overall score 12.0

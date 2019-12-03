@@ -39,4 +39,11 @@ public class Sorter
 			return competitor;
 		}
 		
+		public ArrayList<ParentCompetitor> sortByPosition()
+		{
+			Collections.sort(competitor, ParentCompetitor.comparePosition);
+			return competitor;
+		}
+		
+		
 }

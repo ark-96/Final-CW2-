@@ -1,27 +1,35 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 
-public class CompetitorListGUI extends JFrame implements ActionListener {
+public class CompetitorListGUI  implements ActionListener {
 	private ParentCompetitorList competitorList;
 	JFrame mainGUI;
+	JFrame popUpGUI;
+	ArrayList<JFrame> pops = new ArrayList<JFrame>();
 	JMenuBar menuBar;
 	JMenu mb, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19, m20, m21, m22, m23, m24, m25, m26, m27, m28, m29, m30, m31, m32, m33, m34, m35, m36, m37, m38, m39, m40, m41, m42;
 	JPanel sportsPanel, panelSouth, panelCentre, basketballPanel, kendoPanel, tableTennisPanel, volleyballPanel;
 	JButton shortDetails, search, delete, close, help, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4, basketball, kendoka, tabletennis, volleyball;
 	JLabel membershipNumber, title, explain;
 	JTextField searchField;
+	// CompetitorListGUI guiArray[];
+	ArrayList<CompetitorListGUI> guiList = new ArrayList<CompetitorListGUI>();
 	
 	private static String popUpSport = "Kendo";
 	private static String popUpSortKey = "ID";
+//	String[] sportsList = {"Basketball", "Kendo", "Table Tennis", "Volleyball"};
+//	String[][] sortOptions = {{" ", " ", " ", " "},{"ID", "name", "age", "dan" },{" ", " ", " ", " "},{" ", " ", " ", " "}};
 		
-
 	public CompetitorListGUI(ParentCompetitorList list){
 		
 		competitorList=list;
-		JFrame mainGUI = new JFrame("JADA Sports Management");
+		mainGUI = new JFrame("JADA Sports Management");
 		mainGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainGUI.setLocation(400,200);
 		mainGUI.getContentPane().add(BorderLayout.SOUTH, buildSouth());
@@ -32,20 +40,28 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		System.out.println("gui works");		
 	}
 	
-	public CompetitorListGUI(ParentCompetitorList popUpList, String sport)
+	public void KillMe()
+	{
+		popUpGUI.setVisible(false);
+	}
+	
+	
+	private void CompetitorListGUI2(ParentCompetitorList popUpList, String sport, String sort)
 	{	
 	competitorList = popUpList;
 	System.out.println("creating Pop Up");
-	JFrame popUpGUI = new JFrame("More Details on " + sport);
+	popUpGUI = new JFrame("More Details on " + sport);
 	popUpGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	popUpGUI.setLocation(500,300);
 	//popUpGUI.add(BorderLayout.SOUTH, bottomPanel());
 	popUpGUI.getContentPane().add(BorderLayout.NORTH, northPanel());
-	popUpGUI.add(BorderLayout.CENTER, reportPane(popUpList, popUpSortKey));
+	popUpGUI.add(BorderLayout.CENTER, reportPane(popUpList, sort));
 	popUpGUI.pack();
 	popUpGUI.setVisible(true);
+	pops.add( popUpGUI );
 	System.out.println("gui works");
 	}
+	
 	
 	public JMenuBar buildMenu()
 	{
@@ -379,7 +395,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		}
 		else if(action.equals("Full report v"))
 		{
-				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballFullDetails()) );
+				JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballFullDetails("ID")) );
 				System.out.println("Full tennis report");
 		}
 		else if(action.equals("Short details b"))
@@ -475,63 +491,87 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		else if(action.equals("Options k"))
 		{
 			popUpSport = "Kendo";
-			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
+			popUpSortKey = "ID";  						// default option when entering Popup
+			buildOutGUIs(popUpSortKey, popUpSport);
 			System.out.println("Kendo popup");
 			}
 		else if(action.equals("Options t"))
 		{
 			JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
-			System.out.println("Printing basketball statistics");
+			System.out.println("Printing tabletennis statistics");
 			}
-		else if(action.equals("Options t"))
+		else if(action.equals("Options v"))
 		{
-			JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
-			System.out.println("Printing basketball statistics");
+			popUpSport = "Volleyball";
+			popUpSortKey = "ID";  						// default option when entering Popup
+			buildOutGUIs(popUpSortKey, popUpSport);
+			System.out.println("Volleyball popup");
+			
+			// JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());
+			System.out.println("Volleyball popup");
 			}
 		else if (action.equals("Sort by Age"))
 		{
 			System.out.println("Sort by Age");
 			popUpSortKey = "age";
-			this.setVisible(false);
-			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-			dispose();
-			// this.setVisible(true);
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
 		}
 		else if (action.equals("Sort by Dan"))
 		{
 			System.out.println("Sort by Dan");
 			popUpSortKey = "dan";
-			this.setVisible(false);
-			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-			// this.setVisible(true);
-			dispose();
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
 		}
 		else if (action.equals("Sort by Overall Score"))
 		{
 			System.out.println("Sort by Overall Score");
 			popUpSortKey = "score";
-			this.setVisible(false);
-			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-			// this.setVisible(true);
-			dispose();
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
 		}
 		else if (action.equals("Sort by ID"))
 		{
 			System.out.println("Sort by ID");
 			popUpSortKey = "ID";
-			this.setVisible(false);
-			CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-			// this.setVisible(true);
-			dispose();
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
 		}	
+		else if (action.equals("Sort by Name"))
+		{
+			System.out.println("Sort by Name");
+			popUpSortKey = "name";
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
+		}	
+		else if	(action.equals("Sort by Position"))
+		{
+			System.out.println("Sort by Position");
+			popUpSortKey = "position";
+			killPopUp();
+			buildOutGUIs(popUpSortKey, popUpSport);
+		}		
 		else if (action.equals("Close Popup"))
 		{
-			this.setVisible(false);
+	//		this.setVisible(false);
+			System.out.println("making popup not visible");
 		}
 		
 		}
 	}
-	
+
+
+	private void killPopUp() {
+
+		for (int i=0; i<pops.size(); ++i)
+		{
+			pops.get(i).setVisible( false );
+		}
+		guiList.removeAll(guiList);
+		System.out.println("guiList is empty" + guiList.isEmpty());
+	}
+
 	public String about()
 	{
 		System.out.println("Reached about()");
@@ -581,6 +621,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 			case "Tabletennis":
 				break;
 			case "Volleyball":
+				report = popUpList.getVolleyballFullDetails(sortkey);
 				break;
 		}
 		JTextArea panel = new JTextArea( report );
@@ -604,91 +645,70 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	panelN.add(label0);
 	panelN.add(rbutton0);
 	group.add(rbutton0);
-	if (popUpSortKey == "ID" ) {rbutton0.setSelected(true);} 					// set default
-
-	JLabel label1 = new JLabel("Age");
+	if (popUpSortKey == "ID" ) {rbutton0.setSelected(true);}	// set default
+	
+	JLabel label1 = new JLabel("Overall Score");
 	JRadioButton rbutton1 = new JRadioButton();
 	rbutton1.addActionListener(this);
-	rbutton1.setActionCommand("Sort by Age");
+	rbutton1.setActionCommand("Sort by Overall Score");
 	panelN.add(label1);
 	panelN.add(rbutton1);
 	group.add(rbutton1);
-	if (popUpSortKey == "age" ) {rbutton1.setSelected(true);}
+	if (popUpSortKey == "score" ) {rbutton1.setSelected(true);} 					
 
-	JLabel label2 = new JLabel("Overall Score");
-	JRadioButton rbutton2 = new JRadioButton();
-	rbutton2.addActionListener(this);
-	rbutton2.setActionCommand("Sort by Overall Score");
-	panelN.add(label2);
-	panelN.add(rbutton2);
-	group.add(rbutton2);
-	if (popUpSortKey == "score" ) {rbutton2.setSelected(true);}
-	
 	switch(popUpSport)
 		{
 		case "Kendo":
-			JLabel label3 = new JLabel("Dan Grade");
+			JLabel klabel2 = new JLabel("Dan Grade");
+			JRadioButton krbutton2 = new JRadioButton();
+			krbutton2.addActionListener(this);
+			krbutton2.setActionCommand("Sort by Dan");
+			panelN.add(klabel2);
+			panelN.add(krbutton2);
+			group.add(krbutton2);
+			if (popUpSortKey == "dan" ) {krbutton2.setSelected(true);}
+			
+			JLabel label3 = new JLabel("Age");
 			JRadioButton rbutton3 = new JRadioButton();
 			rbutton3.addActionListener(this);
-			rbutton3.setActionCommand("Sort by Dan");
+			rbutton3.setActionCommand("Sort by Age");
 			panelN.add(label3);
 			panelN.add(rbutton3);
 			group.add(rbutton3);
-			if (popUpSortKey == "dan" ) {rbutton3.setSelected(true);}
+			if (popUpSortKey == "age" ) {rbutton3.setSelected(true);}
 			break;
 		case "Basketball":
 			break;
 		case "Tabletennis":
 			break;
 		case "Volleyball":
+			JLabel vlabel2 = new JLabel("Position");
+			JRadioButton vrbutton2 = new JRadioButton();
+			vrbutton2.addActionListener(this);
+			vrbutton2.setActionCommand("Sort by Position");
+			panelN.add(vlabel2);
+			panelN.add(vrbutton2);
+			group.add(vrbutton2);
+			if (popUpSortKey == "position" ) {vrbutton2.setSelected(true);}
+						
+			JLabel vlabel3 = new JLabel("Name");
+			JRadioButton vrbutton3 = new JRadioButton();
+			vrbutton3.addActionListener(this);
+			vrbutton3.setActionCommand("Sort by Name");
+			panelN.add(vlabel3);
+			panelN.add(vrbutton3);
+			group.add(vrbutton3);
+			if (popUpSortKey == "name" ) {vrbutton3.setSelected(true);}
 			break;
-			
 		}
 	return panelN;
 	}
 
-//	public void actionPerformedPopup(ActionEvent e)
-//	{
-//	String action = e.getActionCommand();
-//
-//	if (action.equals("Sort by Age"))
-//		{
-//		popUpSortKey = "age";
-//		System.out.println("Sort by Age");
-//		System.out.println("Sort by Age");
-//		popUpSortKey = "age";
-//		this.setVisible(false);
-//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-//		dispose();
-//		// this.setVisible(true); to replace report pane with sorted by Age
-//		}
-//	else if (action.equals("Sort by Dan"))
-//		{
-//		System.out.println("Sort by Dan");
-//		popUpSortKey = "dan";
-//		this.setVisible(false);
-//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-//		// this.setVisible(true);
-//		dispose();
-//		}
-//	else if (action.equals("Sort by Overall Score"))
-//		{
-//		System.out.println("Sort by Overall Score");
-//		popUpSortKey = "score";
-//		this.setVisible(false);
-//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-//		// this.setVisible(true);
-//		dispose();
-//		}
-//	else if (action.equals("Sort by ID"))
-//		{
-//		System.out.println("Sort by ID");
-//		popUpSortKey = "ID";
-//		this.setVisible(false);
-//		CompetitorListGUI popupGUI= new CompetitorListGUI(competitorList, popUpSport);
-//		// this.setVisible(true);
-//		dispose();
-//		}
-//	}
+	public void buildOutGUIs(String popUpSortKey, String popUpSport)
+	{
+		{
+			CompetitorListGUI2(competitorList, popUpSport, popUpSortKey );
+		}
+	}
 	
 }

@@ -16,15 +16,16 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 	}
 	
 	
+	
+	
 	public String getPosition() {return volleyballPosition;}
 	public int [] getScoreArray() {return volleyballScore;}
 	
 	public double getOverallScore() {
 		int total = 0;
-		for (int volleyballScoreIndex = 0; volleyballScoreIndex < volleyballScore.length;
-		                    volleyballScoreIndex++) {
-			total +=volleyballScore[volleyballScoreIndex];
-		}
+		for (int volleyballScoreIndex = 0; volleyballScoreIndex < volleyballScore.length; volleyballScoreIndex++) 
+			{ total +=volleyballScore[volleyballScoreIndex];}
+		// System.out.print( total ); System.out.println( "   " + volleyballScore.length);
 		return (double) total/volleyballScore.length;
 	}
 	
@@ -37,9 +38,11 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 	public String getFullDetails() { 
 		return ("\nCompetitor Number: ") + getId() + ", " + ("Name: ") + getName().getFullName() +".\n" + getName().getFirstName() + " is an " + getLevel() + " " + volleyballPosition + " " + ("and has scores of: ");
 	}
-	
 
-	}
+	public int comparePosition(Volleyball a , Volleyball b)
+	{	return  a.getPosition().compareTo( b.getPosition() );	}
+
+}
 
 
 
