@@ -44,6 +44,12 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	}
 	
 	public void KillMe()
+	/** KillMe()
+	 * Makes the associated object not visible.
+	 * Perhaps KillMe is an overstatement. 
+	 * 
+	 * @param No parameter
+	 */
 	{
 		popUpGUI.setVisible(false);
 	}
