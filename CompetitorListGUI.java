@@ -49,6 +49,13 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	}
 	
 	private void CompetitorListGUI2(ParentCompetitorList popUpList, String sport, String sort)
+	/** CompetitorListGUI2
+	 * Creates the popUpGUI as JFrame, filling its content with:
+	 * North pane - a list of radio buttons built in northPanel()
+	 * Centre - using reportPane() 
+	 * @param ParentCompetitorList popUpList, String sport, String sort
+	 * 	 Sport relates to which sport the pop-up is for, sort is the key the pop-up is sorted on
+	 */
 	{	
 		competitorList = popUpList;
 		popUpGUI = new JFrame("More Details on " + sport);
