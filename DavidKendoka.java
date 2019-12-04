@@ -4,12 +4,12 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class DavidKendoka extends ParentCompetitor
 /** Class of DavidKendoka
  * provides data structure to hold Kendoka members and several get & set methods
  * @param 
  * 	 
  */
+public class DavidKendoka extends ParentCompetitor
 {
 	// now build main data structure
 	// Declare variables
@@ -22,7 +22,12 @@ public class DavidKendoka extends ParentCompetitor
 	int [] last5Scores;
 		
 	// Constructor
-	public DavidKendoka(String a, Integer i , 
+	/** Constructor of DavidKendoka
+		 * builds a Kendoka member 
+		 * @param 
+		 * 	 
+		 */
+		public DavidKendoka(String a, Integer i , 
 					Name n ,
 					LocalDate dob ,
 					Integer dan , 
@@ -31,11 +36,6 @@ public class DavidKendoka extends ParentCompetitor
 					String l,
 					int [] s ) 
 		{
-		/** Constructor of DavidKendoka
-		 * builds a Kendoka member 
-		 * @param 
-		 * 	 
-		 */
 		super (a, i, n, l, s);
 		memberShipNumber = i;
 		individual = n;
@@ -47,12 +47,12 @@ public class DavidKendoka extends ParentCompetitor
 		}
 		
 
-		public double getOverallScore()
 		/** Calculates 'Overall Score'
 		 * Takes best 4 of the 5 recent scores, deducts dan grade as a handicap.
 		 * @param queryIndividual the Kendoka whose score we want to interrogate
 		 * returns the Overall Score.	 
 		 */
+		public double getOverallScore()
 		{
 			int[] temp = getScoreArray();
 			double totalMarks = 0;
@@ -67,44 +67,44 @@ public class DavidKendoka extends ParentCompetitor
 		}
 		
 		
-		public int getAge()
 		/** Calculates 'Age'
 		 * parameterless, returns the Age of the object using Period.between LocalDate.
 		 */
-			{return Period.between( dateOfBirth , LocalDate.now() ).getYears();}
+		public int getAge()
+		{	return Period.between( dateOfBirth , LocalDate.now() ).getYears();	}
 		
 		
-		public String getIdAsString() 
 		/** Returns objects ID as a string
 		 */
-			{ return String.valueOf(memberShipNumber) ; }
+		public String getIdAsString() 
+		{ return String.valueOf(memberShipNumber) ; }
 	
-		public int getIdAsInt()
 		/** Returns Membership Number (ID)
 		 * parameterless. 
 		 */
+		public int getIdAsInt()
 			{ return memberShipNumber ;}
 		
-		public int getDanGrade()
 		/** Returns DanGrade of object
 		 * parameterless. 
 		 */
+		public int getDanGrade()
 		{
 			return danGrade;
 		}
 		
-		public int [] getLast5Scores()
 		/** returns an array of last5Scores
 		 * parameterless. 
 		 */
+		public int [] getLast5Scores()
 		{
 			return last5Scores;
 		}
 		
-		public String getFullDetails()
 		/** Returns a string of Full Details
 		 * @param parameterless
 		 */
+		public String getFullDetails()
 		{
 			String scores = "";
 			for (int s = 0 ; s <=4 ; s++)
@@ -121,22 +121,22 @@ public class DavidKendoka extends ParentCompetitor
 			return fullDetails;					
 		}
 					
-	public int compareDan(DavidKendoka a , DavidKendoka b)
 	/** Compares two Kendokas Dan grades, used to sort by grade
 	 * @param a,b both DavidKendokas
 	 */
+	public int compareDan(DavidKendoka a , DavidKendoka b)
 	{	return Integer.compare(a.getDanGrade(), b.getDanGrade());	}	
 		
-	public int compareAge(DavidKendoka a , DavidKendoka b)
 	/** Compares two Kendokas Ages, used to sort by Age
 	 * @param a,b both DavidKendokas
 	 */
+	public int compareAge(DavidKendoka a , DavidKendoka b)
 	{	return Integer.compare(a.getAge() , b.getAge() );	}
 	
-	public int compareScore(DavidKendoka a , DavidKendoka b)
 	/** Compares two Kendokas Overall Scores, used to sort by Score
 	 * @param a,b both DavidKendokas
 	 */
+	public int compareScore(DavidKendoka a , DavidKendoka b)
 	{	return Double.compare( a.getOverallScore() , b.getOverallScore() );	}
 		
 }

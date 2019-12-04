@@ -5,12 +5,10 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CompetitorListGUI extends JFrame implements ActionListener 
 /** Class of CompetitorList GUI
- * provides constructors to build GUIS, manage ActionPerformed and related functionality.
- * @param 
- * 	 
+ * provides constructors to build GUIS, manage ActionPerformed and related functionality.	 
  */
+public class CompetitorListGUI extends JFrame implements ActionListener 
 {
 	ParentCompetitorList competitorList;
 	JFrame mainGUI;
@@ -19,7 +17,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	MenuBar mb; 
 	JMenu m1, m4, m11, m12, m13, m41, m42;
 	JPanel searchPanel, sportsPanel, panelSouth, panelCentre, basketballPanel, kendoPanel, tableTennisPanel, volleyballPanel;
-	JButton shortDetails, search, close, help, b1, b2, b3, b4, k1, k2, k3, k4, t1, t2, t3, t4, v1, v2, v3, v4, basketball, kendoka, tabletennis, volleyball, best;
+	JButton shortDetails, search, close, help, b1, b2, b4, k1, k2, k4, t1, t2, t4, v1, v2, v4, basketball, kendoka, tabletennis, volleyball, best;
 	JLabel membershipNumber, title, explain, score;
 	JTextField searchField, alterScores;
 	String alter="";
@@ -29,7 +27,10 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	private static String popUpSport = "Kendo";
 	private static String popUpSortKey = "ID";
 		
-
+	/** Constructor CompetitorListGUI
+	 *  creates the main gui frame
+	 * @param list The competitor array list
+	 */
 	public CompetitorListGUI(ParentCompetitorList list){
 		
 		competitorList=list;
@@ -43,18 +44,17 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		mainGUI.setVisible(true);	
 	}
 	
-	public void KillMe()
 	/** KillMe()
 	 * Makes the associated object not visible.
 	 * Perhaps KillMe is an overstatement. 
 	 * 
 	 * @param No parameter
-	 */
+	 */	
+	public void KillMe()
 	{
 		popUpGUI.setVisible(false);
 	}
 	
-	private void CompetitorListGUI2(ParentCompetitorList popUpList, String sport, String sort)
 	/** CompetitorListGUI2
 	 * Creates the popUpGUI as JFrame, filling its content with:
 	 * North pane - a list of radio buttons built in northPanel()
@@ -62,6 +62,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	 * @param ParentCompetitorList popUpList, String sport, String sort
 	 * 	 Sport relates to which sport the pop-up is for, sort is the key the pop-up is sorted on
 	 */
+	private void CompetitorListGUI2(ParentCompetitorList popUpList, String sport, String sort)
 	{	
 		competitorList = popUpList;
 		popUpGUI = new JFrame("More Details on " + sport);
@@ -74,6 +75,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		pops.add( popUpGUI );
 	}
 	
+	/** Constructor CompetitorListGUI
+	 * creates the pop up gui frame
+	 * @param numberList The competitor array list
+	 * @param num parameter to differentiate from the main gui constructor using overloading
+	 */
 	public CompetitorListGUI(ParentCompetitorList numberList, int num)
 	{	
 		competitorList = numberList;
@@ -85,6 +91,10 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		searchGUI.setVisible(true);
 	}
 	
+	/** buildMenu
+	 *  creates the menubar with the necessary menu items and adds action listeners
+	 * @return the menubar with all menu items
+	 */
 	public JMenuBar buildMenu()
 	{
         //Creating the MenuBar and adding components
@@ -121,6 +131,10 @@ public class CompetitorListGUI extends JFrame implements ActionListener
         return mb;
 	}
 	
+	/**buildSouth
+	 * creates the south panel with the necessary buttons and adds action listeners
+	 * @return south panel
+	 */
  	public JPanel buildSouth()
 	{
  		
@@ -150,7 +164,19 @@ public class CompetitorListGUI extends JFrame implements ActionListener
         return panel;
 	}
 	
-	public static JPanel buildSport(JPanel sportPanel, Color col, String sport, JButton b1, JButton b2, JButton b3, JButton b4, JButton b5)
+ 	/**buildSport
+ 	 * builds the sport panel with the necessary buttons for the specified competitor
+ 	 * based on the value of the sport parameter 
+ 	 * @param sportPanel the JPanel with the buttons
+ 	 * @param col the background colour of the panel
+ 	 * @param sport the sport for which the panel is being designed
+ 	 * @param b1 first button 	
+ 	 * @param b2 second button 
+ 	 * @param b4 third button
+ 	 * @param b5 forth button
+ 	 * @return sportPanel with all the buttons aligned as specified
+ 	 */
+	public static JPanel buildSport(JPanel sportPanel, Color col, String sport, JButton b1, JButton b2, JButton b4, JButton b5)
 	{
 		// Builds a stack of buttons plus heading
 		sportPanel.setLayout(new BoxLayout(sportPanel, BoxLayout.Y_AXIS));
@@ -179,6 +205,10 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		return sportPanel;
 	}    	
 	
+	/**buildCentre
+	 * creates the center panel 
+	 * @return center panel with 1 panel for each of the sports 
+	 */
 	public JPanel buildCentre()
 	{
 		// Builds the centre panel of 4 sports
@@ -201,7 +231,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		basketball.addActionListener(this);
 		basketball.setActionCommand("Options b");
 		basketball.setToolTipText("Click here for more options for basketball players");
-		buildSport(basketP, Color.GREEN, "Basketball", b1, b2, b3, b4, basketball);
+		buildSport(basketP, Color.GREEN, "Basketball", b1, b2, b4, basketball);
 		
 		JPanel kendoP = new JPanel();
         JButton k1 = new JButton("Full Statistics");
@@ -220,7 +250,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		kendoka.addActionListener(this);
 		kendoka.setActionCommand("Options k");
 		kendoka.setToolTipText("Click here for more options for kendoka");
-		buildSport(kendoP, Color.GRAY , "Kendo", k1, k2, k3, k4, kendoka);
+		buildSport(kendoP, Color.GRAY , "Kendo", k1, k2, k4, kendoka);
 		
 		JPanel tableP = new JPanel();
         JButton t1 = new JButton("Full Statistics");
@@ -239,7 +269,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		tabletennis.addActionListener(this);
 		tabletennis.setActionCommand("Options t");
 		tabletennis.setToolTipText("Click here for more options for table tennis competitor group");
-		buildSport(tableP, Color.RED, "Table-Tennis", t1, t2, t3, t4, tabletennis);
+		buildSport(tableP, Color.RED, "Table-Tennis", t1, t2, t4, tabletennis);
 		
 		JPanel volleyP = new JPanel();
         JButton v1 = new JButton("Full Statistics");
@@ -259,7 +289,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		volleyball.addActionListener(this);
 		volleyball.setActionCommand("Options v");
 		volleyball.setToolTipText("Click here for more options for volleyball players");
-		buildSport(volleyP, Color.CYAN, "Volleyball", v1, v2, v3, v4, volleyball);
+		buildSport(volleyP, Color.CYAN, "Volleyball", v1, v2, v4, volleyball);
 		
 		cPanel.add(basketP);
 		cPanel.add(kendoP);
@@ -268,7 +298,12 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 
 		return cPanel;
 	}   
+	
 	@Override
+	/**actionPerformed
+	 * performs the required functions based on the value generated by the action listener
+	 * @params e The keyword of the action event as read by the action listener 
+	 */
 	public void actionPerformed(ActionEvent e) 
 	{
 	
@@ -442,33 +477,20 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 			}	
 			
 			else if (action.equals("Search"))
-			{
-	//			
-					
-				//if(searchField.getText().length() >0) {
-					//member = Integer.parseInt(searchField.getText().trim());
-					CompetitorListGUI searchGUI= new CompetitorListGUI(competitorList, 1);
-					//searchGUI.getSearchPanel(member);
-					//searchID=member;
-				
-					//JOptionPane.showMessageDialog(mainGUI, competitorList.findShortDetails(member));
-									
-	//			else {
-	//				JOptionPane.showMessageDialog(mainGUI, "Please enter valid membership number");
-	//			}
-	//		}
-	//			catch(NumberFormatException ioe){
-	//				JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number. Try again.");
-	//			}
-			}
+				{	CompetitorListGUI searchGUI= new CompetitorListGUI(competitorList, 1);	}
 			else if (action.equals("View Score full details"))
 			{
-				if(searchField.getText().length() >0) {
-					member = Integer.parseInt(searchField.getText().trim());
-					JOptionPane.showMessageDialog(null, competitorList.findFullDetails(member));
+				try {
+					if(searchField.getText().length() >0) {
+						member = Integer.parseInt(searchField.getText().trim());
+						JOptionPane.showMessageDialog(null, competitorList.findFullDetails(member));
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Please enter valid id.");
+					}
 				}
-				else{
-					JOptionPane.showMessageDialog(null, "Please enter valid id.");
+				catch(NumberFormatException ioe){
+					JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number.\nMakes sure there are no spaces or commas between the scores and only enter numerical characters.\nTry again.");
 				}
 			}
 			else if (action.equals("Alter Score")) 
@@ -491,12 +513,12 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 						 	}
 						 }
 						else{
-							JOptionPane.showMessageDialog(null, "Please enter exactly 5 digits in the alter score input field" );
+							JOptionPane.showMessageDialog(null, "Please enter exactly 5 digits in the alter score input field.\nMakes sure there are no spaces or commas between the scores and only enter numerical characters." );
 						}
 					}
 				}
 				catch(NumberFormatException ioe){
-					JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number. Try again.");
+					JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number.\nMakes sure there are no spaces or commas between the scores and only enter numerical characters.\nTry again.");
 				}
 			}
 			else if (action.equals("Search score"))
@@ -507,22 +529,22 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 						JOptionPane.showMessageDialog(mainGUI, competitorList.findShortDetails(member));
 					}
 					else{
-						JOptionPane.showMessageDialog(null, "Please enter valid id.");
+						JOptionPane.showMessageDialog(null, "Please enter valid id.\nMakes sure there are no spaces or commas between the scores and only enter numerical characters.\nTry again.");
 					}
 				}
 				catch(NumberFormatException ioe){
-					JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number. Try again.");
+					JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number.\nMakes sure there are no spaces or commas between the scores and only enter numerical characters.\nTry again.");
 				}
 			}	
 		}
 	}
 	
-	private void killPopUp() 
 	/** killPopUp()
 	 * Method to hide unused GUI from display
 	 * @param no parameters 
 	 * 	 
 	 */
+	private void killPopUp() 
 	{
 		for (int i=0; i<pops.size(); ++i)
 		{
@@ -531,12 +553,12 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		guiList.removeAll(guiList);
 	}
 	
-	public String about()
 	/** about()
 	 * Method to provide information about application
 	 * @param no parameters 
 	 * 	 
 	 */
+	public String about()
 	{
 		String aboutJADA = "";
 		aboutJADA += "\n";
@@ -552,12 +574,12 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		return aboutJADA;
 	}
 
-	public String help()
 	/** help()
 	 * Method to provide help information
 	 * @param no parameters 
 	 * 	 
 	 */
+	public String help()
 	{
 		String help = "";
 		help += "\n";
@@ -567,6 +589,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		return help;
 	}
 	
+	/**
+	 * 
+	 * @param report
+	 * @return
+	 */
 	public JScrollPane makeReportGUI(String report)
 	{
 		JTextArea text = new JTextArea( report );
@@ -575,6 +602,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		return scrollPane;
 	}
 	
+	/**getSearchPanel
+	 * creates search panel for the search popup gui
+	 * @param num arbitrary constant to distinguish from main gui 
+	 * @return search panel with necessary buttons and input text fields
+	 */
 	public JPanel getSearchPanel(int num){
 			JPanel sPanel = new JPanel();
 			sPanel.setLayout(new FlowLayout());
@@ -585,6 +617,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	        sPanel.add(label); // Components Added using Flow Layout
 	        sPanel.add(searchField);
 	        searchField.addActionListener(this);
+	        searchField.setToolTipText("Enter the Id of the competitor. Make sure there are no spaces or commas and only enter numerical characters.");
 	        searchField.setEditable(true);
 			
 	        JButton search = new JButton("Search");
@@ -603,6 +636,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	        sPanel.add(alter); // Components Added using Flow Layout
 	        sPanel.add(alterScores);
 	        alterScores.addActionListener(this);
+	        alterScores.setToolTipText("Enter the new scores. Makes sure there are no spaces or commas between the scores and only enter numerical characters.");
 	        alterScores.setEditable(true);
 			
 			JButton as = new JButton("Alter Score");
@@ -615,12 +649,12 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 			return sPanel;
 	}
 	
-	public JTextArea reportPane(ParentCompetitorList popUpList, String sortkey)
 	/** reportPane
 	 * Creates the body of the sorted report for the Competitor Sorter
 	 * * @param ParentCompetitorList popUpList, String sortkey
 	 * These indicate the list of members we are working with and the key to sort on.
 	 */
+	public JTextArea reportPane(ParentCompetitorList popUpList, String sortkey)
 	{
 		String report = "";
 		switch (popUpSport)
@@ -643,13 +677,13 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		return panel;
 	}
 	
-	public JPanel northPanel()
 	/** northPanel()
 	 * Creates the radio buttons header, with 2 common buttons and
 	 * a mix of others which are sport dependent.
 	 * @param Takes no parameters, but actively uses local/private
 	 * instance variables of popUpsport and popUpSortKey to customise output
 	 */
+	public JPanel northPanel()
 	{
 	JPanel panelN = new JPanel();
 	panelN.setLayout(new FlowLayout());
@@ -750,16 +784,13 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	return panelN;
 	}
 	
-	public void buildOutGUIs(String popUpSortKey, String popUpSport)
 	/** buildOutGUIs
 	 * pCalls CompetitorListGUI2 to create pop up competitor sorter
 	 * @param String popUpSport, popUpSortKey 
 	 * 	 
 	 */
-	{
-		{
-			CompetitorListGUI2(competitorList, popUpSport, popUpSortKey );
-		}
-	}	
+	public void buildOutGUIs(String popUpSortKey, String popUpSport)
+	{	CompetitorListGUI2(competitorList, popUpSport, popUpSortKey );	}
+	
 }
 
