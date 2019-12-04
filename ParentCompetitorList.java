@@ -6,21 +6,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
-
-
+/**Class of ParentCompetitorList
+ *reads in file, writes to file, has getter methods
+ */
 public class ParentCompetitorList {
   protected ArrayList<ParentCompetitor> competitorList; 
 
+  /**Constructor of ParentCompetitorList
+   * creates an array list of ParentCompetitors
+   */
  public ParentCompetitorList() {
 	 competitorList = new ArrayList<ParentCompetitor> ();
  }
-
+ 
+ /**getCompetitorList
+  * @return list of a competitors
+  */
  public ArrayList<ParentCompetitor> getCompetitorList(){
 	 return competitorList;
  }
  
+ /**findShortDetails
+  * generate short details of competitor in the list
+  * @param id id of the competitor
+  * @return short details of the competitor
+  */
 public String findShortDetails(int id)
 	{
 	String report = "";
@@ -36,6 +46,11 @@ public String findShortDetails(int id)
 		return report;
 	}	
 
+/** findFullDetails
+ * generate full details of competitor in the list
+ * @param id id of the competitor
+ * @return full details of the competitor
+ */
 public String findFullDetails(int id)
 {
 String report = "";
@@ -50,6 +65,11 @@ if (report.equals("")) {
 	return report;
 }
 
+/**setScoreArray
+ * alter the score array of a competitor
+ * @param sc score array of a competitor
+ * @param id id of the competitor
+ */ 
 public void setScoreArray(int [] sc, int id)
 { 
 	for (ParentCompetitor c : competitorList ){
@@ -59,6 +79,11 @@ public void setScoreArray(int [] sc, int id)
 	}
 }
 
+/**getOverallScore
+ * generate the overall score of the competitor
+ * @param id id of the competitor
+ * @return overall score of the competitor
+ */
 public double getOverallScore( int id)
 { 
 	
@@ -71,6 +96,10 @@ public double getOverallScore( int id)
 	return report;
 }
 
+/**readFile
+ * reads an information from the input file
+ * @param filename name of the file
+ */
 public void readFile(String filename){
 	 try{
 	  File f = new File(filename);
@@ -88,6 +117,11 @@ public void readFile(String filename){
 	 }
 	}
 
+/**add
+ * adds a competitor to the competitor list
+ * @param c competitor
+ * @return check if competitor is in the list
+ */
 public boolean add(ParentCompetitor c){
  int num = c.getId();
  ParentCompetitor inList = this.findByNum(num);
@@ -98,6 +132,11 @@ public boolean add(ParentCompetitor c){
  return false;
 }
 
+/**findByNum
+ * finds a competitor by its ID number
+ * @param num competitors ID
+ * @return returns a competitor by the number entered
+ */
 public ParentCompetitor findByNum(int num){
  for (ParentCompetitor c : competitorList){
   if (c.getId() == (num)){
@@ -107,6 +146,12 @@ public ParentCompetitor findByNum(int num){
  return null;
 }
 
+/**writeToFile
+ * writes the information to a file
+ * @param filename name of the file the information will be written to
+ * @param report name of the String that will be written
+ * @param highestScore name of the String that will be written
+ */
 public  void writeToFile(String filename, String report, String highestScore) {  
 		 FileWriter fw;
 		 try {
@@ -130,6 +175,10 @@ public  void writeToFile(String filename, String report, String highestScore) {
 		 }
 	}
 
+/**processLine
+ * reads in information from the file by processing line by line
+ * @param line the line that is currently being processed
+ */
 private void processLine(String line) {
  
 	  String parts [] = line.split(",");	
@@ -284,6 +333,10 @@ private void processLine(String line) {
 		}
 	 }
 
+/**getallMembers
+ * generates the short details of all competitors in the list
+ * @return short details of all competitors in the list
+ */
 public String getallMembers(){
 	String report = "The short details of the competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
@@ -293,6 +346,10 @@ public String getallMembers(){
 	return report;
 }
 
+/**getallBasketball
+ * generates short details of all Basketball competitors
+ * @return short details of Basketball competitors
+ */
 public String getallBasketball(){
 	String report = "The short details of the basketball competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
@@ -304,8 +361,11 @@ public String getallBasketball(){
 	return report;
 }
 
+/**getallDavidKendoka
+ * generates short details of DavidKendoka competitors
+ * @return short details of DavidKendoka competitors
+ */
 public String getallDavidKendoka(){
-	// Collections.sort( competitorList , Comparator );
 	String report = "The short details of the kendo competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
 		if(c instanceof DavidKendoka){
@@ -316,6 +376,10 @@ public String getallDavidKendoka(){
 	return report;
 }
 
+/**getallTableTennis
+ * generates short details of TableTennis competitors
+ * @return short details of TableTennis competitors
+ */
 public String getallTableTennis(){
 	String report = "The short details of the table-tennis competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
@@ -327,6 +391,10 @@ public String getallTableTennis(){
 	return report;
 }
 
+/**getallVolleyball
+ * generates short details of Volleyball competitors
+ * @return short details of Volleyball competitors
+ */
 public String getallVolleyball(){
 	String report = "The short details of the volleyball competitors is as follows:\n";
 	for (ParentCompetitor c: competitorList) {
@@ -338,6 +406,10 @@ public String getallVolleyball(){
 	return report;
 }
 
+/**getHighestScore
+ * finds the highest overall score of all competitors
+ * @return the highest overall score from competitor list
+ */
 public String getHighestScore(){
 	double highestScore=-999;
 	int count = 0;
@@ -366,6 +438,10 @@ public String getHighestScore(){
 	return scoreReport;
 }
 
+/**getallBasketballScoreReport
+ * finds the basketball competitor with a highest score
+ * @return the name and the score of a basketball competitor with the highest overall score
+ */
 public String getallBasketballScoreReport(){
 	double highestScore=0;
 	int count = 0;
@@ -398,6 +474,10 @@ public String getallBasketballScoreReport(){
 	return scoreReport;
 }
 
+/**getallDavidKendokaScoreReport
+ *finds the DavidKendoka competitor with a highest score
+ * @return the name and the score of a DavidKendoka competitor with the highest overall score
+ */
 public String getallDavidKendokaScoreReport()
 {
 	double highestScore=-99;
@@ -431,6 +511,10 @@ public String getallDavidKendokaScoreReport()
 	return scoreReport;
 }
 
+/**getalltableTennisScoreReport
+ * finds the table tennis competitor with a highest score
+ * @return the name and the score of a table tennis competitor with the highest overall score
+ */
 public String getallTableTennisScoreReport(){
 	double highestScore=0;
 	int count = 0;
@@ -463,6 +547,10 @@ public String getallTableTennisScoreReport(){
 	return scoreReport;
 }
 
+/**getallVolleyballScoreReport
+ * finds the volleyball competitor with a highest score
+ * @return the name and the score of a volleyball competitor with the highest overall score
+ */
 public String getallVolleyballScoreReport(){
 	double highestScore=0;
 	int count = 0;
@@ -495,6 +583,10 @@ public String getallVolleyballScoreReport(){
 	return scoreReport;
 }
 
+/**getCompetitorCount
+ * counts the number of competitors
+ * @return the number of competitors in the list
+ */
 public int getCompetitorCount(){
 	int count = 0;
 	for (ParentCompetitor c: competitorList) {
@@ -503,6 +595,11 @@ public int getCompetitorCount(){
 	return count;	
 }
 
+/**getBasketballFullDetails
+ * generates full details of the basketball category players sorted in a different ways
+ * @param key the category by which the competitors re sorted
+ * @return sorted list of basketball competitors
+ */
 public String getBasketballFullDetails(String key) {
 	Sorter sortedList;
 	sortedList = new Sorter(competitorList);
@@ -529,6 +626,10 @@ public String getBasketballFullDetails(String key) {
 	return report;
 }
 
+/**getBasketballStats
+ * generates statistical reports of basketball players
+ * @return statistical report of baskeball players
+ */
 public String getBasketballStats() {
 	String statistics = "";
 	statistics += getBasketballFullDetails("ID");
@@ -541,6 +642,10 @@ public String getBasketballStats() {
 	return statistics; 
 }
 
+/**getSizeOfBasketball
+ * counts the number of competitors in a basketball category
+ * @return the number of competitors in a basketball category
+ */
 public  int getSizeOfBasketball() {
 	int count=0;
 	for (ParentCompetitor c:competitorList) {
@@ -551,6 +656,11 @@ public  int getSizeOfBasketball() {
 	return count;
 }
 
+/**getCountOfPeopleAtLevel
+ * counts the number of people at different basketball category levels
+ * @param level level of a competitor
+ * @return count of a competitors at each basketball level
+ */
 public int getCountOfPeopleAtLevel(String level) {
 	int countLevel = 0;
 	for (ParentCompetitor c:competitorList) {
@@ -562,6 +672,10 @@ public int getCountOfPeopleAtLevel(String level) {
 	return countLevel; 
 }
 
+/**getFrequencyOfScoresBasketball
+ * generates the score frequency report
+ * @return score frequency
+ */
 public String getFrequencyOfScoresBasketball() {
 	String report="";
 	int [] freqOfScores = new int [6];
@@ -594,6 +708,10 @@ public String getFrequencyOfScoresBasketball() {
 	 return report;
 }
 
+/**getKendoHighestScorer
+ * finds the competitor with a highest score in DavidKendoka
+ * @return competitor with the highest score in DavidKendoka
+ */
 private ParentCompetitor getKendoHighestScorer()
 {
 	ParentCompetitor highMember = competitorList.get(0);
@@ -612,7 +730,11 @@ private ParentCompetitor getKendoHighestScorer()
 	}
 	return highMember;							// send back the highest scoring member
 }
-	
+
+/**getKendoLowestScorer
+ * finds the competitor with a lowest score in DavidKendoka
+ * @return competitor with the lowest score in DavidKendoka
+ */
 private ParentCompetitor getKendoLowestScorer()
 {
 	ParentCompetitor lowMember = competitorList.get(0);
@@ -633,6 +755,11 @@ private ParentCompetitor getKendoLowestScorer()
 	return lowMember;							// send back the lowest scoring member
 }
 
+/**getFullKendoDetails
+ * generates full details of a DavidKendoka competitor
+ * @param a competitor
+ * @return full details of a DavidKendoka competitor
+ */
 public String getFullKendoDetails(ParentCompetitor a)
 {
 	String fullDetails = "";
@@ -655,6 +782,10 @@ public String getFullKendoDetails(ParentCompetitor a)
 	return fullDetails;					
 }
 
+/**etKendoStatistics
+ *  generates the statistical report of DavidKendoka competitors
+ * @return statistical report of DavidKendoka competitors
+ */
 public String getKendoStatistics()
 {
 	String Sreport = getDavidKendokaFullDetails("ID");
@@ -669,6 +800,10 @@ public String getKendoStatistics()
 	return Sreport;
 }
 
+/**buildScoreFrequency
+ * counts the frequency of scores awarded to DavidKendoka competitors
+ * @return score frequency of DavidKendoka competitors
+ */
 private String buildScoreFrequency()
 {
 	ParentCompetitor winner = getKendoHighestScorer();
@@ -770,7 +905,10 @@ private String buildScoreFrequency()
 	return frequencyTable ;
 }
 
-	
+/**buildAvgScoresByDan
+ * 	calculates the average scores of DavidKendoka competitors by dan grade
+ * @return average score of a dan grade
+ */
  private String buildAvgScoresByDan()
 {
 	// create a two-dimensional array of size [8][2]
@@ -871,6 +1009,12 @@ private String buildScoreFrequency()
 		
 }
 
+ /**getDavidKendokaFullDetails
+  * generates full details for DavidKendoka competitors
+  * and sorts them according to different categories
+  * @param key category to sort by
+  * @return sorted list of DavidKendoka competitors
+  */
 public String getDavidKendokaFullDetails(String key)
 {	
 	Sorter sortedList;
@@ -939,6 +1083,11 @@ public String getDavidKendokaFullDetails(String key)
 	return report;
 }
 
+/**getTableTennisFullDetails
+ * generates a list of TableTennis competitors and sorts them according different categories
+ * @param key category to sort by
+ * @return sorted list of TableTennis competitors
+ */
 public String getTableTennisFullDetails(String key){	
 	Sorter sortedList;
 	sortedList = new Sorter(competitorList);
@@ -972,6 +1121,10 @@ public String getTableTennisFullDetails(String key){
 	 return report;  
 }
 
+/**getTableTennisStatistics
+ * generates a statistical report of TableTennis competitors
+ * @return statistical report of TableTennis competitors
+ */
 public String getTableTennisStatistics(){
 	 String report = "\nSTATISTICS\n";
 	 double avg = 0;
@@ -1041,6 +1194,11 @@ public String getTableTennisStatistics(){
 	 return report;
 	}
 
+/**getTableTennisStat
+ * generates a report consisting of full detail of TableTennis competitors
+ * and statistical information of the TableTennis category
+ * @return full details of TableTennis competitors and TableTennis statistical report
+ */
 	public String getTableTennisStat(){
 		String report = "";
 		report += getTableTennisFullDetails("ID");
@@ -1048,6 +1206,12 @@ public String getTableTennisStatistics(){
 		return report; 	
 	}
 
+/**getVolleyballFullDetails
+ * generates a list of Volleyball competitors
+ * and allows to sort it by different categories
+ * @param key category by which the list should be sorted
+ * @return sorted list of Volleyball competitors
+ */
 public String getVolleyballFullDetails(String key)
 {
 Sorter sortedList;
@@ -1075,6 +1239,10 @@ for (ParentCompetitor c: sortedCompetitors) {
 return report;
 }
 
+/**etHighestOverallScoreVolleyball
+ * finds the competitor with the highest overall core in Volleyball category
+ * @return competitor with the highest overall score in Volleyball category
+ */
 public String getHighestOverallScoreVolleyball() {
 	double maxOverallScore = 0;
 	String winner="";
@@ -1090,6 +1258,11 @@ public String getHighestOverallScoreVolleyball() {
 	return "The competitor with the highest score is " + winner + " with an overall score of " + maxOverallScore;
 }
 
+/**getLowestOverallScoreVolleyball
+ * finds the competitor with the lowest overall core in Volleyball category
+ * @return competitor with the lowest overall score in Volleyball category
+ * @return
+ */
 public String getLowestOverallScoreVolleyball() {
 	String loser = "";
 ;	double minOverallScore = 5;
@@ -1105,6 +1278,10 @@ public String getLowestOverallScoreVolleyball() {
 	return "The competitor with the lowest score is " + loser + " with an overall score of " + minOverallScore;
 }
 
+/**getScoreFrequencyReportVolleyball
+ * generates the frequency report of volleyball scores
+ * @return the frequency report of volleyball scores
+ */
 public String getScoreFrequencyReportVolleyball() {
 	int [] freqScores = new int [5];
 	for (ParentCompetitor c : competitorList) {
@@ -1130,7 +1307,11 @@ public String getScoreFrequencyReportVolleyball() {
 		}
 	return report2;
 }
-	
+
+/**getTotalCompetitorsVolleyball
+ * counts how many competitors are in the Volleyball category
+ * @return the number of competitors in Volleyball category
+ */
 public String getTotalCompetitorsVolleyball(){
 	int count=0;
 	String report1 = "";
@@ -1143,6 +1324,13 @@ public String getTotalCompetitorsVolleyball(){
 	return report1;
 }
 
+/**getVolleyballStat
+ * generates a statistical report of volleyball category
+ * including total number of competitors, score frequency
+ *  as well as competitor with the highest overall score
+ *  and lowest overall score
+ * @return statistical report of Volleyball category
+ */
 public String getVolleyballStat(){
 	String report = "";
 	report += getVolleyballFullDetails("ID");
