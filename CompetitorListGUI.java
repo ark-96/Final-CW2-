@@ -5,7 +5,13 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CompetitorListGUI extends JFrame implements ActionListener {
+public class CompetitorListGUI extends JFrame implements ActionListener 
+/** Class of CompetitorList GUI
+ * provides constructors to build GUIS, manage ActionPerformed and related functionality.
+ * @param 
+ * 	 
+ */
+{
 	ParentCompetitorList competitorList;
 	JFrame mainGUI;
 	JFrame popUpGUI;
@@ -499,6 +505,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	}
 	
 	private void killPopUp() 
+	/** killPopUp()
+	 * Method to hide unused GUI from display
+	 * @param no parameters 
+	 * 	 
+	 */
 	{
 		for (int i=0; i<pops.size(); ++i)
 		{
@@ -508,6 +519,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	}
 	
 	public String about()
+	/** about()
+	 * Method to provide information about application
+	 * @param no parameters 
+	 * 	 
+	 */
 	{
 		String aboutJADA = "";
 		aboutJADA += "\n";
@@ -524,6 +540,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	}
 
 	public String help()
+	/** help()
+	 * Method to provide help information
+	 * @param no parameters 
+	 * 	 
+	 */
 	{
 		String help = "";
 		help += "\n";
@@ -706,6 +727,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	}
 	
 	public void buildOutGUIs(String popUpSortKey, String popUpSport)
+	/** buildOutGUIs
+	 * pCalls CompetitorListGUI2 to create pop up competitor sorter
+	 * @param String popUpSport, popUpSortKey 
+	 * 	 
+	 */
 	{
 		{
 			CompetitorListGUI2(competitorList, popUpSport, popUpSortKey );
