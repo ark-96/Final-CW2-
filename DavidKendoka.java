@@ -4,9 +4,13 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 
-
 public class DavidKendoka extends ParentCompetitor
-	{
+/** Class of DavidKendoka
+ * provides data structure to hold Kendoka members and several get & set methods
+ * @param 
+ * 	 
+ */
+{
 	// now build main data structure
 	// Declare variables
 	Integer memberShipNumber;
@@ -27,6 +31,11 @@ public class DavidKendoka extends ParentCompetitor
 					String l,
 					int [] s ) 
 		{
+		/** Constructor of DavidKendoka
+		 * builds a Kendoka member 
+		 * @param 
+		 * 	 
+		 */
 		super (a, i, n, l, s);
 		memberShipNumber = i;
 		individual = n;
@@ -59,24 +68,43 @@ public class DavidKendoka extends ParentCompetitor
 		
 		
 		public int getAge()
+		/** Calculates 'Age'
+		 * parameterless, returns the Age of the object using Period.between LocalDate.
+		 */
 			{return Period.between( dateOfBirth , LocalDate.now() ).getYears();}
 		
 		
 		public String getIdAsString() 
+		/** Returns objects ID as a string
+		 */
 			{ return String.valueOf(memberShipNumber) ; }
 	
 		public int getIdAsInt()
+		/** Returns Membership Number (ID)
+		 * parameterless. 
+		 */
 			{ return memberShipNumber ;}
 		
-		public int getDanGrade(){
+		public int getDanGrade()
+		/** Returns DanGrade of object
+		 * parameterless. 
+		 */
+		{
 			return danGrade;
 		}
 		
-		public int [] getLast5Scores(){
+		public int [] getLast5Scores()
+		/** returns an array of last5Scores
+		 * parameterless. 
+		 */
+		{
 			return last5Scores;
 		}
 		
 		public String getFullDetails()
+		/** Returns a string of Full Details
+		 * @param parameterless
+		 */
 		{
 			String scores = "";
 			for (int s = 0 ; s <=4 ; s++)
@@ -94,12 +122,21 @@ public class DavidKendoka extends ParentCompetitor
 		}
 					
 	public int compareDan(DavidKendoka a , DavidKendoka b)
+	/** Compares two Kendokas Dan grades, used to sort by grade
+	 * @param a,b both DavidKendokas
+	 */
 	{	return Integer.compare(a.getDanGrade(), b.getDanGrade());	}	
 		
 	public int compareAge(DavidKendoka a , DavidKendoka b)
+	/** Compares two Kendokas Ages, used to sort by Age
+	 * @param a,b both DavidKendokas
+	 */
 	{	return Integer.compare(a.getAge() , b.getAge() );	}
 	
 	public int compareScore(DavidKendoka a , DavidKendoka b)
+	/** Compares two Kendokas Overall Scores, used to sort by Score
+	 * @param a,b both DavidKendokas
+	 */
 	{	return Double.compare( a.getOverallScore() , b.getOverallScore() );	}
 		
 }
