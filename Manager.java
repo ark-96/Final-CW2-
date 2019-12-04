@@ -25,7 +25,6 @@ public class Manager{
 	
 	public void showGUI(){
 		CompetitorListGUI gui= new CompetitorListGUI(allMembers);
-		System.out.println("ended");
 	 }
 	
 }

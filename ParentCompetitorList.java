@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+
+
+
 public class ParentCompetitorList {
   protected ArrayList<ParentCompetitor> competitorList; 
 
@@ -577,10 +580,16 @@ public String getFrequencyOfScoresBasketball() {
 	 }
 	 report+= "\n";
 	 report +="The following individual scores were awarded:";
-	 report +="\nScore:  0 1 2 3 4 5";
+	 report +="\nScore:      0  1  2  3  4  5";
 	 report +="\nFrequency:  ";
 	 for(int scoreIndex = 0; scoreIndex < freqOfScores.length; scoreIndex++){
-	  report += freqOfScores[scoreIndex] + " " ;
+	  report += freqOfScores[scoreIndex];
+	  if(String.valueOf(freqOfScores[scoreIndex]).length() == 1){
+		  report += "  ";
+	  }
+	  else{
+		  report += " ";
+	  }
 }
 	 return report;
 }
@@ -963,6 +972,82 @@ public String getTableTennisFullDetails(String key){
 	 return report;  
 }
 
+public String getTableTennisStatistics(){
+	 String report = "\nSTATISTICS\n";
+	 double avg = 0;
+	 int count = 0;
+	 for(ParentCompetitor c : competitorList){
+		 if (c instanceof TableTennis){
+		 avg += c.getOverallScore();
+		 count++;
+		 }
+	 }	 
+	 report += "\nThere are " + String.format("%s", count) + " competitors." ;
+	 report += "\nThe average score scored by the competitors is ";
+	 report += String.format("%.3s", avg/count);
+	 report += ".";
+	 String maxCompName = "";
+	 double maxScore = 0;
+	 for (ParentCompetitor c : competitorList) { 
+		 if (c instanceof TableTennis){
+		 double sc = c.getOverallScore();
+		 if(sc> maxScore) {
+			 maxScore= sc;
+			 maxCompName=c.getName().getFullName();
+	 		}
+		 }
+	 	}	 
+	 String minCompName = "";
+	 double minScore = 5;
+	 for (ParentCompetitor c : competitorList) {
+		 if (c instanceof TableTennis){
+		 double sc = c.getOverallScore();
+		 if(sc<minScore) {
+			 minScore= sc;
+			 minCompName=c.getName().getFullName();
+		 }
+	 }
+	 } 
+	 report += "\nThe competitor with the highest score is " + maxCompName + " with an overall score of " + String.format("%.3s", maxScore) + ".";
+	 report += "\nThe competitor with the lowest score is " + minCompName + " with an overall score of " + String.format("%.3s", minScore) + ".";	   
+	 int [] freqOfScores = new int [6];
+	 for(ParentCompetitor c : competitorList){
+		 if (c instanceof TableTennis){
+	  String scoreArray = c.getScoreString();
+	  scoreArray.replaceAll(" ","");
+	  //report +="\n" + scoreArray;
+	  for (int s = 0; s < scoreArray.length() ; s++){
+	   String sc=scoreArray.substring(s, s+1);
+	    if (s%2==0){
+	     int sco=Integer.valueOf(sc);
+	     freqOfScores[sco]++;
+	    }
+	   } 
+		 }
+	  }
+	 report+= "\n";
+	 report +="The following individual scores were awarded:";
+	 report +="\nScore:      0  1  2  3  4  5";
+	 report +="\nFrequency:  ";
+	 for(int scoreIndex = 0; scoreIndex < freqOfScores.length; scoreIndex++){
+	  report += freqOfScores[scoreIndex] ;
+	  if(String.valueOf(freqOfScores[scoreIndex]).length() == 1){
+		  report += "  ";
+	  }
+	  else{
+		  report += " ";
+	  }
+	  }
+	 return report;
+	}
+
+	public String getTableTennisStat(){
+		String report = "";
+		report += getTableTennisFullDetails("ID");
+		report += getTableTennisStatistics();		
+		return report; 	
+	}
+
 public String getVolleyballFullDetails(String key)
 {
 Sorter sortedList;
@@ -988,6 +1073,84 @@ for (ParentCompetitor c: sortedCompetitors) {
 	}
 }
 return report;
+}
+
+public String getHighestOverallScoreVolleyball() {
+	double maxOverallScore = 0;
+	String winner="";
+	for (ParentCompetitor c : competitorList) {
+		 if (c instanceof Volleyball){
+		double mxos = c.getOverallScore();
+		if (mxos> maxOverallScore) {
+			maxOverallScore= mxos;
+			winner=c.getName().getFullName();
+		}
+		 }
+	}	
+	return "The competitor with the highest score is " + winner + " with an overall score of " + maxOverallScore;
+}
+
+public String getLowestOverallScoreVolleyball() {
+	String loser = "";
+;	double minOverallScore = 5;
+	for (ParentCompetitor c : competitorList) {
+		 if (c instanceof Volleyball){
+		double mnos = c.getOverallScore();
+		if (mnos < minOverallScore) {
+			minOverallScore = mnos;
+			loser= c.getName().getFullName();
+		}
+		 }
+		 }
+	return "The competitor with the lowest score is " + loser + " with an overall score of " + minOverallScore;
+}
+
+public String getScoreFrequencyReportVolleyball() {
+	int [] freqScores = new int [5];
+	for (ParentCompetitor c : competitorList) {
+		 if (c instanceof Volleyball){
+		for(int i = 0; i < c.getScoreArray().length-1; i++){
+			if (c.getScoreArray()[i] == 1) {
+				freqScores[0]++;
+			} else if (c.getScoreArray()[i]==2) {
+				freqScores[1]++;
+			} else if (c.getScoreArray()[i]==3){
+				freqScores[2]++;
+			} else if (c.getScoreArray()[i]==4){
+				freqScores[3]++;
+			}else if (c.getScoreArray()[i]==5){
+				freqScores[4]++;
+			}
+		}
+		}
+	}
+	String report2 = "FREQUENCY OF SCORES\n";
+	for (int i = 0; i < freqScores.length; i++) {
+		report2 += "Score " + (i+1) + " : "  + freqScores[i] + "\n";
+		}
+	return report2;
+}
+	
+public String getTotalCompetitorsVolleyball(){
+	int count=0;
+	String report1 = "";
+	for (ParentCompetitor c:competitorList) {
+		 if (c instanceof Volleyball){
+			 count++;
+		 }
+	}
+	report1 =  Integer.toString(count);
+	return report1;
+}
+
+public String getVolleyballStat(){
+	String report = "";
+	report += getVolleyballFullDetails("ID");
+	report += "\nThere are a total of " + getTotalCompetitorsVolleyball() + " volleyball players.\n";
+	report += "\n" + getScoreFrequencyReportVolleyball();
+	report += "\n" + getHighestOverallScoreVolleyball();
+	report += "\n" + getLowestOverallScoreVolleyball();
+	return report; 	
 }
 
 }

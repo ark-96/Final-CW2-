@@ -320,9 +320,9 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 		else if(action.equals("Full report k"))
 			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getKendoStatistics()) );	}
 		else if(action.equals("Full report t"))
-			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisFullDetails("ID")) );	}
+			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisStat()) );	}
 		else if(action.equals("Full report v"))
-			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballFullDetails("ID")) );	}
+			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballStat()) );	}
 		else if(action.equals("Short details b"))
 			{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallBasketball());	}
 		else if(action.equals("Short details k"))
