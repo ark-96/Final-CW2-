@@ -616,6 +616,11 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	}
 	
 	public JTextArea reportPane(ParentCompetitorList popUpList, String sortkey)
+	/** reportPane
+	 * Creates the body of the sorted report for the Competitor Sorter
+	 * * @param ParentCompetitorList popUpList, String sortkey
+	 * These indicate the list of members we are working with and the key to sort on.
+	 */
 	{
 		String report = "";
 		switch (popUpSport)
