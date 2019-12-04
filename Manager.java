@@ -5,9 +5,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Manager Class
+ * sets up a ParentCompetitorList then delegates to a GUI
+ *
+ */
 public class Manager{ 
 
 	protected ParentCompetitorList allMembers;
+	
+	/**
+	 * Manager method
+	 */
 	public Manager(){
 		 allMembers = new ParentCompetitorList();
 		 }
@@ -22,7 +31,9 @@ public class Manager{
 //		String highestScore = allMembers.getHighestScore();
 //		allMembers.writeToFile("Output.txt", report, highestScore);
 //		}
-	
+	/**
+	 * showGUI()
+	 */
 	public void showGUI(){
 		CompetitorListGUI gui= new CompetitorListGUI(allMembers);
 	 }

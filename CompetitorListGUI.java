@@ -47,7 +47,6 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	/** KillMe()
 	 * Makes the associated object not visible.
 	 * Perhaps KillMe is an overstatement. 
-	 * 
 	 * @param No parameter
 	 */	
 	public void KillMe()
@@ -92,7 +91,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	}
 	
 	/** buildMenu
-	 *  creates the menubar with the necessary menu items and adds action listeners
+	 * creates the menubar with the necessary menu items and adds action listeners
 	 * @return the menubar with all menu items
 	 */
 	public JMenuBar buildMenu()
@@ -167,6 +166,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
  	/**buildSport
  	 * builds the sport panel with the necessary buttons for the specified competitor
  	 * based on the value of the sport parameter 
+ 	 * Performs actions common to all 4 button stacks
  	 * @param sportPanel the JPanel with the buttons
  	 * @param col the background colour of the panel
  	 * @param sport the sport for which the panel is being designed
@@ -589,8 +589,8 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 		return help;
 	}
 	
-	/**
-	 * 
+	/** makeReportGUI
+	 * puts a text string report into a JTextArea 
 	 * @param report
 	 * @return
 	 */
@@ -651,7 +651,8 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	
 	/** reportPane
 	 * Creates the body of the sorted report for the Competitor Sorter
-	 * * @param ParentCompetitorList popUpList, String sortkey
+	 * @param ParentCompetitorList popUpList, String sortkey
+	 * @return panel - being a panel populated with a sport specific sorted report
 	 * These indicate the list of members we are working with and the key to sort on.
 	 */
 	public JTextArea reportPane(ParentCompetitorList popUpList, String sortkey)
@@ -681,6 +682,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	 * Creates the radio buttons header, with 2 common buttons and
 	 * a mix of others which are sport dependent.
 	 * @param Takes no parameters, but actively uses local/private
+	 * @return panelN - a panel consisting of sport specific sort radio buttons
 	 * instance variables of popUpsport and popUpSortKey to customise output
 	 */
 	public JPanel northPanel()

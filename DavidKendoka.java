@@ -4,10 +4,11 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 
-/** Class of DavidKendoka
+
+/**Class of DavidKendoka
  * provides data structure to hold Kendoka members and several get & set methods
- * @param 
- * 	 
+ * @author dks4
+ *
  */
 public class DavidKendoka extends ParentCompetitor
 {
@@ -47,11 +48,10 @@ public class DavidKendoka extends ParentCompetitor
 		}
 		
 
-		/** Calculates 'Overall Score'
+	 	 /** Calculates 'Overall Score'
 		 * Takes best 4 of the 5 recent scores, deducts dan grade as a handicap.
-		 * @param queryIndividual the Kendoka whose score we want to interrogate
-		 * returns the Overall Score.	 
-		 */
+		 * @return  the Overall Score.
+		 * */	 
 		public double getOverallScore()
 		{
 			int[] temp = getScoreArray();
@@ -68,25 +68,29 @@ public class DavidKendoka extends ParentCompetitor
 		
 		
 		/** Calculates 'Age'
-		 * parameterless, returns the Age of the object using Period.between LocalDate.
+		 * parameterless, 
+		 * @return Age of the object using Period.between LocalDate.
 		 */
 		public int getAge()
 		{	return Period.between( dateOfBirth , LocalDate.now() ).getYears();	}
 		
 		
 		/** Returns objects ID as a string
+		 * @return ID as a string
 		 */
 		public String getIdAsString() 
 		{ return String.valueOf(memberShipNumber) ; }
 	
 		/** Returns Membership Number (ID)
-		 * parameterless. 
+		 * parameterless.
+		 * @return ID 
 		 */
 		public int getIdAsInt()
 			{ return memberShipNumber ;}
 		
 		/** Returns DanGrade of object
 		 * parameterless. 
+		 * @return dandGrade
 		 */
 		public int getDanGrade()
 		{
@@ -94,7 +98,8 @@ public class DavidKendoka extends ParentCompetitor
 		}
 		
 		/** returns an array of last5Scores
-		 * parameterless. 
+		 * parameterless.
+		 * @return last5Scores 
 		 */
 		public int [] getLast5Scores()
 		{
@@ -102,7 +107,8 @@ public class DavidKendoka extends ParentCompetitor
 		}
 		
 		/** Returns a string of Full Details
-		 * @param parameterless
+		 * @param 
+		 * @return fullDetails
 		 */
 		public String getFullDetails()
 		{
@@ -123,18 +129,21 @@ public class DavidKendoka extends ParentCompetitor
 					
 	/** Compares two Kendokas Dan grades, used to sort by grade
 	 * @param a,b both DavidKendokas
+	 * @return sort indicator
 	 */
 	public int compareDan(DavidKendoka a , DavidKendoka b)
 	{	return Integer.compare(a.getDanGrade(), b.getDanGrade());	}	
 		
 	/** Compares two Kendokas Ages, used to sort by Age
 	 * @param a,b both DavidKendokas
+	 * @return sort indicator
 	 */
 	public int compareAge(DavidKendoka a , DavidKendoka b)
 	{	return Integer.compare(a.getAge() , b.getAge() );	}
 	
 	/** Compares two Kendokas Overall Scores, used to sort by Score
 	 * @param a,b both DavidKendokas
+	 * @return sort indicator
 	 */
 	public int compareScore(DavidKendoka a , DavidKendoka b)
 	{	return Double.compare( a.getOverallScore() , b.getOverallScore() );	}

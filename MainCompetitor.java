@@ -1,5 +1,14 @@
+/**
+ * Main Class contains the main method
+ *  *
+ */
 public class MainCompetitor {
 
+	
+	/** Main
+	 * This is the main method
+	 * @param args
+	 */
 	public static void main (String[] args) 
 	{
 		Manager km = new Manager();
