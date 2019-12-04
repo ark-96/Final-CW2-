@@ -255,7 +255,7 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 	
 		String action = e.getActionCommand();
 		
-		if ((competitorList.getCompetitorCount() == 0) & !( (action.equals("Read File") || action.equals("Close") ) || ((action.equals("About")) || (action.equals("Help")))))	
+		if ((competitorList.getCompetitorCount() == 0) & !( (action.equals("Read File")) || (action.equals("Close") ) || (action.equals("About")) || (action.equals("Help")) || (action.equals("Exit") ) ))	
 		{ JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." ); }
 		else
 			{	
@@ -264,221 +264,237 @@ public class CompetitorListGUI extends JFrame implements ActionListener {
 				{
 					JOptionPane.showMessageDialog(null, about());
 				}
-			if (action.equals("Help"))
+			else if (action.equals("Help"))
 				{
 					JOptionPane.showMessageDialog(null, help());
 				}
-		
-		else if(action.equals("Read File"))
-		{
-			int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to read the file?", "Message", JOptionPane.YES_NO_OPTION );
-			if(result == JOptionPane.YES_OPTION) {
-				competitorList.readFile("ArkCompetitorInput.txt");
-				competitorList.readFile("Input File Davids Updated.dat");
-				competitorList.readFile("Volleyball_Input_data.txt");
-				competitorList.readFile("AgzCompetitors.txt");
+			else if (action.equals("Exit"))
+			{
+				System.exit(0);
 			}
-		}
-		else if(action.equals("Report Written to File"))
-		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
+			else if(action.equals("Read File"))
+			{
+				int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to read the file?", "Message", JOptionPane.YES_NO_OPTION );
+				if(result == JOptionPane.YES_OPTION) {
+					competitorList.readFile("ArkCompetitorInput.txt");
+					competitorList.readFile("Input File Davids Updated.dat");
+					competitorList.readFile("Volleyball_Input_data.txt");
+					competitorList.readFile("AgzCompetitors.txt");
+				}
 			}
-			else{
-			String report = competitorList.getallMembers();
-			String highestScore = competitorList.getHighestScore();
-			competitorList.writeToFile("Output.txt", report, highestScore);
-			JOptionPane.showMessageDialog(null, "Report has been written to the file 'Output.txt'");
-			}
-		}
-		else if(action.equals("Close"))
-		{
-			if(competitorList.getCompetitorCount() == 0){
-				JOptionPane.showMessageDialog(mainGUI, "The program is terminated.\nTo get the report written into the 'Output.txt' file load the input files using File->Read Input File." );
-			}
-			else{
+			else if(action.equals("Report Written to File"))
+			{
+				if(competitorList.getCompetitorCount() == 0){
+					JOptionPane.showMessageDialog(mainGUI, "Load the data form the file using File->Read Input File." );
+				}
+				else{
 				String report = competitorList.getallMembers();
 				String highestScore = competitorList.getHighestScore();
 				competitorList.writeToFile("Output.txt", report, highestScore);
-				JOptionPane.showMessageDialog(null, "The program is terminated and the report has been written to the file 'Output.txt'");
+				JOptionPane.showMessageDialog(null, "Report has been written to the file 'Output.txt'");
+				}
 			}
-			System.exit(0);
-			
-		}
-		else if(action.equals("Short details"))
-		{
-				JTextArea shortDetailstext = new JTextArea(competitorList.getallMembers());
-				JScrollPane shortDetails = new JScrollPane(shortDetailstext);
-				shortDetailstext.setLineWrap(true);
-				shortDetailstext.setWrapStyleWord(true);
-				shortDetailstext.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-				shortDetails.setPreferredSize(new Dimension(371,400));
-				JOptionPane.showMessageDialog(mainGUI,shortDetails, "Short details of all competitors",JOptionPane.PLAIN_MESSAGE);
-		}
-		else if(action.equals("Full report b"))
-			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getBasketballStats()) );	}
-		else if(action.equals("Full report k"))
-			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getKendoStatistics()) );	}
-		else if(action.equals("Full report t"))
-			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisStat()) );	}
-		else if(action.equals("Full report v"))
-			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballStat()) );	}
-		else if(action.equals("Short details b"))
-			{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallBasketball());	}
-		else if(action.equals("Short details k"))
-			{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails("score")) );}
-		else if(action.equals("Short details t"))
-			{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallTableTennis());	}
-		else if(action.equals("Short details v"))
-			{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallVolleyball());}
-
-		else if(action.equals("Write report b"))
-			{	JOptionPane.showMessageDialog(null,  competitorList.getallBasketballScoreReport());}
-		else if(action.equals("Write report k"))
-			{	JOptionPane.showMessageDialog(null,  competitorList.getallDavidKendokaScoreReport() );}
-		else if(action.equals("Write report t"))
-			{	JOptionPane.showMessageDialog(null,  competitorList.getallTableTennisScoreReport());	}
-		else if(action.equals("Write report v"))
-			{	JOptionPane.showMessageDialog(null,  competitorList.getallVolleyballScoreReport()); }
-
-		else if(action.equals("Best overall report"))
-			{	JOptionPane.showMessageDialog(null, competitorList.getHighestScore());
-			}
-		else if(action.equals("Basketball stats"))
-			{	JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());}
-		else if(action.equals("Options b"))
-		{
-			popUpSport = "Basketball";
-			popUpSortKey = "ID";  						// default option when entering Popup
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}
-		else if(action.equals("Options k"))
-		{
-			popUpSport = "Kendo";
-			popUpSortKey = "ID";  						// default option when entering Popup
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}
-		else if(action.equals("Options t"))
-		{
-			popUpSport = "Tabletennis";
-			popUpSortKey = "ID";  						// default option when entering Popup
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}
-		else if(action.equals("Options v"))
-		{
-			popUpSport = "Volleyball";
-			popUpSortKey = "ID";  						// default option when entering Popup
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}
-		else if (action.equals("Sort by Age"))
-		{
-			popUpSortKey = "age";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}
-		else if (action.equals("Sort by Dan"))
-		{
-			popUpSortKey = "dan";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}
-		else if (action.equals("Sort by Overall Score"))
-		{
-			popUpSortKey = "score";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}
-		else if (action.equals("Sort by ID"))
-		{
-			popUpSortKey = "ID";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}	
-		else if (action.equals("Sort by Name"))
-		{
-			popUpSortKey = "name";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}	
-		else if	(action.equals("Sort by Position"))
-		{
-			popUpSortKey = "position";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}		
-		else if	(action.equals("Sort by Nationality"))
-		{
-			popUpSortKey = "nationality";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}		
-		else if	(action.equals("Sort by Level"))
-		{
-			popUpSortKey = "level";
-			killPopUp();
-			buildOutGUIs(popUpSortKey, popUpSport);
-		}	
-		
-		else if (action.equals("Search"))
-		{
-//			try {
+			else if(action.equals("Close"))
+			{
+				if(competitorList.getCompetitorCount() == 0){
+					JOptionPane.showMessageDialog(mainGUI, "The program is terminated.\nTo get the report written into the 'Output.txt' file load the input files using File->Read Input File." );
+				}
+				else{
+					String report = competitorList.getallMembers();
+					String highestScore = competitorList.getHighestScore();
+					competitorList.writeToFile("Output.txt", report, highestScore);
+					JOptionPane.showMessageDialog(null, "The program is terminated and the report has been written to the file 'Output.txt'");
+				}
+				System.exit(0);
 				
-			//if(searchField.getText().length() >0) {
-				//member = Integer.parseInt(searchField.getText().trim());
-				CompetitorListGUI searchGUI= new CompetitorListGUI(competitorList, 1);
-				//searchGUI.getSearchPanel(member);
-				//searchID=member;
+			}
+			else if(action.equals("Short details"))
+			{
+					JTextArea shortDetailstext = new JTextArea(competitorList.getallMembers());
+					JScrollPane shortDetails = new JScrollPane(shortDetailstext);
+					shortDetailstext.setLineWrap(true);
+					shortDetailstext.setWrapStyleWord(true);
+					shortDetailstext.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+					shortDetails.setPreferredSize(new Dimension(371,400));
+					JOptionPane.showMessageDialog(mainGUI,shortDetails, "Short details of all competitors",JOptionPane.PLAIN_MESSAGE);
+			}
+			else if(action.equals("Full report b"))
+				{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getBasketballStats()) );	}
+			else if(action.equals("Full report k"))
+				{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getKendoStatistics()) );	}
+			else if(action.equals("Full report t"))
+				{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getTableTennisStat()) );	}
+			else if(action.equals("Full report v"))
+				{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getVolleyballStat()) );	}
+			else if(action.equals("Short details b"))
+				{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallBasketball());	}
+			else if(action.equals("Short details k"))
+				{	JOptionPane.showMessageDialog(null, makeReportGUI(competitorList.getDavidKendokaFullDetails("score")) );}
+			else if(action.equals("Short details t"))
+				{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallTableTennis());	}
+			else if(action.equals("Short details v"))
+				{	JOptionPane.showMessageDialog(mainGUI, competitorList.getallVolleyball());}
+	
+			else if(action.equals("Write report b"))
+				{	JOptionPane.showMessageDialog(null,  competitorList.getallBasketballScoreReport());}
+			else if(action.equals("Write report k"))
+				{	JOptionPane.showMessageDialog(null,  competitorList.getallDavidKendokaScoreReport() );}
+			else if(action.equals("Write report t"))
+				{	JOptionPane.showMessageDialog(null,  competitorList.getallTableTennisScoreReport());	}
+			else if(action.equals("Write report v"))
+				{	JOptionPane.showMessageDialog(null,  competitorList.getallVolleyballScoreReport()); }
+	
+			else if(action.equals("Best overall report"))
+				{	JOptionPane.showMessageDialog(null, competitorList.getHighestScore());
+				}
+			else if(action.equals("Basketball stats"))
+				{	JOptionPane.showMessageDialog(null, competitorList.getBasketballStats());}
+			else if(action.equals("Options b"))
+			{
+				popUpSport = "Basketball";
+				popUpSortKey = "ID";  						// default option when entering Popup
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}
+			else if(action.equals("Options k"))
+			{
+				popUpSport = "Kendo";
+				popUpSortKey = "ID";  						// default option when entering Popup
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}
+			else if(action.equals("Options t"))
+			{
+				popUpSport = "Tabletennis";
+				popUpSortKey = "ID";  						// default option when entering Popup
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}
+			else if(action.equals("Options v"))
+			{
+				popUpSport = "Volleyball";
+				popUpSortKey = "ID";  						// default option when entering Popup
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}
+			else if (action.equals("Sort by Age"))
+			{
+				popUpSortKey = "age";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}
+			else if (action.equals("Sort by Dan"))
+			{
+				popUpSortKey = "dan";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}
+			else if (action.equals("Sort by Overall Score"))
+			{
+				popUpSortKey = "score";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}
+			else if (action.equals("Sort by ID"))
+			{
+				popUpSortKey = "ID";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}	
+			else if (action.equals("Sort by Name"))
+			{
+				popUpSortKey = "name";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}	
+			else if	(action.equals("Sort by Position"))
+			{
+				popUpSortKey = "position";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}		
+			else if	(action.equals("Sort by Nationality"))
+			{
+				popUpSortKey = "nationality";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}		
+			else if	(action.equals("Sort by Level"))
+			{
+				popUpSortKey = "level";
+				killPopUp();
+				buildOutGUIs(popUpSortKey, popUpSport);
+			}	
 			
-				//JOptionPane.showMessageDialog(mainGUI, competitorList.findShortDetails(member));
-								
-//			else {
-//				JOptionPane.showMessageDialog(mainGUI, "Please enter valid membership number");
-//			}
-//		}
-//			catch(NumberFormatException ioe){
-//				JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number. Try again.");
-//			}
-		}
-		else if (action.equals("View Score full details"))
-		{
-			if(searchField.getText().length() >0) {
-				member = Integer.parseInt(searchField.getText().trim());
-				JOptionPane.showMessageDialog(null, competitorList.findFullDetails(member));
+			else if (action.equals("Search"))
+			{
+	//			
+					
+				//if(searchField.getText().length() >0) {
+					//member = Integer.parseInt(searchField.getText().trim());
+					CompetitorListGUI searchGUI= new CompetitorListGUI(competitorList, 1);
+					//searchGUI.getSearchPanel(member);
+					//searchID=member;
+				
+					//JOptionPane.showMessageDialog(mainGUI, competitorList.findShortDetails(member));
+									
+	//			else {
+	//				JOptionPane.showMessageDialog(mainGUI, "Please enter valid membership number");
+	//			}
+	//		}
+	//			catch(NumberFormatException ioe){
+	//				JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number. Try again.");
+	//			}
 			}
-			else{
-				JOptionPane.showMessageDialog(null, "Please enter valid id.");
+			else if (action.equals("View Score full details"))
+			{
+				if(searchField.getText().length() >0) {
+					member = Integer.parseInt(searchField.getText().trim());
+					JOptionPane.showMessageDialog(null, competitorList.findFullDetails(member));
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Please enter valid id.");
+				}
 			}
-		}
-		else if (action.equals("Alter Score")) 
-		{
-			if(searchField.getText().length() >0) {
-				member = Integer.parseInt(searchField.getText().trim());
-				if(alterScores.getText().length() >0) {
-						alter = alterScores.getText().trim();
-						int [] newScore= new int[alter.length()];
-						for(int i=0; i<alter.length(); i++){
-						newScore[i]=Integer.parseInt(alter.substring(i,i+1));
+			else if (action.equals("Alter Score")) 
+			{
+				try {
+					if(searchField.getText().length() >0 ) {
+						member = Integer.parseInt(searchField.getText().trim());
+						if(alterScores.getText().length() >0 & alterScores.getText().length() == 5) {
+								alter = alterScores.getText().trim();
+								int [] newScore= new int[alter.length()];
+								for(int i=0; i<alter.length(); i++){
+								newScore[i]=Integer.parseInt(alter.substring(i,i+1));
+							}
+							competitorList.setScoreArray(newScore, member);
+							JOptionPane.showMessageDialog(null, "The new overall score for the competitor number " + member + " is " + competitorList.getOverallScore(member));
+							String  report = "";
+							for(int scoreIndex = 0; scoreIndex < newScore.length; scoreIndex++)
+						 	{
+								 report += newScore[scoreIndex] + " " ;
+						 	}
+						 }
+						else{
+							JOptionPane.showMessageDialog(null, "Please enter exactly 5 digits in the alter score input field" );
+						}
 					}
-					competitorList.setScoreArray(newScore, member);
-					JOptionPane.showMessageDialog(null, "The new overall score for the competitor number " + member + " is " + competitorList.getOverallScore(member));
-					String  report = "";
-					for(int scoreIndex = 0; scoreIndex < newScore.length; scoreIndex++)
-				 	{
-						 report += newScore[scoreIndex] + " " ;
-				 	}
-				 }
+				}
+				catch(NumberFormatException ioe){
+					JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number. Try again.");
+				}
 			}
-		}
-		else if (action.equals("Search score"))
-		{
-			if(searchField.getText().length() >0) {
-				member = Integer.parseInt(searchField.getText().trim());
-				JOptionPane.showMessageDialog(mainGUI, competitorList.findShortDetails(member));
-			}
-			else{
-				JOptionPane.showMessageDialog(null, "Please enter valid id.");
-			}
-		}	
+			else if (action.equals("Search score"))
+			{
+				try {
+					if(searchField.getText().length() >0) {
+						member = Integer.parseInt(searchField.getText().trim());
+						JOptionPane.showMessageDialog(mainGUI, competitorList.findShortDetails(member));
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Please enter valid id.");
+					}
+				}
+				catch(NumberFormatException ioe){
+					JOptionPane.showMessageDialog(null, "Invalid entry: Please input valid number. Try again.");
+				}
+			}	
 		}
 	}
 	
