@@ -2,9 +2,8 @@ public class MainCompetitor {
 
 	public static void main (String[] args) 
 	{
-		// TODO Auto-generated method stub
 		Manager km = new Manager();
-		//km.run();
+		//km.run();					// This allows automatic reading of input file, commented out to demonstrate menu read/write option.
 		km.showGUI();
 	}
 

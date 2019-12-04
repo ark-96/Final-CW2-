@@ -158,5 +158,5 @@ abstract public class ParentCompetitor {
 	else
 		{return null;}
 	}
-	
+
 }

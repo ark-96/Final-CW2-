@@ -6,7 +6,7 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 	private String volleyballPosition;
 	
 	private int [] volleyballScore;
-	
+
 	//constructor of the competitor object
 	public Volleyball(String a, int i, Name n, String l, String vPos, int [] s){  
 		super(a, i, n, l, s);
@@ -16,20 +16,15 @@ public class Volleyball extends ParentCompetitor {   //not sure if changing this
 	
 	
 	public String getPosition() {return volleyballPosition;}
-	public int [] getScoreArray() {return volleyballScore;}
 	
 	public double getOverallScore() {
 		double total = 0;
-		for (int volleyballScoreIndex = 0; volleyballScoreIndex < volleyballScore.length; volleyballScoreIndex++) 
-			{ total +=volleyballScore[volleyballScoreIndex];}
-		double avg = (total/volleyballScore.length);
+		for (int volleyballScoreIndex = 0; volleyballScoreIndex < getScoreArray().length; volleyballScoreIndex++) 
+			{ total +=getScoreArray()[volleyballScoreIndex];			}
+		double avg = (total/getScoreArray().length);
+		
 		return (avg);
 	}
-	
-	public String getArraytoString(){
-		return Arrays.toString(volleyballScore);
-	}
-	
 	
 	//probably have to change this as it is calling the parent's instance variable?  need to look at David's name class if we are using his code
 	public String getFullDetails() { 

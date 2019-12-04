@@ -70,10 +70,8 @@ public class Name {
 	 shorterName += lastName;
 	 return shorterName;
 	 }
-	 
 
 	 public String getInitPeriodLast(){
 		 return firstName.charAt(0) + ". " + lastName; 		 
 	 }
-
 }

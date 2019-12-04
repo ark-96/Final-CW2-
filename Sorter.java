@@ -5,7 +5,6 @@ public class Sorter
 {
 		ArrayList<ParentCompetitor> competitor = new ArrayList<>();
 	
-	
 		public Sorter(ArrayList<ParentCompetitor> competitor)
 		{	this.competitor = competitor;	}
 		

@@ -1,4 +1,4 @@
-ppublic class Basketball extends ParentCompetitor {
+public class Basketball extends ParentCompetitor {
 	
 	private String country;
 

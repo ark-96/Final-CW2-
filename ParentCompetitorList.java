@@ -278,10 +278,8 @@ private void processLine(String line) {
       
       System.out.println("Could not process");
       System.exit(1);
-	}
-	  
-	  }
-
+		}
+	 }
 
 public String getallMembers(){
 	String report = "The short details of the competitors is as follows:\n";
@@ -722,7 +720,6 @@ private String buildScoreFrequency()
 		{
 		countToHalf += counts[index];
 		index ++ ;
-		//  System.out.println(index + " " + countToHalf + " " + cumCount + " " + index%2); - debugging
 		}
 	if ( index%2 == 1 )
 		{ frequencyTable += Integer.toString( index + low - 1) ; }
@@ -992,7 +989,5 @@ for (ParentCompetitor c: sortedCompetitors) {
 }
 return report;
 }
-
-
 
 }
