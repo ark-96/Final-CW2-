@@ -640,8 +640,10 @@ public class CompetitorListGUI extends JFrame implements ActionListener
 	
 	public JPanel northPanel()
 	/** northPanel()
-	 * Creates the radio buttons header, with 2 common buttons and a mix of others which are sport dependent.
-	 * @param Takes no parameters, but actively uses local/private instance variables of popUpsport and popUpSortKey
+	 * Creates the radio buttons header, with 2 common buttons and
+	 * a mix of others which are sport dependent.
+	 * @param Takes no parameters, but actively uses local/private
+	 * instance variables of popUpsport and popUpSortKey to customise output
 	 */
 	{
 	JPanel panelN = new JPanel();
