@@ -312,7 +312,7 @@ private void processLine(String line) {
 			//the scores are at the end of the line
 			int competitorScoreLength = parts.length - 5;
 			int []competitorScore = new int[competitorScoreLength];
-			//System.arraycopy(parts, 4, competitorScore, 0, competitorScoreLength);
+
 			for(int i = 0; i < competitorScore.length; i++) {
 				if (parts[5 +i].trim().isEmpty()) {
 					continue; 
@@ -829,7 +829,6 @@ private String buildScoreFrequency()
 		if (k instanceof DavidKendoka)
 		{
 			score = k.getOverallScore();
-			// System.out.println(range + " " + score + "index = " + ((int) (Math.round(score) - low )));
 			counts[ (int) (Math.round(score) - low ) ] ++ ;
 			totalScores += score ;
 			cumCount ++ ;
@@ -1027,7 +1026,6 @@ public String getDavidKendokaFullDetails(String key)
 	
 	sortedList = new Sorter(competitorList);
 	ArrayList<ParentCompetitor> sortedCompetitors = sortedList.sortByID();	// default
-	System.out.println(key);
 	switch(key)
 	{
 		case "name":
@@ -1168,7 +1166,6 @@ public String getTableTennisStatistics(){
 		 if (c instanceof TableTennis){
 	  String scoreArray = c.getScoreString();
 	  scoreArray.replaceAll(" ","");
-	  //report +="\n" + scoreArray;
 	  for (int s = 0; s < scoreArray.length() ; s++){
 	   String sc=scoreArray.substring(s, s+1);
 	    if (s%2==0){

@@ -20,7 +20,8 @@ public class Manager{
 	public Manager(){
 		 allMembers = new ParentCompetitorList();
 		 }
-	
+
+//  Can be used to 	
 //	public void run() { 
 //		allMembers.readFile("ArkCompetitorInput.txt");
 //		allMembers.readFile("Input File Davids Updated.dat");

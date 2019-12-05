@@ -88,19 +88,12 @@ public class DavidKendoka extends ParentCompetitor
 		 */
 		public String getIdAsString() 
 		{ return String.valueOf(memberShipNumber) ; }
-	
-		/** Returns Membership Number (ID)
-		 * parameterless.
-		 * @return ID 
-		 */
-		public int getIdAsInt()
-			{ return memberShipNumber ;}
 		
 		/** Returns DanGrade of object
 		 * parameterless. 
 		 * @return dandGrade
 		 */
-		public int getDanGrade()
+		public int getDanGrade() 
 		{
 			return danGrade;
 		}

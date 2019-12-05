@@ -102,7 +102,7 @@ abstract public class ParentCompetitor {
 	/** get age if it is a kendoka
 	 * @return age, if not 0
 	 */
-	public int getAge()
+	public int getAge()   
 	{
 		if (this instanceof DavidKendoka )
 		{return ((DavidKendoka) this).getAge();}
@@ -113,7 +113,7 @@ abstract public class ParentCompetitor {
 	/** gets Dan if it is a kendoka
 	 * @return dan, otherwise -1
 	 */
-	public int getDan()
+	public int getDan()   
 	{
 		if (this instanceof DavidKendoka )
 			{return ((DavidKendoka) this).getDanGrade();}
@@ -124,7 +124,7 @@ abstract public class ParentCompetitor {
 	/**get position if it's a volleyball player
 	 * @return volleyball position, otherwise null
 	 */
-	public String getP()
+	public String getP()    
 	{
 		if (this instanceof Volleyball ) {
 			return ((Volleyball) this).getPosition();
@@ -137,7 +137,7 @@ abstract public class ParentCompetitor {
 	/**get nationality if it's a table tennis player
 	 * @return nationality, otherwise null
 	 */
-	protected String getN() 
+	protected String getN()   
 	{
 		if (this instanceof TableTennis )
 		{
