@@ -25,7 +25,15 @@ public class DavidKendoka extends ParentCompetitor
 	// Constructor
 	/** Constructor of DavidKendoka
 		 * builds a Kendoka member 
-		 * @param 
+		 * @param a sport
+		 * @param i ID
+		 * @param n name
+		 * @param dob Date of Birth
+		 * @param dan dan grade
+		 * @param shogoAwarded  any shogo held
+		 * @param qualifiedCoach flags if they are a coach
+		 * @param l level 
+		 * @param s an array of scores
 		 * 	 
 		 */
 		public DavidKendoka(String a, Integer i , 
@@ -107,7 +115,7 @@ public class DavidKendoka extends ParentCompetitor
 		}
 		
 		/** Returns a string of Full Details
-		 * @param 
+		 * 
 		 * @return fullDetails
 		 */
 		public String getFullDetails()
@@ -128,21 +136,24 @@ public class DavidKendoka extends ParentCompetitor
 		}
 					
 	/** Compares two Kendokas Dan grades, used to sort by grade
-	 * @param a,b both DavidKendokas
+	 * @param a a DavidKendoka
+	 * @param b a DavidKendoka
 	 * @return sort indicator
 	 */
 	public int compareDan(DavidKendoka a , DavidKendoka b)
 	{	return Integer.compare(a.getDanGrade(), b.getDanGrade());	}	
 		
 	/** Compares two Kendokas Ages, used to sort by Age
-	 * @param a,b both DavidKendokas
+	 * @param a a DavidKendoka
+	 * @param b a DavidKendoka
 	 * @return sort indicator
 	 */
 	public int compareAge(DavidKendoka a , DavidKendoka b)
 	{	return Integer.compare(a.getAge() , b.getAge() );	}
 	
 	/** Compares two Kendokas Overall Scores, used to sort by Score
-	 * @param a,b both DavidKendokas
+	 * @param a a DavidKendoka
+	 * @param b a DavidKendoka
 	 * @return sort indicator
 	 */
 	public int compareScore(DavidKendoka a , DavidKendoka b)
