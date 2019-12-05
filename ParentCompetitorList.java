@@ -1224,7 +1224,7 @@ switch(key)
 	case "ID":		sortedCompetitors = sortedList.sortByID();		break;
 	case "position":sortedCompetitors = sortedList.sortByPosition();break;	
 }	
-String report = "ID    NAME                     LEVEL         POSITION              SCORES     OVERALL\n";
+String report = "ID    NAME                     LEVEL         POSITION               SCORES    OVERALL\n";
 for (ParentCompetitor c: sortedCompetitors) {
 	if(c instanceof Volleyball){
 		report += String.format("%-6s", c.getId());
@@ -1255,7 +1255,7 @@ public String getHighestOverallScoreVolleyball() {
 		}
 		 }
 	}	
-	return "The competitor with the highest score is " + winner + " with an overall score of " + maxOverallScore;
+	return "The competitor with the highest overall score is " + winner + ".\nWith an impressive " + maxOverallScore + " overall score!";
 }
 
 /**getLowestOverallScoreVolleyball
@@ -1275,7 +1275,7 @@ public String getLowestOverallScoreVolleyball() {
 		}
 		 }
 		 }
-	return "The competitor with the lowest score is " + loser + " with an overall score of " + minOverallScore;
+	return "The competitor with the lowest overall score is " + loser + ".\nWith an unfortunate overall score of " + minOverallScore + ".";
 }
 
 /**getScoreFrequencyReportVolleyball
@@ -1333,11 +1333,13 @@ public String getTotalCompetitorsVolleyball(){
  */
 public String getVolleyballStat(){
 	String report = "";
+	report += "REPORT OF VOLLEYBALL COMPETITORS\n";
 	report += getVolleyballFullDetails("ID");
+	report += "\nSTATISTICS";
 	report += "\nThere are a total of " + getTotalCompetitorsVolleyball() + " volleyball players.\n";
 	report += "\n" + getScoreFrequencyReportVolleyball();
-	report += "\n" + getHighestOverallScoreVolleyball();
-	report += "\n" + getLowestOverallScoreVolleyball();
+	report += "\nHIGHEST SCORER\n" + getHighestOverallScoreVolleyball();
+	report += "\n\nLOWEST SCORER\n" + getLowestOverallScoreVolleyball() + "\n";
 	return report; 	
 }
 
